@@ -7,8 +7,11 @@
     <script type="text/javascript" src="/assets/scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/assets/scripts/angular.min.js"></script>
     <script type="text/javascript" src="/assets/scripts/ui-bootstrap-tpls-0.11.2.min.js"></script>
+    <script type="text/javascript">
+        var keyshop = angular.module('keyshop', ['ui.bootstrap']);
+    </script>
 
     <link type="text/css" rel="stylesheet" href="/assets/styles/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="/assets/styles/bootstrap-theme.min.css" />
 </head>
-<body>
+<body ng-app="keyshop">
