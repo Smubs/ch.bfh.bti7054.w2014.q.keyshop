@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     Herzlich Willkommen auf keyshop.ch
 </div>
 

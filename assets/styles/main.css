@@ -1,0 +1,17 @@
+body {
+    background: url(/assets/images/bg-body.png) repeat;
+}
+
+header {
+    padding: 15px 0 15px 0;
+    background-color: #FFFFFF;
+}
+
+nav {
+    background-color: #333333;
+}
+
+nav ul li {
+    float: left;
+    list-style-type: none;
+}
