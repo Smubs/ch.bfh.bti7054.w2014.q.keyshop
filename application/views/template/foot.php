@@ -1,13 +1,20 @@
-            </div>
-        </div>
-        <footer>
-            <div class="footer-top-area">
-                <div class="container">Footer Top Area</div>
-            </div>
-            <div class="footer-copyright">
-                <div class="container">Copyright &copy; 2014, Michael Räss & Tobias Schmoker</div>
-            </div>
-        </footer>
+</div>
+</div>
+<footer>
+    <div class="footer-top-area">
+        <div class="container">Footer Top Area</div>
     </div>
+    <div class="footer-copyright">
+        <div class="container">Copyright &copy; 2014, Michael Räss & Tobias Schmoker</div>
+    </div>
+</footer>
+</div>
+
+<?= $prescripts ?>
+<script type="text/javascript">
+    var ks = $.parseJSON($.base64.decode('<?= $jsdata ?>'));
+</script>
+<?= $scripts ?>
+
 </body>
 </html>

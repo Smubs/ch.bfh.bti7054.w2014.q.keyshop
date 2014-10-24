@@ -5,16 +5,8 @@
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <script type="text/javascript" src="/assets/scripts/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="/assets/scripts/angular.min.js"></script>
-    <script type="text/javascript" src="/assets/scripts/ui-bootstrap-tpls-0.11.2.min.js"></script>
-    <script type="text/javascript" src="/assets/scripts/main.js"></script>
-
-    <link type="text/css" rel="stylesheet" href="/assets/styles/main.css" />
-    <link type="text/css" rel="stylesheet" href="/assets/styles/bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="/assets/styles/bootstrap-theme.min.css" />
-    <link type="text/css" rel="stylesheet" href="/assets/styles/font-awesome.min.css" />
+    
+    <?= $styles ?>
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,300" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="keyshop">
