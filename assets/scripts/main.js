@@ -2,59 +2,84 @@ var keyshop = angular.module('keyshop', ['ui.bootstrap']);
 
 keyshop.controller('ModalLogin', function ($scope, $modal) {
     $scope.openLogin = function() {
-        $scope.placeholders = {
-            modalTitle: 'Anmelden',
-            modalSend:  'Anmelden'
-        };
-        $scope.inputs = new Array(
-            {
-                type: 'email',
-                name: 'email',
-                icon: 'fa-at',
-                placeholder: 'E-Mail Adresse'
+        $scope.data = {
+            placeholders: {
+                modalTitle: 'Anmelden',
+                modalSend:  'Anmelden'
             },
-            {
-                type: 'password',
-                name: 'password',
-                icon: 'fa-key',
-                placeholder: 'Passwort'
-            }
-        );
-        $scope.open($scope.inputs);
-    };
-
-    $scope.openRegister = function() {
-        $scope.placeholders = {
-            modalTitle: 'Registrieren',
-            modalSend:  'Registrieren'
+            inputs: new Array(
+                {
+                    type: 'email',
+                    name: 'email',
+                    icon: 'fa-at',
+                    placeholder: 'E-Mail Adresse'
+                },
+                {
+                    type: 'password',
+                    name: 'password',
+                    icon: 'fa-key',
+                    placeholder: 'Passwort'
+                }
+            )
         };
-
         $scope.open();
     };
 
-    $scope.open = function (inputs) {
+    $scope.openRegister = function() {
+        $scope.data = {
+            placeholders: {
+                modalTitle: 'Registrieren',
+                modalSend:  'Registrieren'
+            },
+            inputs: new Array(
+                {
+                    type: 'email',
+                    name: 'email',
+                    icon: 'fa-at',
+                    placeholder: 'E-Mail Adresse wählen'
+                },
+                {
+                    type: 'password',
+                    name: 'password',
+                    icon: 'fa-key',
+                    placeholder: 'Passwort erstellen'
+                },
+                {
+                    type: 'password',
+                    name: 'password',
+                    icon: 'fa-repeat',
+                    placeholder: 'Passwort bestätigen'
+                }
+            )
+        };
+        $scope.open();
+    };
+
+    $scope.open = function () {
         var modalInstance = $modal.open({
             templateUrl: 'modalUser.html',
             controller: 'ModalLoginInstance',
             resolve: {
-                placeholders: function () {
-                    return $scope.placeholders;
-                },
-                inputs: function () {
-                    return $scope.inputs;
+                data: function () {
+                    return $scope.data;
                 }
             }
         });
     };
 });
 
-keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, placeholders, inputs) {
-    $scope.modalTitle = placeholders.modalTitle;
-    $scope.modalSend  = placeholders.modalSend;
-    $scope.inputs     = inputs;
+keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, data) {
+    $scope.modalTitle = data.placeholders.modalTitle;
+    $scope.modalSend  = data.placeholders.modalSend;
+    $scope.inputs     = data.inputs;
 
     $scope.send = function () {
-        alert("Sending ajax request...");
+        $scope.error = true;
+        $scope.feedback = {
+            title: "Error",
+            message: "Ajax not yet implemented"
+        };
+
     };
 
     $scope.cancel = function () {

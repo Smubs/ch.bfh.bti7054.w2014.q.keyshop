@@ -38,6 +38,10 @@
                                 <h3 class="modal-title">{{ modalTitle }}</h3>
                             </div>
                             <div class="modal-body">
+                                <div ng-show="error" class="bs-callout bs-callout-danger modal-callout">
+                                    <h4>{{ feedback.title }}</h4>
+                                    <p>{{ feedback.message }}</p>
+                                </div>
                                 <div class="form-group" ng-repeat="input in inputs">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa {{ input.icon }}"></i></div>

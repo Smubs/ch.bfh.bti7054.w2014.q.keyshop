@@ -9,7 +9,7 @@ class Home extends KS_Controller {
         
         $this->_setJsData('test', 'wertvontest');
         $this->_setData('test', 'wertvontest');
-        
+
         $this->_renderScripts();
         $this->_renderStyles();
 
