@@ -9,9 +9,7 @@
     <script type="text/javascript" src="/assets/scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/assets/scripts/angular.min.js"></script>
     <script type="text/javascript" src="/assets/scripts/ui-bootstrap-tpls-0.11.2.min.js"></script>
-    <script type="text/javascript">
-        var keyshop = angular.module('keyshop', ['ui.bootstrap']);
-    </script>
+    <script type="text/javascript" src="/assets/scripts/main.js"></script>
 
     <link type="text/css" rel="stylesheet" href="/assets/styles/main.css" />
     <link type="text/css" rel="stylesheet" href="/assets/styles/bootstrap.min.css" />
@@ -36,12 +34,30 @@
                             <li><a href="#">Kategorien</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" ng-controller="ModalLogin">
                         <ul class="shopping-cart-wrapper">
                             <li class="shopping-cart"><a href="#"><i class="fa fa-shopping-cart"></i>Warenkorb</a></li>
-                            <li><a href="#"><i class="fa fa-sign-in"></i>Anmelden</a></li>
-                            <li><a href="#"><i class="fa fa-edit"></i>Registrieren</a></li>
+                            <li><a href="#" ng-click="openLogin()"><i class="fa fa-sign-in"></i>Anmelden</a></li>
+                            <li><a href="#" ng-click="openRegister()"><i class="fa fa-edit"></i>Registrieren</a></li>
                         </ul>
+
+                        <script type="text/ng-template" id="modalUser.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">{{ modalTitle }}</h3>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group" ng-repeat="input in inputs">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa {{ input.icon }}"></i></div>
+                                        <input class="form-control" type="{{ input.type }}" name="{{ input.name }}" placeholder="{{ input.placeholder }}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" ng-click="send()">{{ modalSend }}</button>
+                                <button class="btn btn-warning" ng-click="cancel()">Schliessen</button>
+                            </div>
+                        </script>
                     </div>
                 </div>
             </div>
