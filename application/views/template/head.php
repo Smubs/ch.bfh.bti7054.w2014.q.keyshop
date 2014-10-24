@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Key Shop</title>
+
 	<meta charset="utf-8">
-	<title>Key Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script type="text/javascript" src="/assets/scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/assets/scripts/angular.min.js"></script>
@@ -14,16 +16,64 @@
     <link type="text/css" rel="stylesheet" href="/assets/styles/main.css" />
     <link type="text/css" rel="stylesheet" href="/assets/styles/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="/assets/styles/bootstrap-theme.min.css" />
+    <link type="text/css" rel="stylesheet" href="/assets/styles/font-awesome.min.css" />
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,300" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="keyshop">
-    <div class="container">
-        <header class="container">
-            <a href="/"><img src="/assets/images/keyshop-logo.png" alt="Keyshop Logo"></a>
+    <div class="global-wrap">
+        <header>
+            <div class="container">
+                <a href="/"><i class="fa fa-shopping-cart"></i> Keyshop</a>
+            </div>
         </header>
         <nav>
-            <ul>
-                <li><a href="#">Nav 1</a></li>
-                <li><a href="#">Nav 2</a></li>
-                <li><a href="#">Nav 3</a></li>
-            </ul>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul>
+                            <li><a href="#">Nav 1</a></li>
+                            <li><a href="#">Nav 2</a></li>
+                            <li><a href="#">Nav 3</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="shopping-cart-wrapper">
+                            <li class="shopping-cart"><a href="#"><i class="fa fa-shopping-cart"></i>Warenkorb</a></li>
+                            <li><a href="#"><i class="fa fa-sign-in"></i>Anmelden</a></li>
+                            <li><a href="#"><i class="fa fa-edit"></i>Registrieren</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </nav>
+        <form class="search-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 clearfix">
+                        <label>
+                            <i class="fa fa-search"></i>
+                            <span>Ich suche nach</span>
+                        </label>
+                        <div class="search-input">
+                            <input class="form-control" type="text" placeholder="Produkt" />
+                        </div>
+                    </div>
+                    <div class="col-md-5 clearfix">
+                        <label>
+                            <i class="fa fa-folder-open"></i>
+                            <span>In der Kategorie</span>
+                        </label>
+                        <div class="search-category">
+                            <select name="search-category">
+                                <option>Alle</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-block search-btn" type="submit">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="content-wrapper">
+            <div class="container">

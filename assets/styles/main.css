@@ -2,16 +2,155 @@ body {
     background: url(/assets/images/bg-body.png) repeat;
 }
 
+.global-wrap {
+    width: 1230px;
+    margin: 30px auto;
+    background-color: #F2F2F2;
+}
+
 header {
     padding: 15px 0 15px 0;
+    text-align: center;
     background-color: #FFFFFF;
+}
+
+header a {
+    color: #444444;
+    font-size: 22px;
+}
+
+header a .fa {
+    font-size: 24px;
+}
+
+header a:hover {
+    color: #444444;
+    text-decoration: none;
 }
 
 nav {
     background-color: #333333;
 }
 
+nav ul {
+    padding: 0;
+    margin: 0;
+}
+
 nav ul li {
     float: left;
     list-style-type: none;
+}
+
+nav ul li a {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 15px 0 15px;
+    color: #FFFFFF;
+}
+
+nav ul li a:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+    background-color: #262626;
+}
+
+nav ul li a.active {
+    background-color: #2A8FBD;
+}
+
+nav ul li a i {
+    margin: 0 8px 0 0;
+}
+
+.shopping-cart-wrapper {
+    float: right;
+}
+
+.shopping-cart-wrapper li {
+    border-right: 1px solid #232323;
+}
+
+.shopping-cart-wrapper li:last-child {
+    border: none;
+}
+
+.search-wrapper {
+    padding: 8px 0 8px 0;
+    background-color: #FFFFFF;
+    font-family: 'Roboto';
+    -webkit-box-shadow: 0 3px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 3px 1px rgba(0,0,0,0.1);
+    -o-box-shadow: 0 3px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 1px rgba(0,0,0,0.1);
+}
+
+.search-wrapper label {
+    position: relative;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 0 0 65px;
+    margin: 0 10px 0 0;
+    font-size: 19px;
+    font-weight: 300;
+    color: #666666;
+}
+
+.search-wrapper label i {
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #E6E6E6;
+}
+
+.search-wrapper .search-input {
+    float: left;
+    width: 300px;
+}
+
+.search-wrapper .search-category {
+    float: left;
+    width: 200px;
+}
+
+.search-wrapper .search-category select {
+    width: 100%;
+    margin: 5px 0 0 0;
+}
+
+.search-wrapper .search-btn,
+.search-wrapper .search-btn:hover,
+.search-wrapper .search-btn:focus {
+    color: #FFFFFF;
+    border-color: #247AA1;
+    background-color: #2A8FBD;
+}
+
+.content-wrapper {
+    padding: 30px 0 30px 0;
+}
+
+h1.first {
+    margin-top: 0;
+}
+
+footer {
+    color: #999999;
+    border-top: 3px solid #2681AA;
+}
+
+footer .footer-top-area {
+    padding: 30px 0 30px 0;
+    background-color: #1F1F1F;
+}
+
+footer .footer-copyright {
+    padding: 10px 0 10px 0;
+    background-color: #000000;
 }

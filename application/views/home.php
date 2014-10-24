@@ -1,7 +1,4 @@
-<div class="container">
-    Herzlich Willkommen auf keyshop.ch
-</div>
-
+<h1 class="first">Herzlich Willkommen auf keyshop.ch</h1>
 <div ng-controller="ModalDemoCtrl">
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
