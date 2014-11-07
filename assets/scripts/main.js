@@ -86,3 +86,40 @@ keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, data)
         $modalInstance.close();
     };
 });
+
+keyshop.controller('KeyshopProducts', function ($scope) {
+    $scope.products = [
+        {
+            title: "Windows 8.1 Pro",
+            image: "windows-8.1.jpg",
+            description: "Das stabile und bewährte Windows 8.1 Pro.",
+            price: "75 CHF",
+            priceOld: "150 CHF",
+            priceSave: "Sie sparen 50%",
+            category: "Kategorie"
+        },
+        {
+            title: "Windows 10 Beta",
+            image: "windows-10.jpg",
+            description: "Testen Sie die Beta-Version von Windows 10.",
+            price: "10 CHF",
+            priceOld: "15 CHF",
+            priceSave: "Sie sparen 33%",
+            category: "Kategorie"
+        },
+        {
+            title: "Microsoft Office 2013 Professional Plus",
+            image: "office-2013.png",
+            description: "Alles, was Sie für's Arbeiten benötigen.",
+            price: "100 CHF",
+            priceOld: "200 CHF",
+            priceSave: "Sie sparen 50%",
+            category: "Kategorie"
+        }
+    ];
+}).directive('ksProduct', function() {
+    return {
+        restrict: 'E',
+        templateUrl: '/assets/directives/ks-product.html'
+    };
+});

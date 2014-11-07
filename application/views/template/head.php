@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <?= $styles ?>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,300" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="keyshop">
@@ -35,22 +36,22 @@
 
                         <script type="text/ng-template" id="modalUser.html">
                             <div class="modal-header">
-                                <h3 class="modal-title">{{ modalTitle }}</h3>
+                                <h3 class="modal-title">{{modalTitle}}</h3>
                             </div>
                             <div class="modal-body">
                                 <div ng-show="error" class="bs-callout bs-callout-danger modal-callout">
-                                    <h4>{{ feedback.title }}</h4>
-                                    <p>{{ feedback.message }}</p>
+                                    <h4>{{feedback.title}}</h4>
+                                    <p>{{feedback.message}}</p>
                                 </div>
                                 <div class="form-group" ng-repeat="input in inputs">
                                     <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa {{ input.icon }}"></i></div>
-                                        <input class="form-control" type="{{ input.type }}" name="{{ input.name }}" placeholder="{{ input.placeholder }}" />
+                                        <div class="input-group-addon"><i class="fa {{input.icon}}"></i></div>
+                                        <input class="form-control" type="{{input.type}}" name="{{input.name}}" placeholder="{{input.placeholder}}" />
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" ng-click="send()">{{ modalSend }}</button>
+                                <button class="btn btn-primary" ng-click="send()">{{modalSend}}</button>
                                 <button class="btn btn-warning" ng-click="cancel()">Schliessen</button>
                             </div>
                         </script>

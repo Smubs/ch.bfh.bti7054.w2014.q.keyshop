@@ -82,7 +82,6 @@ class KS_Controller extends CI_Controller {
         // default css
         $defaultCss = array(
             'assets/styles/bootstrap.min.css',
-            'assets/styles/bootstrap-theme.min.css',
             'assets/styles/font-awesome.min.css',
             'assets/styles/main.css'
         );
