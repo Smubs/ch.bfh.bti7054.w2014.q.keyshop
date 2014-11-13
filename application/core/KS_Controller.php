@@ -5,11 +5,17 @@ class KS_Controller extends CI_Controller {
     private $jsdata;
     private $data;
 
+    /**
+     * @var \Doctrine\ORM\EntityManager $em
+     */
+    public $em;
+
     public function __construct() {
         parent::__construct();
 
         // images url
         $this->data['iurl'] = base_url() . 'assets/images/';
+        $this->em = $this->doctrine->em;
     }
 
     public function _setJsData($name, $object) {

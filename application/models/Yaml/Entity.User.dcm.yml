@@ -1,0 +1,45 @@
+Entity\User:
+  type: entity
+  table: keyshop_users
+  repositoryClass: Repository\UserRepository
+  uniqueConstraints:
+      email:
+        columns: [ email ]
+
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  fields:
+    email:
+      type: string
+      length: 100
+
+    password:
+      type: string
+      length: 40
+
+    firstname:
+      type: string
+      length: 100
+
+    lastname:
+      type: string
+      length: 100
+
+    address:
+      type: string
+      length: 100
+
+    zip:
+      type: string
+      length: 20
+
+    place:
+      type: string
+      length: 100
+
+    country:
+      type: integer
