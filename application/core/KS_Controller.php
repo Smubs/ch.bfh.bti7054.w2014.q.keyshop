@@ -9,13 +9,44 @@ class KS_Controller extends CI_Controller {
      * @var \Doctrine\ORM\EntityManager $em
      */
     public $em;
+    /**
+     * @var \Repository\CategoryRepository $categoryRepo
+     */
+    public $categoryRepo;
+    /**
+     * @var \Repository\KeyRepository $keyRepo
+     */
+    public $keyRepo;
+    /**
+     * @var \Repository\OrderRepository $orderRepo
+     */
+    public $orderRepo;
+    /**
+     * @var \Repository\ProductRepository $productRepo
+     */
+    public $productRepo;
+    /**
+     * @var \Repository\UserRepository $userRepo
+     */
+    public $userRepo;
+    /**
+     * @var \Repository\CountryRepository $countryRepo
+     */
+    public $countryRepo;
 
     public function __construct() {
         parent::__construct();
 
         // images url
         $this->data['iurl'] = base_url() . 'assets/images/';
-        $this->em = $this->doctrine->em;
+
+        $this->em           = $this->doctrine->em;
+        $this->categoryRepo = $this->em->getRepository('Entity\Category');
+        $this->keyRepo      = $this->em->getRepository('Entity\Key');
+        $this->orderRepo    = $this->em->getRepository('Entity\Order');
+        $this->productRepo  = $this->em->getRepository('Entity\Product');
+        $this->userRepo     = $this->em->getRepository('Entity\User');
+        $this->countryRepo  = $this->em->getRepository('Entity\Country');
     }
 
     public function _setJsData($name, $object) {

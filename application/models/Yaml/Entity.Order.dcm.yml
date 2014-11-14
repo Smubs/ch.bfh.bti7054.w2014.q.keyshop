@@ -1,0 +1,41 @@
+Entity\Order:
+  type: entity
+  table: keyshop_orders
+  repositoryClass: Repository\OrderRepository
+
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  fields:
+    userId:
+      type: integer
+      column: user_id
+
+  oneToMany:
+    keys:
+      targetEntity: Key
+      mappedBy: order
+
+  manyToOne:
+    user:
+      targetEntity: User
+      inversedBy: orders
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+
+  manyToMany:
+    products:
+      targetEntity: Product
+      inversedBy: orders
+      joinTable:
+        name: keyshop_orders_products
+        joinColumns:
+          order_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          product_id:
+            referencedColumnName: id

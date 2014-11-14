@@ -3,16 +3,16 @@
 namespace Repository;
 
 /**
- * Class UserRepositoryException
+ * Class OrderRepositoryException
  * @package Repository
  */
-class UserRepositoryException extends \Exception {}
+class OrderRepositoryException extends \Exception {}
 
 /**
- * Class UserRepository
+ * Class OrderRepository
  * @package Repository
  */
-class UserRepository extends \Doctrine\ORM\EntityRepository {
+class OrderRepository extends \Doctrine\ORM\EntityRepository {
     /**
      * @var \Doctrine\ORM\EntityManager $em
      */

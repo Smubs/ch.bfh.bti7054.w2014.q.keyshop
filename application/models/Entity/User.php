@@ -2,8 +2,16 @@
 
 namespace Entity;
 
+/**
+ * Class UserException
+ * @package Entity
+ */
 class UserException extends \Exception {}
 
+/**
+ * Class User
+ * @package Entity
+ */
 class User {
     /**
      * @var integer $id
@@ -38,17 +46,17 @@ class User {
      */
     protected $place;
     /**
-     * @var integer $country
+     * @var Country $country
      */
     protected $country;
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection|Order[] $orders
+     */
+    protected $orders;
 
-    public function __construct() {
-        $this->firstname = '';
-        $this->lastname  = '';
-        $this->address   = '';
-        $this->zip       = '';
-        $this->place     = '';
-        $this->country   = 0;
+    public function __construct()
+    {
+
     }
 
     /**
@@ -68,7 +76,7 @@ class User {
     }
 
     /**
-     * @param int $country
+     * @param Country $country
      */
     public function setCountry($country)
     {
@@ -76,7 +84,7 @@ class User {
     }
 
     /**
-     * @return int
+     * @return Country
      */
     public function getCountry()
     {
@@ -148,11 +156,23 @@ class User {
     }
 
     /**
+     * @link http://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/
      * @param string $password
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        // A higher "cost" is more secure but consumes more processing power
+        $cost = 10;
+
+        // Create a random salt
+        $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
+
+        // Prefix information about the hash so PHP knows how to verify it later.
+        // "$2a$" Means we're using the Blowfish algorithm. The following two digits are the cost parameter.
+        $salt = sprintf("$2a$%02d$", $cost) . $salt;
+
+        // Hash the password with the salt
+        $this->password = crypt($password, $salt);
     }
 
     /**
@@ -193,5 +213,21 @@ class User {
     public function getZip()
     {
         return $this->zip;
+    }
+
+    /**
+     * @param mixed $orders
+     */
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
 }

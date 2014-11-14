@@ -15,31 +15,45 @@ Entity\User:
   fields:
     email:
       type: string
-      length: 100
+      length: 254
 
     password:
       type: string
-      length: 40
+      length: 60
 
     firstname:
       type: string
       length: 100
+      nullable: true
 
     lastname:
       type: string
       length: 100
+      nullable: true
 
     address:
       type: string
       length: 100
+      nullable: true
 
     zip:
       type: string
       length: 20
+      nullable: true
 
     place:
       type: string
       length: 100
+      nullable: true
 
+  manyToOne:
     country:
-      type: integer
+      targetEntity: Country
+      joinColumn:
+        name: country_id
+        referencedColumnName: id
+
+  oneToMany:
+    orders:
+      targetEntity: Order
+      mappedBy: user

@@ -1,0 +1,23 @@
+Entity\Category:
+  type: entity
+  table: keyshop_categories
+  repositoryClass: Repository\CategoryRepository
+
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  fields:
+    name:
+      type: string
+      length: 200
+
+    description:
+      type: text
+
+  manyToMany:
+    products:
+      targetEntity: Product
+      mappedBy: categories

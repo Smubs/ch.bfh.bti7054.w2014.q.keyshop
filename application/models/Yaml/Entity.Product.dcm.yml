@@ -1,0 +1,56 @@
+Entity\Product:
+  type: entity
+  table: keyshop_products
+  repositoryClass: Repository\ProductRepository
+
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+
+  fields:
+    status:
+      type: boolean
+
+    name:
+      type: string
+      length: 40
+
+    description:
+      type: text
+
+    price:
+      type: float
+
+    discountPrice:
+      type: float
+      nullable: true
+      column: discount_price
+
+    picture:
+      type: string
+      length: 200
+      nullable: true
+
+  oneToMany:
+    keys:
+      targetEntity: Key
+      mappedBy: product
+
+  manyToMany:
+    categories:
+      targetEntity: Category
+      inversedBy: products
+      joinTable:
+        name: keyshop_products_categories
+        joinColumns:
+          product_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          category_id:
+            referencedColumnName: id
+
+    orders:
+      targetEntity: Order
+      mappedBy: products
