@@ -1,4 +1,4 @@
-var keyshop = angular.module('keyshop', ['ui.bootstrap']);
+var keyshop = angular.module('keyshop', ['ui.bootstrap', 'authService']);
 
 keyshop.controller('ModalLogin', function ($scope, $modal) {
     $scope.openLogin = function() {
