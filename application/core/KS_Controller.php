@@ -93,6 +93,7 @@ class KS_Controller extends CI_Controller {
         $defaultJs = array(
             'assets/scripts/angular.min.js',
             'assets/scripts/ui-bootstrap-tpls-0.11.2.min.js',
+			'assets/scripts/services/authService.js',
             'assets/scripts/main.js'
         );
 

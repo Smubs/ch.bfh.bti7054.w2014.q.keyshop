@@ -2,6 +2,7 @@ var keyshop = angular.module('keyshop', ['ui.bootstrap']);
 
 keyshop.controller('ModalLogin', function ($scope, $modal) {
     $scope.openLogin = function() {
+
         $scope.data = {
             placeholders: {
                 modalTitle: 'Anmelden',
@@ -68,18 +69,37 @@ keyshop.controller('ModalLogin', function ($scope, $modal) {
     };
 });
 
-keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, data) {
+keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, data, Auth) {
     $scope.modalTitle = data.placeholders.modalTitle;
     $scope.modalSend  = data.placeholders.modalSend;
     $scope.inputs     = data.inputs;
 
-    $scope.send = function () {
-        $scope.error = true;
-        $scope.feedback = {
-            title: "Error",
-            message: "Ajax not yet implemented"
-        };
 
+    $scope.send = function () {
+        $scope.loading = true;
+        Auth.login($scope.loginData)
+            .success(function(data) {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    $scope.error = true;
+                    $scope.feedback = {
+                        title: "Error",
+                        message: "Ajax not yet implemented"
+                    };
+                }
+                $scope.loading = false;
+            })
+            .error(function(data) {
+                $scope.error = true;
+                console.log('error');
+                console.log(data);
+                $scope.feedback = {
+                    title: "Server Error",
+                    message: "watch console"
+                };
+                $scope.loading = false;
+            });
     };
 
     $scope.cancel = function () {
