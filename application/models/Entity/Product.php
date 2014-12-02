@@ -230,8 +230,8 @@ class Product {
             'name' => $this->getName(),
             'picture' => $this->getPicture(),
             'description' => $this->getDescription(),
-            'discountPrice' => $this->getDiscountPrice() . 'CHF',
-            'price' => $this->getPrice() . 'CHF',
+            'discountPrice' => $this->getDiscountPrice() . ' CHF',
+            'price' => $this->getPrice() . ' CHF',
             'priceSave' => 'Sie sparen ' . round($this->getDiscountPrice() / $this->getPrice() * 100) . '%',
             'category' => implode(', ', $categories),
         );

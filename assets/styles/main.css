@@ -11,7 +11,6 @@ img {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto', Arial, helvetica, sans-serif;
     margin-top: 0;
     font-weight: 300;
     color: #4D4D4D;
@@ -129,7 +128,6 @@ nav ul li a i {
 .search-wrapper {
     padding: 8px 0 8px 0;
     background-color: #FFFFFF;
-    font-family: 'Roboto';
     -webkit-box-shadow: 0 3px 1px rgba(0,0,0,0.1);
     -moz-box-shadow: 0 3px 1px rgba(0,0,0,0.1);
     -o-box-shadow: 0 3px 1px rgba(0,0,0,0.1);
