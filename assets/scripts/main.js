@@ -108,7 +108,7 @@ keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, data,
 });
 
 keyshop.controller('KeyshopProducts', function ($scope) {
-    $scope.products = $.parseJSON(ks.homeProducts);
+    $scope.products = ks.homeProducts;
 }).directive('ksProduct', function() {
     return {
         restrict: 'E',

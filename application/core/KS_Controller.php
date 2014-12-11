@@ -93,9 +93,14 @@ class KS_Controller extends CI_Controller {
         $defaultJs = array(
             'assets/scripts/angular.min.js',
             'assets/scripts/ui-bootstrap-tpls-0.11.2.min.js',
-			'assets/scripts/services/authService.js',
-            'assets/scripts/main.js'
+			'assets/scripts/services/authService.js'
         );
+
+        if ($this->uri->segment(1) === 'admin') {
+            $defaultJs[] = 'assets/scripts/admin/main.js';
+        } else {
+            $defaultJs[] = 'assets/scripts/main.js';
+        }
 
         $this->data['scripts'] = '';
         foreach (array_merge($defaultJs, $js) as $jsitem) {

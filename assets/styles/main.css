@@ -105,6 +105,10 @@ nav ul li a:hover {
     background-color: #262626;
 }
 
+nav ul li a:focus {
+    text-decoration: none;
+}
+
 nav ul li a.active {
     background-color: #2A8FBD;
 }
@@ -406,4 +410,24 @@ footer .footer-copyright {
 
 .product-thumb .product-save {
     font-weight: 600;
+}
+
+/** Backend Style **/
+.product-overview i {
+    color: #333333;
+    font-size: 18px;
+}
+
+.product-overview th,
+.product-overview td {
+    border-color: #CCCCCC !important;
+}
+
+.form-product-remove {
+    display: inline-block;
+    margin: 0;
+}
+
+.form-product-remove .fa-remove {
+    cursor: pointer;
 }
