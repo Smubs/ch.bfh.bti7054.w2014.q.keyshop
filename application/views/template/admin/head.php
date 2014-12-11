@@ -22,14 +22,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <ul>
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Produkte</a></li>
-                            <li><a href="#">Kategorien</a></li>
+                            <li><a href="/admin/">Dashboard</a></li>
+                            <li><a href="/admin/products">Produkte</a></li>
+                            <li><a href="/admin/categories">Kategorien</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6">
                         <ul class="pull-right">
-                            <li class="logout"><a href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
+                            <li class="logout"><a href="/admin/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -37,3 +37,6 @@
         </nav>
         <div class="content-wrapper">
             <div class="container">
+                <div class="alert alert-{{alert.mode}} {{alert.display}}" ng-controller="KeyshopAlert">
+                    {{alert.message}}
+                </div>

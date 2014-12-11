@@ -11,7 +11,7 @@ class Home extends KS_Controller {
         foreach ($products as $product) {
             $homeProducts[] = $product->getHomeArray();
         }
-        $this->_setJsData('homeProducts', json_encode($homeProducts));
+        $this->_setJsData('homeProducts', $homeProducts);
 
         $this->_renderScripts();
         $this->_renderStyles();
