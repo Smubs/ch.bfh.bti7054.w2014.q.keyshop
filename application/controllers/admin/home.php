@@ -1,12 +1,19 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
-class Home extends CI_Controller {
+if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
+
+class Home extends KS_Controller {
 
 	public function index()
 	{
-		$this->load->view('template/admin/head');
-		$this->load->view('admin/home');
-		$this->load->view('template/admin/foot');
+        $this->_renderScripts();
+        $this->_renderStyles();
+
+		$this->load->view('template/admin/head', $this->_getData());
+		$this->load->view('admin/home', $this->_getData());
+		$this->load->view('template/admin/foot', $this->_getData());
 	}
 
 }
