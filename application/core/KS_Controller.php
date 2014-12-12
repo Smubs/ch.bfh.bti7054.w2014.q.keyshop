@@ -4,6 +4,7 @@ class KS_Controller extends CI_Controller {
 
     private $jsdata;
     private $data;
+    private $isBackend;
 
     /**
      * @var \Doctrine\ORM\EntityManager $em
@@ -39,6 +40,16 @@ class KS_Controller extends CI_Controller {
 
         // images url
         $this->data['iurl'] = base_url() . 'assets/images/';
+        $this->isBackend    = $this->uri->segment(1) === 'admin';
+
+        if ($this->isBackend) {
+            // Set alert defaults
+            $this->data['alert'] = array(
+                'mode'    => '',
+                'display' => 'hide',
+                'message' => ''
+            );
+        }
 
         $this->em           = $this->doctrine->em;
         $this->categoryRepo = $this->em->getRepository('Entity\Category');
@@ -58,6 +69,9 @@ class KS_Controller extends CI_Controller {
     }
     
     public function _getData() {
+        if (!isset($this->data['alert']['display'])) {
+            $this->data['alert']['display'] = '';
+        }
         return $this->data;
     }
 
@@ -96,7 +110,7 @@ class KS_Controller extends CI_Controller {
 			'assets/scripts/services/authService.js'
         );
 
-        if ($this->uri->segment(1) === 'admin') {
+        if ($this->isBackend) {
             $defaultJs[] = 'assets/scripts/admin/main.js';
         } else {
             $defaultJs[] = 'assets/scripts/main.js';

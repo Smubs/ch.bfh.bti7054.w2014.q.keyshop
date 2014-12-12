@@ -59,6 +59,14 @@ class Product {
 
     }
 
+    public function removePicture()
+    {
+        $picture = $this->getPicture();
+        if (!empty($picture)) {
+            @unlink('assets/images/products/' . $picture);
+        }
+    }
+
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection|\Entity\Category[] $categories
      */
@@ -96,7 +104,7 @@ class Product {
      */
     public function setDiscountPrice($discountPrice)
     {
-        $this->discountPrice = $discountPrice;
+        $this->discountPrice = floatval($discountPrice);
     }
 
     /**
@@ -192,7 +200,7 @@ class Product {
      */
     public function setPrice($price)
     {
-        $this->price = $price;
+        $this->price = floatval($price);
     }
 
     /**

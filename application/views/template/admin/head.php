@@ -37,6 +37,6 @@
         </nav>
         <div class="content-wrapper">
             <div class="container">
-                <div class="alert alert-{{alert.mode}} {{alert.display}}" ng-controller="KeyshopAlert">
-                    {{alert.message}}
+                <div class="alert alert-<?= $alert['mode'] . ' ' . $alert['display'] ?>">
+                    <?= $alert['message'] ?>
                 </div>
