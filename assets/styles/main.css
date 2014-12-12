@@ -431,3 +431,8 @@ footer .footer-copyright {
 .form-product-remove .fa-remove {
     cursor: pointer;
 }
+
+.product-edit-picture {
+    width: 200px;
+    margin-bottom: 15px;
+}

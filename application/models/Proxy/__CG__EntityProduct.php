@@ -176,6 +176,17 @@ class Product extends \Entity\Product implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function removePicture()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removePicture', array());
+
+        return parent::removePicture();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setCategories($categories)
     {
 

@@ -54,3 +54,6 @@ Entity\Product:
     orders:
       targetEntity: Order
       mappedBy: products
+
+  lifecycleCallbacks:
+      postRemove: [ removePicture ]

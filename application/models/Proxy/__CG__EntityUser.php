@@ -64,10 +64,10 @@ class User extends \Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'email', 'password', 'firstname', 'lastname', 'address', 'zip', 'place', 'country', 'orders');
+            return array('__isInitialized__', 'id', 'admin', 'email', 'password', 'firstname', 'lastname', 'address', 'zip', 'place', 'country', 'orders');
         }
 
-        return array('__isInitialized__', 'id', 'email', 'password', 'firstname', 'lastname', 'address', 'zip', 'place', 'country', 'orders');
+        return array('__isInitialized__', 'id', 'admin', 'email', 'password', 'firstname', 'lastname', 'address', 'zip', 'place', 'country', 'orders');
     }
 
     /**
@@ -193,6 +193,28 @@ class User extends \Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAddress', array());
 
         return parent::getAddress();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setAdmin($admin)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAdmin', array($admin));
+
+        return parent::setAdmin($admin);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAdmin()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAdmin', array());
+
+        return parent::getAdmin();
     }
 
     /**
