@@ -305,7 +305,8 @@ INSERT INTO `keyshop_products_categories` (`product_id`, `category_id`) VALUES
 (4, 2);
 
 CREATE TABLE IF NOT EXISTS `keyshop_users` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `admin` tinyint(1) NOT NULL,
   `email` varchar(254) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `firstname` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -317,8 +318,8 @@ CREATE TABLE IF NOT EXISTS `keyshop_users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 INSERT INTO `keyshop_users` (`id`, `email`, `password`, `firstname`, `lastname`, `address`, `zip`, `place`, `country_id`) VALUES
-(2, 'raess.michael@gmail.com', '$2a$10$9LcDgnWxqMyaR6AljcWB.OFSVSccON5mGDXTGCcF1gp6w0CdtWqJS', 'Michael', 'Räss', 'Interlakenstrasse 90', '3705', 'Faulensee', 208),
-(3, 'tobischmoker@gmail.com', '$2a$10$74Etz3He2OQ.b1Y.zs/ZbuZCz6GE74ADnuhdactjuC2JTeJgZT/py', 'Tobias', 'Schmoker', 'Rugenaustrasse 23', '3800', 'Interlaken', 208);
+(2, 1, 'raess.michael@gmail.com', '$2a$10$9LcDgnWxqMyaR6AljcWB.OFSVSccON5mGDXTGCcF1gp6w0CdtWqJS', 'Michael', 'Räss', 'Interlakenstrasse 90', '3705', 'Faulensee', 208),
+(3, 1, 'tobischmoker@gmail.com', '$2a$10$74Etz3He2OQ.b1Y.zs/ZbuZCz6GE74ADnuhdactjuC2JTeJgZT/py', 'Tobias', 'Schmoker', 'Rugenaustrasse 23', '3800', 'Interlaken', 208);
 
 
 ALTER TABLE `keyshop_categories`

@@ -18,6 +18,10 @@ class User {
      */
     protected $id;
     /**
+     * @var boolean $admin
+     */
+    protected $admin;
+    /**
      * @var string $email
      */
     protected $email;
@@ -56,7 +60,7 @@ class User {
 
     public function __construct()
     {
-
+        $this->admin = false;
     }
 
     /**
@@ -73,6 +77,22 @@ class User {
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * @param boolean $admin
+     */
+    public function setAdmin($admin)
+    {
+        $this->admin = $admin;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getAdmin()
+    {
+        return $this->admin;
     }
 
     /**
