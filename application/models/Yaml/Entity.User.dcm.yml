@@ -13,6 +13,9 @@ Entity\User:
         strategy: AUTO
 
   fields:
+    admin:
+      type: boolean
+
     email:
       type: string
       length: 254

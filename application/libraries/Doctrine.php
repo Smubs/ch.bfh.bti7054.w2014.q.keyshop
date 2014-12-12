@@ -45,11 +45,7 @@ class Doctrine
         $driver = new YamlDriver(array(APPPATH . '/models/Yaml'));
         $config->setMetadataDriverImpl($driver);
 
-        // Set up logger
-        /*$logger = new EchoSQLLogger;
-        $config->setSQLLogger($logger);*/
-
-        $config->setAutoGenerateProxyClasses(true);
+        $config->setAutoGenerateProxyClasses(false);
 
         // Database connection information
         $connectionOptions = array(

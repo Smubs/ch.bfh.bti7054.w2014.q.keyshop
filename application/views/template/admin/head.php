@@ -14,7 +14,7 @@
     <div class="global-wrap">
         <header>
             <div class="container">
-                <a href="/"><i class="fa fa-shopping-cart"></i> Keyshop Backend</a>
+                <a href="/admin/"><i class="fa fa-shopping-cart"></i> Keyshop Backend</a>
             </div>
         </header>
         <nav>
