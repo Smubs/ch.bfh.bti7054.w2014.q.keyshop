@@ -32,7 +32,7 @@ class Category {
 
     public function __construct()
     {
-
+        $this->description = '';
     }
 
     /**

@@ -1,5 +1,5 @@
 <h3>Produkt hinzufügen</h3><br />
-<form action="/<?= uri_string() ?>" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+<form action="/<?= uri_string() ?>" method="post" class="form-horizontal form-product" role="form" enctype="multipart/form-data">
     <div class="form-group">
         <label for="input-status" class="col-sm-2 control-label">Status</label>
         <div class="col-sm-10">
@@ -8,6 +8,18 @@
                     <input type="checkbox" name="status" id="input-status"  <?= $data['status'] ?> /> Aktiv
                 </label>
             </div>
+        </div>
+    </div>
+    <div class="form-group" ng-controller="KeyshopMultiSelect">
+        <label class="col-sm-2 control-label">Kategorien</label>
+        <div class="col-sm-10">
+            <input type="hidden" name="categories" />
+            <multi-select
+                input-model="data"
+                button-label="icon name"
+                item-label="icon name maker"
+                tick-property="ticked">
+            </multi-select>
         </div>
     </div>
     <div class="form-group">
