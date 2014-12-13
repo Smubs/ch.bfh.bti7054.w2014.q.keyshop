@@ -8,12 +8,12 @@ keyshop.controller("KeyshopCategories", function ($scope) {
     $scope.categories = ks.categories;
 });
 
-keyshop.controller("KeyshopMultiSelect", function ($scope) {
-    $scope.data = ks.multiSelectData;
+keyshop.controller("KeyshopMultiSelectCategories", function ($scope) {
+    $scope.multiSelectCategories = ks.multiSelectCategories;
 
     $(".form-product").submit(function() {
         var ids = new Array();
-        angular.forEach($scope.data, function(value) {
+        angular.forEach($scope.multiSelectCategories, function(value) {
             if (value.ticked === true) {
                 ids.push(value.id);
             }

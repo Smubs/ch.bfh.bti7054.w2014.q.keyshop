@@ -10,12 +10,12 @@
             </div>
         </div>
     </div>
-    <div class="form-group" ng-controller="KeyshopMultiSelect">
+    <div class="form-group" ng-controller="KeyshopMultiSelectCategories">
         <label class="col-sm-2 control-label">Kategorien</label>
         <div class="col-sm-10">
             <input type="hidden" name="categories" />
             <multi-select
-                input-model="data"
+                input-model="multiSelectCategories"
                 button-label="icon name"
                 item-label="icon name maker"
                 tick-property="ticked">
@@ -51,6 +51,12 @@
         <div class="col-sm-10">
             <?= $data['picture'] ?>
             <input type="file" class="form-control" name="picture" id="input-picture" />
+        </div>
+    </div>
+    <div class="form-group" ng-controller="KeyshopMultiSelectKeys">
+        <label class="col-sm-2 control-label">Keys</label>
+        <div class="col-sm-10">
+            <p class="form-control-static"><?= $data['keys'] ?></p>
         </div>
     </div>
     <div class="form-group">

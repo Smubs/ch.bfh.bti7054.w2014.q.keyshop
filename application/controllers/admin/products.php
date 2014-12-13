@@ -53,6 +53,11 @@ class Products extends KS_Controller {
     {
         if (($product = $this->productRepo->find($id)) && !$this->input->post()) {
             $productCategories = $product->getCategories()->toArray();
+            $keys = $product->getKeys()->toArray();
+            $data['keys'] = '';
+            foreach ($keys as $key) {
+                $data['keys'] .= $key->getKey() . '<br />';
+            }
 
             if ($product->getStatus()) {
                 $post['status'] = 1;
@@ -79,6 +84,7 @@ class Products extends KS_Controller {
             }
         }
 
+        // Multi Select Categories
         $jsData = array();
         $categories = $this->categoryRepo->findAll();
         foreach ($categories as $category) {
@@ -88,7 +94,7 @@ class Products extends KS_Controller {
                 'ticked' => in_array($category, $productCategories),
             );
         }
-        $this->_setJsData('multiSelectData', $jsData);
+        $this->_setJsData('multiSelectCategories', $jsData);
 
         $data['status']        = isset($post['status'])        ? 'checked="checked"'    : '';
         $data['name']          = isset($post['name'])          ? $post['name']          : '';
@@ -96,6 +102,7 @@ class Products extends KS_Controller {
         $data['price']         = isset($post['price'])         ? $post['price']         : '';
         $data['discountPrice'] = isset($post['discountPrice']) ? $post['discountPrice'] : '';
         $data['picture']       = isset($post['picture'])       ? $post['picture']       : '';
+        if (empty($data['keys'])) $data['keys'] = '';
         $this->_setData('data', $data);
 
         if ($this->input->post()) {
