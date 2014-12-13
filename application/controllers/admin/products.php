@@ -22,15 +22,15 @@ class Products extends KS_Controller {
             }
         }
 
-        $arrProducts = array();
+        $jsData = array();
         $products = $this->productRepo->findAll();
         foreach ($products as $product) {
-            $arrProducts[] = array(
+            $jsData[] = array(
                 'id'   => $product->getId(),
                 'name' => $product->getName(),
             );
         }
-        $this->_setJsData('products', json_encode($arrProducts));
+        $this->_setJsData('products', $jsData);
 
         $this->_renderScripts();
         $this->_renderStyles();
@@ -52,6 +52,8 @@ class Products extends KS_Controller {
     public function add($id = 0)
     {
         if (($product = $this->productRepo->find($id)) && !$this->input->post()) {
+            $productCategories = $product->getCategories()->toArray();
+
             if ($product->getStatus()) {
                 $post['status'] = 1;
             }
@@ -66,8 +68,27 @@ class Products extends KS_Controller {
                 $post['picture'] = '<img src="/assets/images/products/' . $picture . '" class="product-edit-picture" />';
             }
         } else {
+            $productCategories = array();
             $post = $this->input->post();
+            if (!empty($post['categories']) && $categoryIds = explode(',', $post['categories'])) {
+                foreach ($categoryIds as $categoryId) {
+                    if ($category = $this->categoryRepo->find($categoryId)) {
+                        $productCategories[] = $category;
+                    }
+                }
+            }
         }
+
+        $jsData = array();
+        $categories = $this->categoryRepo->findAll();
+        foreach ($categories as $category) {
+            $jsData[] = array(
+                'id'     => $category->getId(),
+                'name'   => $category->getName(),
+                'ticked' => in_array($category, $productCategories),
+            );
+        }
+        $this->_setJsData('multiSelectData', $jsData);
 
         $data['status']        = isset($post['status'])        ? 'checked="checked"'    : '';
         $data['name']          = isset($post['name'])          ? $post['name']          : '';
@@ -90,6 +111,7 @@ class Products extends KS_Controller {
                 if (!$product) {
                     $product = new \Entity\Product();
                 }
+                $product->setCategories($productCategories);
                 $product->setStatus(isset($post['status']));
                 $product->setName($post['name']);
                 $product->setDescription($post['description']);

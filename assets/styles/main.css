@@ -413,22 +413,22 @@ footer .footer-copyright {
 }
 
 /** Backend Style **/
-.product-overview i {
+.table-overview i {
     color: #333333;
     font-size: 18px;
 }
 
-.product-overview th,
-.product-overview td {
+.table-overview th,
+.table-overview td {
     border-color: #CCCCCC !important;
 }
 
-.form-product-remove {
+.form-remove {
     display: inline-block;
     margin: 0;
 }
 
-.form-product-remove .fa-remove {
+.form-remove .fa-remove {
     cursor: pointer;
 }
 

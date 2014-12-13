@@ -6,6 +6,9 @@ class KS_Controller extends CI_Controller {
     private $data;
     private $isBackend;
 
+    // 'constructor' for ajax controllers
+    protected $request = null;
+
     /**
      * @var \Doctrine\ORM\EntityManager $em
      */
@@ -75,9 +78,6 @@ class KS_Controller extends CI_Controller {
         return $this->data;
     }
 
-    // 'constructor' for ajax controllers
-    protected $request = null;
-
     public function _thisIsAjax() {
         $this->output->set_content_type('application/json');
         $this->request = json_decode(file_get_contents("php://input"));
@@ -111,6 +111,7 @@ class KS_Controller extends CI_Controller {
         );
 
         if ($this->isBackend) {
+            $defaultJs[] = 'assets/scripts/admin/angular-multi-select.js';
             $defaultJs[] = 'assets/scripts/admin/main.js';
         } else {
             $defaultJs[] = 'assets/scripts/main.js';
@@ -118,13 +119,11 @@ class KS_Controller extends CI_Controller {
 
         $this->data['scripts'] = '';
         foreach (array_merge($defaultJs, $js) as $jsitem) {
-            $this->data['scripts'] .= '<script src="' . base_url() . $jsitem . '"></script>';
+            $this->data['scripts'] .= '<script src="' . base_url() . $jsitem . '"></script>' . "\n";
         }
 
         $this->data['jsdata'] = base64_encode(json_encode($this->jsdata));
     }
-    
-    
 
     public function _renderStyles($css = array()) {
         // check if there is somewhere no .css 
@@ -142,13 +141,15 @@ class KS_Controller extends CI_Controller {
             'assets/styles/font-awesome.min.css',
             'assets/styles/main.css'
         );
+
+        if ($this->isBackend) {
+            $defaultCss[] = 'assets/styles/angular-multi-select.css';
+        }
         
         $this->data['styles'] = '';
         foreach (array_merge($defaultCss, $css) as $cssitem) {
-            $this->data['styles'] .= '<link type="text/css" rel="stylesheet" href="' . base_url() . $cssitem . '" />
-';
+            $this->data['styles'] .= '<link type="text/css" rel="stylesheet" href="' . base_url() . $cssitem . '" />' . "\n";
         }
     }
-
 
 }
