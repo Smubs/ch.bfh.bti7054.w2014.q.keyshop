@@ -41,7 +41,11 @@
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['admin'] = 'admin/dashboard';
-
+$route['product/(:any)'] = 'product/index/$1';
+$route['produkt/(:any)'] = 'product/index/$1';
+$route['produkte'] = 'products/index';
+$route['kategorien'] = 'categories/index';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
+

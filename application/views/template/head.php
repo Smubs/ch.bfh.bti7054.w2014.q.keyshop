@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Key Shop</title>
+    <title>Keyshop</title>
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,12 +9,13 @@
     <?= $styles ?>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,300" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Raleway:100' rel='stylesheet' type='text/css'>
 </head>
 <body ng-app="keyshop">
     <div class="global-wrap">
-        <header>
+        <header class="main">
             <div class="container">
-                <a href="/"><i class="fa fa-shopping-cart"></i> Keyshop</a>
+                <a class="logo" href="/">K<span class="rotated">e</span>yshop</a>
             </div>
         </header>
         <nav>
@@ -22,16 +23,52 @@
                 <div class="row">
                     <div class="col-md-6">
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Produkte</a></li>
-                            <li><a href="#">Kategorien</a></li>
+                            <li><a href="/">Home</a></li>
+							<?php if (isset($isAdmin) && $isAdmin): ?>
+									<li><a href="<?=site_url('admin')?>">Admin</a></li>
+							<?php endif ?>
+                            <li><a href="<?=site_url('produkte')?>">Produkte</a></li>
+                            <li><a href="<?=site_url('kategorien')?>">Kategorien</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6" ng-controller="ModalLogin">
                         <ul class="shopping-cart-wrapper">
-                            <li class="shopping-cart"><a href="#"><i class="fa fa-shopping-cart"></i>Warenkorb</a></li>
-                            <li><a href="#" ng-click="openLogin()"><i class="fa fa-sign-in"></i>Anmelden</a></li>
-                            <li><a href="#" ng-click="openRegister()"><i class="fa fa-edit"></i>Registrieren</a></li>
+                            <li class="shopping-cart shopping-cart-white"><a href="#"><i class="fa fa-shopping-cart"></i>Warenkorb</a>
+                                <div class="shopping-cart-box">
+                                    <ul class="shopping-cart-items">
+                                        <li>
+                                            <a href="/">
+                                                <img src="/assets/images/products/windows-10.jpg" alt="Image Alternative text">
+                                                <h5>Windows 8.1 Pro</h5><span>150 CHF</span>
+                                            </a>
+                                        </li>
+										 <li>
+                                            <a href="/">
+                                                <img src="/assets/images/products/windows-10.jpg" alt="Image Alternative text">
+                                                <h5>Windows 8.1 Pro</h5><span>150 CHF</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-inline text-center">
+                                        <li><a href="page-checkout.html"><i class="fa fa-check-square"></i> Zur Kasse</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+							<?php if (!$user): ?>
+								<li><a href="#" ng-click="openLogin()"><i class="fa fa-sign-in"></i>Anmelden</a></li>
+								<li><a href="#" ng-click="openRegister()"><i class="fa fa-edit"></i>Registrieren</a></li>
+							<?php else: ?>
+								<li><a href="/profil/"><i class="fa fa-edit"></i>
+									<?php if (!$user['firstname']): ?>
+										<?=$user['email']?>
+									<?php else: ?>
+										<?=$user['firstname'].' '.$user['lastname']?>
+									<?php endif; ?>										
+								</a></li>
+								<li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i>Abmelden</a></li>
+							<?php endif; ?>
+                            
                         </ul>
 
                         <script type="text/ng-template" id="modalUser.html">
@@ -46,7 +83,7 @@
                                 <div class="form-group" ng-repeat="input in inputs">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa {{input.icon}}"></i></div>
-                                        <input class="form-control" type="{{input.type}}" name="{{input.name}}" placeholder="{{input.placeholder}}" />
+                                        <input class="form-control" type="{{input.type}}" ng-model="input.value" name="{{input.name}}" placeholder="{{input.placeholder}}" />
                                     </div>
                                 </div>
                             </div>
@@ -71,19 +108,8 @@
                             <input class="form-control" type="text" placeholder="Produkt" />
                         </div>
                     </div>
-                    <div class="col-md-5 clearfix">
-                        <label>
-                            <i class="fa fa-folder-open"></i>
-                            <span>In der Kategorie</span>
-                        </label>
-                        <div class="search-category">
-                            <select name="search-category">
-                                <option>Alle</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <button class="btn btn-block search-btn" type="submit">Search</button>
+                    <div class="col-md-6 clearfix">
+                        <!-- something else??? -->
                     </div>
                 </div>
             </div>

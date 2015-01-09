@@ -18,7 +18,17 @@ angular.module('authService', [])
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
                     data: $.param(loginData)
                 });
+            },
+			
+			register : function(registerData) {
+                return $http({
+                    method: 'POST',
+                    url: '/ajax/auth/register',
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param(registerData)
+                });
             }
+			
 
         }
 

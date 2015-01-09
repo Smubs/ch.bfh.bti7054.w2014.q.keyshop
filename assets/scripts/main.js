@@ -1,6 +1,31 @@
 var keyshop = angular.module('keyshop', ['ui.bootstrap', 'authService']);
 
-keyshop.controller('ModalLogin', function ($scope, $modal) {
+keyshop.factory('ksUtil', function() {
+        return {
+			// converts ksInputs to $.param-ready datas
+            prepareInputs: function(inputs) {
+				var rv = {};
+                angular.forEach(inputs, function(input, key) {
+					var rvStr = 'rv.'+input.name+'="'+input.value+'"';
+					eval(rvStr); 
+				});
+				return rv;
+            }
+        };
+});
+
+keyshop.controller('ModalLogin', function ($scope, $modal, Auth) {
+	$scope.logout = function() {
+        Auth.logout()
+			.success(function(data) {
+				if (data.success) {
+					window.location.reload();
+				} else {
+					console.log('error 2013: logout error'); 
+				}
+			});
+	};
+
     $scope.openLogin = function() {
 
         $scope.data = {
@@ -23,9 +48,11 @@ keyshop.controller('ModalLogin', function ($scope, $modal) {
                 }
             )
         };
+		$scope.data.type = 'login';
         $scope.open();
     };
 
+	
     $scope.openRegister = function() {
         $scope.data = {
             placeholders: {
@@ -47,12 +74,13 @@ keyshop.controller('ModalLogin', function ($scope, $modal) {
                 },
                 {
                     type: 'password',
-                    name: 'password',
+                    name: 'password2',
                     icon: 'fa-repeat',
                     placeholder: 'Passwort bestätigen'
                 }
             )
         };
+		$scope.data.type = 'register';
         $scope.open();
     };
 
@@ -69,37 +97,67 @@ keyshop.controller('ModalLogin', function ($scope, $modal) {
     };
 });
 
-keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, data, Auth) {
+keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, data, Auth, ksUtil) {
     $scope.modalTitle = data.placeholders.modalTitle;
     $scope.modalSend  = data.placeholders.modalSend;
     $scope.inputs     = data.inputs;
 
-
     $scope.send = function () {
-        $scope.loading = true;
-        Auth.login($scope.loginData)
-            .success(function(data) {
-                if (data.success) {
-                    window.location.reload();
-                } else {
-                    $scope.error = true;
-                    $scope.feedback = {
-                        title: "Error",
-                        message: "Ajax not yet implemented"
-                    };
-                }
-                $scope.loading = false;
-            })
-            .error(function(data) {
-                $scope.error = true;
-                console.log('error');
-                console.log(data);
-                $scope.feedback = {
-                    title: "Server Error",
-                    message: "watch console"
-                };
-                $scope.loading = false;
-            });
+		var uo = ksUtil.prepareInputs($scope.inputs); 
+		
+		if (data.type == 'login') {
+			Auth.login(uo)
+				.success(function(data) {
+					if (data.success) {
+						window.location.reload();
+					} else {
+						$scope.error = true;
+						$scope.feedback = {
+							title: "Fehler!",
+							message: data.message
+						};
+					}
+					$scope.loading = false;
+				})
+				.error(function(data) {
+					$scope.error = true;
+					console.log('error');
+					console.log(data);
+					$scope.feedback = {
+						title: "Server Error",
+						message: "watch console"
+					};
+					$scope.loading = false;
+				});
+		}
+		
+		if (data.type == 'register') {
+			Auth.register(uo)
+				.success(function(data) {
+					if (data.success) {
+						window.location.reload();
+					} else {
+						$scope.error = true;
+						$scope.feedback = {
+							title: "Fehler!",
+							message: data.message
+						};
+					}
+					$scope.loading = false;
+				})
+				.error(function(data) {
+					$scope.error = true;
+					console.log('error');
+					console.log(data);
+					$scope.feedback = {
+						title: "Server Error",
+						message: "watch console"
+					};
+					$scope.loading = false;
+				});
+		}
+		
+		
     };
 
     $scope.cancel = function () {
@@ -108,8 +166,9 @@ keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, data,
 });
 
 keyshop.controller('KeyshopProducts', function ($scope) {
-    $scope.products = ks.homeProducts;
-}).directive('ksProduct', function() {
+    $scope.products = ks.products;
+});
+keyshop.directive('ksProduct', function() {
     return {
         restrict: 'E',
         templateUrl: '/assets/directives/ks-product.html'

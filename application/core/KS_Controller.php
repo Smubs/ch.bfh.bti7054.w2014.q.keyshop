@@ -37,6 +37,9 @@ class KS_Controller extends CI_Controller {
      * @var \Repository\CountryRepository $countryRepo
      */
     public $countryRepo;
+	
+	// current user
+	public $user;
 
     public function __construct() {
         parent::__construct();
@@ -61,6 +64,9 @@ class KS_Controller extends CI_Controller {
         $this->productRepo  = $this->em->getRepository('Entity\Product');
         $this->userRepo     = $this->em->getRepository('Entity\User');
         $this->countryRepo  = $this->em->getRepository('Entity\Country');
+		
+		// do authentifaction and load current user
+        $this->_doUser();
     }
 
     public function _setJsData($name, $object) {
@@ -78,10 +84,37 @@ class KS_Controller extends CI_Controller {
         return $this->data;
     }
 
-    public function _thisIsAjax() {
-        $this->output->set_content_type('application/json');
-        $this->request = json_decode(file_get_contents("php://input"));
+    public function _doUser() {
+        if ($this->session->userdata('logged_in')) {
+            $uid = $this->session->userdata('logged_in'); 
+
+			$u = $this->userRepo->find($uid);
+			$this->user = $u;
+			
+			$udata['id'] = $u->getId();
+			$udata['email'] = $u->getEmail();
+			$udata['firstname'] = $u->getFirstname();
+			$udata['lastname'] = $u->getLastname();
+			$udata['address'] = $u->getAddress();
+			$udata['zip'] = $u->getZip();
+			$udata['place'] = $u->getPlace();
+            
+			$this->_setData('user', $udata);
+            define('USERID', $u->getId());
+
+            if ($u->getAdmin() > 6) {
+                $this->_setData('isAdmin', true);
+				
+            } else
+            {
+                $this->_setData('isAdmin', false);
+            }
+            
+        } else {
+            $this->_setData('user', false);
+        }
     }
+
 
     public function _renderScripts($js = array()) {
         // check if there is somewhere no .js 
@@ -94,7 +127,7 @@ class KS_Controller extends CI_Controller {
         }
         // jquery and base64 | need to be seperated because of dependencies
         $preJs = array(
-            'assets/scripts/jquery-1.11.1.min.js',
+            'assets/scripts/jquery-2.1.3.min.js',
             'assets/scripts/jquery.base64.min.js'
         );
 
@@ -105,6 +138,7 @@ class KS_Controller extends CI_Controller {
 
         // default js
         $defaultJs = array(
+			'assets/scripts/md5.js',
             'assets/scripts/angular.min.js',
             'assets/scripts/ui-bootstrap-tpls-0.11.2.min.js',
 			'assets/scripts/services/authService.js'
