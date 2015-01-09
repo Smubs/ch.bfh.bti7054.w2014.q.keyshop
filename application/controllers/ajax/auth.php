@@ -15,7 +15,7 @@ class Auth extends KS_Controller {
         $user = $this->userRepo->findOneByEmail($email);
 		
 		if ($user) {
-			if (hash_equals($user->getPassword(), crypt($password, $user->getPassword()))) {
+			if ($user->getPassword() === crypt($password, $user->getPassword())) {
 				$this->session->set_userdata('logged_in', $user->getId());
 				
 				echo json_encode(array(

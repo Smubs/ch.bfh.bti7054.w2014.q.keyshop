@@ -6,12 +6,18 @@ if (!defined('BASEPATH'))
 class Home extends KS_Controller {
 
     public function index() {
+	
         $homeProducts = array();
         $products = $this->productRepo->findAll();
         foreach ($products as $product) {
-            $homeProducts[] = $product->getHomeArray();
+			$t = array();
+			$t = $product->getHomeArray();
+            $t['url'] = site_url('produkt/'.urlencode($t['name'])); 
+			$homeProducts[] = $t;
+			unset($t); 
         }
-        $this->_setJsData('homeProducts', $homeProducts);
+		
+        $this->_setJsData('products', $homeProducts);
 
         $this->_renderScripts();
         $this->_renderStyles();
