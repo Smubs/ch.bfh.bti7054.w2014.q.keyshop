@@ -1,4 +1,4 @@
-var keyshop = angular.module('keyshop', ['ui.bootstrap', 'authService']);
+var keyshop = angular.module('keyshop', ['ui.bootstrap', 'authService', 'ngCookies']);
 
 keyshop.factory('ksUtil', function() {
         return {
@@ -168,6 +168,7 @@ keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, data,
 keyshop.controller('KeyshopProducts', function ($scope) {
     $scope.products = ks.products;
 });
+
 keyshop.directive('ksProduct', function() {
     return {
         restrict: 'E',
