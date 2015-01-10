@@ -4,8 +4,16 @@ keyshop.controller("KeyshopProducts", function ($scope) {
     $scope.products = ks.products;
 });
 
+keyshop.controller("KeyshopKeys", function ($scope) {
+    $scope.keys = ks.keys;
+});
+
 keyshop.controller("KeyshopCategories", function ($scope) {
     $scope.categories = ks.categories;
+});
+
+keyshop.controller("KeyshopUsers", function ($scope) {
+    $scope.users = ks.users;
 });
 
 keyshop.controller("KeyshopMultiSelectCategories", function ($scope) {

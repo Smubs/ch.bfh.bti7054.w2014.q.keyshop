@@ -2,6 +2,9 @@ Entity\Product:
   type: entity
   table: keyshop_products
   repositoryClass: Repository\ProductRepository
+  uniqueConstraints:
+    name:
+      columns: [ name ]
 
   id:
     id:

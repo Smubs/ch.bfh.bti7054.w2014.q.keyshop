@@ -13,12 +13,18 @@ class Products extends KS_Controller {
             if ($product) {
                 $productName = $product->getName();
                 $this->em->remove($product);
-                $this->em->flush();
-
-                $this->_setData('alert', array(
-                    'mode'    => 'success',
-                    'message' => 'Das Produkt "' . $productName . '" wurde erfolgreich gelöscht.'
-                ));
+                try {
+                    $this->em->flush();
+                    $this->_setData('alert', array(
+                        'mode'    => 'success',
+                        'message' => 'Das Produkt "' . $productName . '" wurde erfolgreich gelöscht.'
+                    ));
+                } catch (\Exception $e) {
+                    $this->_setData('alert', array(
+                        'mode'    => 'danger',
+                        'message' => 'Löschen Sie zuerst die zugewiesenen Keys.'
+                    ));
+                }
             }
         }
 

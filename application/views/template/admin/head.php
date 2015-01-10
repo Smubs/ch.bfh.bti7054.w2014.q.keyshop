@@ -21,15 +21,17 @@
         <nav>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <ul>
 							<li><a href="/"><i class="fa fa-reply"></i>Zurück zu Keyshop</a></li>
                             <li><a href="/admin/">Dashboard</a></li>
                             <li><a href="/admin/products">Produkte</a></li>
+                            <li><a href="/admin/keys">Keys</a></li>
                             <li><a href="/admin/categories">Kategorien</a></li>
+                            <li><a href="/admin/users">Benutzer</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-6">   
+                    <div class="col-md-4">
                         <ul class="pull-right">
                             <li class="logout"><a href="/admin/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
                         </ul>
