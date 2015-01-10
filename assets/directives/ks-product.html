@@ -1,19 +1,27 @@
-<a href="{{tproduct.url}}">
-	<div class="product-thumb">
-		<header class="product-header">
-			<img src="/assets/images/products/{{tproduct.picture}}" alt="{{tproduct.title}}" title="{{tproduct.title}}" />
-		</header>
-		<div class="product-inner">
-			<h5 class="product-title">{{tproduct.name}}</h5>
-			<p class="product-desciption">{{tproduct.description}}</p>
-			<div class="product-meta">
-				<ul class="product-price-list">
-					<li><span class="product-price">{{tproduct.discountPrice}}</span></li>
-					<li><span class="product-old-price">{{tproduct.price}}</span></li>
-					<li><span class="product-save">{{tproduct.priceSave}}</span></li>
-				</ul>
-			</div>
-			<p class="product-location"><i class="fa fa-folder-open"></i> {{tproduct.category}}</p>
-		</div>
-	</div>
-</a>
+<div class="row" ng-repeat="rows in rowData track by $index">
+    <div class="col-md-4 animated fadeIn" ng-repeat="tproduct in rows">
+        <a href="{{tproduct.url}}">
+            <div class="product-thumb">
+                <header class="product-header">
+                    <img src="/assets/images/products/{{tproduct.picture}}" alt="{{tproduct.title}}" title="{{tproduct.title}}" />
+                </header>
+                <div class="product-inner">
+                    <h5 class="product-title">{{tproduct.name}}</h5>
+                    <p class="product-desciption">{{tproduct.description}}</p>
+                    <div class="product-meta">
+                        <ul ng-show="tproduct.hasDiscountPrice" class="product-price-list">
+                            <li><span class="product-price">{{tproduct.discountPrice}}</span></li>
+                            <li><span class="product-old-price">{{tproduct.price}}</span></li>
+                            <li><span class="product-save">{{tproduct.priceSave}}</span></li>
+                        </ul>
+
+                        <ul ng-show="!tproduct.hasDiscountPrice" class="product-price-list">
+                            <li><span class="product-price">{{tproduct.price}}</span></li>
+                        </ul>
+                    </div>
+                    <p class="product-location"><i class="fa fa-folder-open"></i> {{tproduct.category}}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

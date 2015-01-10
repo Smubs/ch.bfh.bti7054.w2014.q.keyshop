@@ -6,8 +6,6 @@ class KS_Controller extends CI_Controller {
     private $data;
     private $isBackend;
 
-    // 'constructor' for ajax controllers
-    protected $request = null;
 
     /**
      * @var \Doctrine\ORM\EntityManager $em
@@ -160,6 +158,26 @@ class KS_Controller extends CI_Controller {
         $this->data['jsdata'] = base64_encode(json_encode($this->jsdata));
     }
 
+
+    // 'constructor' for ajax controllers
+    private $request = null;
+
+    protected function request($property) {
+        if ($this->request === NULL)
+            return '';
+        $request = $this->request;
+        if(property_exists($request,$property)){
+            return $request->{$property};
+        }else{
+            return ''; //
+        }
+    }
+
+    public function thisIsAjax() {
+        $this->output->set_content_type('application/json');
+        $this->request = json_decode(file_get_contents("php://input"));
+    }
+
     public function _renderStyles($css = array()) {
         // check if there is somewhere no .css 
         $i = 0;
@@ -174,6 +192,7 @@ class KS_Controller extends CI_Controller {
         $defaultCss = array(
             'assets/styles/bootstrap.min.css',
             'assets/styles/font-awesome.min.css',
+            'assets/styles/animate.css',
             'assets/styles/main.css'
         );
 

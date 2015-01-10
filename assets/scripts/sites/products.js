@@ -1,19 +1,18 @@
-keyshop.controller('KeyshopFilterProducts', ['$scope', 'filterFilter', '$http', '$timeout', '$cookieStore', function ($scope, filterFilter, $http, $timeout, $cookieStore) {
+keyshop.controller('KeyshopFilterProducts', ['$scope', 'filterFilter', '$http', '$timeout', '$cookies', function ($scope, filterFilter, $http, $timeout, $cookies) {
     $scope.products = ks.products;
 
-    // will only show a limited count of objects if every filter is active
-    var limited = false;
-
-    // will save user filters in cookies
+    // will save user filters in cookies - not finished
     var saveFilter = true;
 
     // do not edit!
+    $scope.sortBy = 'name';
     var initializing = true;
     var wrap = $(".product-wrap");
     var wrapHeight;
 
     $scope.showLoader = function () {
-        wrap.append("<div class='loader'><div class='preloader'><div class='preloader-container'><span class='animated-preloader'></span></div></div></div>");
+        wrap.append("<div class='loader'><div cl" +
+        "+ass='preloader'><div class='preloader-container'><span class='animated-preloader'></span></div></div></div>");
     };
 
     $scope.hideLoader = function () {
@@ -33,15 +32,18 @@ keyshop.controller('KeyshopFilterProducts', ['$scope', 'filterFilter', '$http', 
 
     // method to get selected regions
     $scope.selectedCategories = function() {
-        return filterFilter($scope.regions, { selected: true });
+        return filterFilter($scope.categories, { selected: true });
     };
 
-    // watch for changes
     $scope.$watch('categories|filter:{selected:true}', function (nv) {
         if (!initializing) {
             $scope.refreshFilter();
         }
 
+    }, true);
+
+    $scope.$watch('sortBy', function (nv) {
+        $scope.refreshFilter();
     }, true);
 
     $scope.unCheckAll = function(obj) {
@@ -51,37 +53,28 @@ keyshop.controller('KeyshopFilterProducts', ['$scope', 'filterFilter', '$http', 
     };
 
     // get cookies if exist
-    if (saveFilter && $cookieStore.get('categories')) {
-        $scope.btypes = $cookieStore.get('categories');
+    if (saveFilter && $cookies.categories) {
+        // $scope.categories = $cookies.categories;
     }
 
     // refreshes the filter
     $scope.refreshFilter = function() {
-
         $scope.showLoader();
-        var url = ks.ajaxurl;
-        console.log(ks.ajaxurl);
+        var url = ks.ajaxurl+'/'+$scope.sortBy+'/';
 
-        // add categories to url
-        /*url+= "?"+$scope.category+"="
-        if (!limited || $scope.categories.length != $scope.selectedCategories().length) {
-            angular.forEach($scope.selectedCategories(), function (k, v) {
-                url += k.value+'|';
-            });
-        }
-        url = url.substring(0, url.length - 1);
-        */
-
-        $http.get(url).success(function(data){
+        $http.post(url, {'categories' : $scope.selectedCategories()}).success(function(data){
             // save new cookies
             if (saveFilter) {
-                $cookieStore.put('categories',$scope.regions);
+                $cookies.categories = $scope.categories;
             }
 
             $scope.hideLoader();
             $scope.products = data.products;
+            $scope.$broadcast("Data_Ready");
+
             $timeout(function() { initializing = false; });
         });
+
     }
 
     $scope.refreshFilter();

@@ -234,13 +234,15 @@ class Product {
             $categories[] = $category->getName();
         }
 
+        $saved = $this->getPrice()-$this->getDiscountPrice();
         return array(
             'name' => $this->getName(),
             'picture' => $this->getPicture(),
             'description' => $this->getDescription(),
             'discountPrice' => $this->getDiscountPrice() . ' CHF',
+            'hasDiscountPrice' => ($this->getDiscountPrice() > 0) ? true : false,
             'price' => $this->getPrice() . ' CHF',
-            'priceSave' => 'Sie sparen ' . round($this->getDiscountPrice() / $this->getPrice() * 100) . '%',
+            'priceSave' => 'Sie sparen ' . $saved . ' CHF',
             'category' => implode(', ', $categories),
         );
     }

@@ -6,18 +6,27 @@ if (!defined('BASEPATH'))
 class Product extends KS_Controller {
 
     public function index($name) {
+        $products = array();
+
         $product = $this->productRepo->findOneByName(urldecode($name));
         $this->_setData('product', $product); 
 		$this->_setJsData('product', $product);
-		
-        $products = array();
-        $oproducts = $this->productRepo->findAll();
-        foreach ($oproducts as $product) {
-			$t = array();
-			$t = $product->getHomeArray();
-            $t['url'] = site_url('produkt/'.urlencode($t['name'])); 
-			$products[] = $t;
-			unset($t); 
+
+        $firstCategory = $product->getCategories()->toArray();
+
+        if ($firstCategory) {
+            $firstCategory = $firstCategory[0];
+            $oproducts = $firstCategory->getProducts()->toArray();
+            shuffle($oproducts);
+            $oproducts = array_slice($oproducts, 0, 3);
+
+            foreach ($oproducts as $product) {
+                $t = array();
+                $t = $product->getHomeArray();
+                $t['url'] = site_url('produkt/'.urlencode($t['name']));
+                $products[] = $t;
+                unset($t);
+            }
         }
 		
 		 
