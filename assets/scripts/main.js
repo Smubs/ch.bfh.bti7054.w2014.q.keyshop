@@ -172,6 +172,21 @@ keyshop.controller('KeyshopProducts', function ($scope) {
 keyshop.directive('ksProduct', function() {
     return {
         restrict: 'E',
+        link:function($scope,$element,attrs){
+            function chunk(arr, size) {
+                var newArr = [];
+                for (var i=0; i<arr.length; i+=size) {
+                    newArr.push(arr.slice(i, i+size));
+                }
+                return newArr;
+            }
+
+            $scope.$on("Data_Ready", function  () {
+                $scope.p = eval('$scope.' + attrs.products);
+                $scope.rowData = chunk($scope.p, 3);
+            });
+            $scope.$broadcast("Data_Ready");
+        },
         templateUrl: '/assets/directives/ks-product.html'
     };
 });

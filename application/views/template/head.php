@@ -5,7 +5,7 @@
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <?= $styles ?>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,300" rel="stylesheet" type="text/css">
@@ -31,25 +31,17 @@
                         </ul>
                     </div>
                     <div class="col-md-6" ng-controller="ModalLogin">
-                        <ul class="shopping-cart-wrapper">
-                            <li class="shopping-cart shopping-cart-white"><a href="#"><i class="fa fa-shopping-cart"></i>Warenkorb</a>
-                                <div class="shopping-cart-box">
-                                    <ul class="shopping-cart-items">
+                        <ul class="useroption-wrapper">
+                            <li class="cart">
+                                <a href="#"><i class="fa fa-shopping-cart"></i>Warenkorb</a>
+                                <div class="cart-box">
+
+
+                                    <ul class="cart-items">
                                         <li>
-                                            <a href="/">
-                                                <img src="/assets/images/products/windows-10.jpg" alt="Image Alternative text">
-                                                <h5>Windows 8.1 Pro</h5><span>150 CHF</span>
-                                            </a>
+                                            <a href="<?=site_url('cart')?>"><span>5</span> befinden sich in deinem Warenkorb</a>
                                         </li>
-										 <li>
-                                            <a href="/">
-                                                <img src="/assets/images/products/windows-10.jpg" alt="Image Alternative text">
-                                                <h5>Windows 8.1 Pro</h5><span>150 CHF</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <ul class="list-inline text-center">
-                                        <li><a href="page-checkout.html"><i class="fa fa-check-square"></i> Zur Kasse</a>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i> Zur Kasse</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -63,11 +55,11 @@
 										<?=$user['email']?>
 									<?php else: ?>
 										<?=$user['firstname'].' '.$user['lastname']?>
-									<?php endif; ?>										
+									<?php endif; ?>
 								</a></li>
 								<li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i>Abmelden</a></li>
 							<?php endif; ?>
-                            
+
                         </ul>
 
                         <script type="text/ng-template" id="modalUser.html">
