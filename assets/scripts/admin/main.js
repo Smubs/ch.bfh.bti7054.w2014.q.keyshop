@@ -1,5 +1,9 @@
 var keyshop = angular.module("keyshop", ["ui.bootstrap", "multi-select"]);
 
+keyshop.controller("KeyshopOrders", function ($scope) {
+    $scope.orders = ks.orders;
+});
+
 keyshop.controller("KeyshopProducts", function ($scope) {
     $scope.products = ks.products;
 });
@@ -30,7 +34,9 @@ keyshop.controller("KeyshopMultiSelectCategories", function ($scope) {
     });
 });
 
-$(document).ready(function() {
+$(function () {
+    $("[data-toggle=\"tooltip\"]").tooltip();
+
     $(".form-remove .fa-remove").click(function() {
         var name = $(this).parents("tr").find(".name").text();
         if (confirm("Wollen Sie \"" + name + "\" wirklich löschen?")) {

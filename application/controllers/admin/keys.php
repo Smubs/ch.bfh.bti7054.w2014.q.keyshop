@@ -39,6 +39,7 @@ class Keys extends KS_Controller {
             $jsData[] = array(
                 'id'      => $key->getId(),
                 'key'     => $key->getKey(),
+                'sold'    => $key->getOrder() !== null,
                 'product' => $key->getProduct()->getName(),
             );
         }

@@ -18,10 +18,6 @@ class Order {
      */
     protected $id;
     /**
-     * @var string $userId
-     */
-    protected $userId;
-    /**
      * @var User $user
      */
     protected $user;
@@ -101,21 +97,5 @@ class Order {
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * @param string $userId
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUserId()
-    {
-        return $this->userId;
     }
 }

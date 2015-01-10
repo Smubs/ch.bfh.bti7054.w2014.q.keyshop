@@ -7,7 +7,7 @@
             <button type="submit" name="submit" class="btn btn-default">Suchen</button>
         </div>
         <div class="col-sm-3 pull-right">
-            <input class="form-control" type="text" name="search" value="<?= $search ?>" placeholder="Suchkriterium" />
+            <input class="form-control" type="text" name="search" value="<?= $search ?>" placeholder="Suchkriterium" required />
         </div>
     </div>
 </form>

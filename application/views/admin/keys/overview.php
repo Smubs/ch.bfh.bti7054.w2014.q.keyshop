@@ -7,7 +7,7 @@
             <button type="submit" name="submit" class="btn btn-default">Suchen</button>
         </div>
         <div class="col-sm-3 pull-right">
-            <input class="form-control" type="text" name="search" value="<?= $search ?>" placeholder="Suchkriterium" />
+            <input class="form-control" type="text" name="search" value="<?= $search ?>" placeholder="Suchkriterium" required />
         </div>
     </div>
 </form>
@@ -27,7 +27,10 @@
         </tr>
         <tr ng-repeat="key in keys">
             <td>{{key.id}}</td>
-            <td class="name"><a href="/admin/keys/edit/{{key.id}}">{{key.key}}</a></td>
+            <td class="name">
+                <a href="/admin/keys/edit/{{key.id}}">{{key.key}}</a>&nbsp;&nbsp;
+                <i ng-show="{{key.sold}}" class="fa fa-shopping-cart" data-toggle="tooltip" data-placement="right" title="Key wurde bereits bestellt."></i>
+            </td>
             <td>{{key.product}}</td>
             <td>
                 <a href="/admin/keys/edit/{{key.id}}"><i class="fa fa-edit"></i></a>

@@ -15,7 +15,7 @@
     <div class="global-wrap">
         <header class="main">
             <div class="container">
-                <a class="logo" href="/"><span class="rotated">KS</span>.ADMIN</a>
+                <a class="logo" href="/admin/"><span class="rotated">KS</span>.ADMIN</a>
             </div>
         </header>
         <nav>
@@ -24,7 +24,7 @@
                     <div class="col-md-8">
                         <ul>
 							<li><a href="/"><i class="fa fa-reply"></i>Zurück zu Keyshop</a></li>
-                            <li><a href="/admin/">Dashboard</a></li>
+                            <li><a href="/admin/orders">Bestellungen</a></li>
                             <li><a href="/admin/products">Produkte</a></li>
                             <li><a href="/admin/keys">Keys</a></li>
                             <li><a href="/admin/categories">Kategorien</a></li>

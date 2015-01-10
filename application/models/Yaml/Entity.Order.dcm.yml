@@ -9,11 +9,6 @@ Entity\Order:
       generator:
         strategy: AUTO
 
-  fields:
-    userId:
-      type: integer
-      column: user_id
-
   oneToMany:
     keys:
       targetEntity: Key

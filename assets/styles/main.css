@@ -629,3 +629,18 @@ footer .footer-copyright {
 .product-sort:hover > ul {
   display: block;
 }
+.table-overview .quantity {
+  display: inline-block;
+  width: 20px;
+}
+.table-overview .fa {
+  color: #666666;
+  font-size: 18px;
+}
+.form-remove {
+  display: inline-block;
+  margin: 0;
+}
+.form-remove .fa-remove {
+  cursor: pointer;
+}

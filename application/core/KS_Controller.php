@@ -141,6 +141,7 @@ class KS_Controller extends CI_Controller {
 			'assets/scripts/md5.js',
             'assets/scripts/angular.min.js',
             'assets/scripts/angular-cookies.min.js',
+            'assets/scripts/bootstrap.min.js',
             'assets/scripts/ui-bootstrap-tpls-0.11.2.min.js',
 			'assets/scripts/services/authService.js'
         );
