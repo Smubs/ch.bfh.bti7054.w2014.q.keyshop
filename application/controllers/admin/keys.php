@@ -22,18 +22,18 @@ class Keys extends KS_Controller {
             }
         }
 
-        $searchProduct = $this->input->post('searchProduct');
-        $this->_setData('searchProduct', $searchProduct);
-        if ($searchProduct) {
-            $product = $this->productRepo->findOneBy(array('name' => $searchProduct));
-            if ($product) {
-                $keys = $this->keyRepo->findBy(array('product' => $product));
-            } else {
-                $keys = array();
+        $search = $this->input->post('search');
+        $this->_setData('search', $search);
+        $keys     = array();
+        $criteria = array();
+        if (!empty($search)) {
+            $products = $this->productRepo->searchBy(array('name' => $search));
+            foreach ($products as $product) {
+                $keys = array_merge($keys, $this->keyRepo->searchBy(array('product' => $product)));
             }
-        } else {
-            $keys = $this->keyRepo->findAll();
+            $criteria = array('key' => $search);
         }
+        $keys = array_merge($keys, $this->keyRepo->searchBy($criteria));
         $jsData = array();
         foreach ($keys as $key) {
             $jsData[] = array(

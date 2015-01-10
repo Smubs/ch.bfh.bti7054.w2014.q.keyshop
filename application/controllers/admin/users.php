@@ -22,10 +22,16 @@ class Users extends KS_Controller {
             }
         }
 
-        $searchEmail = $this->input->post('searchEmail');
-        $this->_setData('searchEmail', $searchEmail);
-        $criteria = !empty($searchEmail) ? array('email' => $searchEmail) : array();
-        $users = $this->userRepo->findBy($criteria);
+        $search = $this->input->post('search');
+        $this->_setData('search', $search);
+        $criteria = array();
+        if (!empty($search)) {
+            $fields  = array('email', 'firstname', 'lastname', 'address', 'zip', 'place');
+            foreach ($fields as $field) {
+                $criteria[$field] = $search;
+            }
+        }
+        $users = $this->userRepo->searchBy($criteria);
         $jsData = array();
         foreach ($users as $user) {
             $jsData[] = array(

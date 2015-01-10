@@ -12,12 +12,7 @@ class CategoryRepositoryException extends \Exception {}
  * Class CategoryRepository
  * @package Repository
  */
-class CategoryRepository extends \Doctrine\ORM\EntityRepository {
-    /**
-     * @var \Doctrine\ORM\EntityManager $em
-     */
-    protected $em;
-
+class CategoryRepository extends EntityRepository {
     /**
      * @param \Doctrine\ORM\EntityManager $em
      * @param \Doctrine\ORM\Mapping\ClassMetadata $class
@@ -25,6 +20,5 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository {
     public function __construct(\Doctrine\ORM\EntityManager $em, \Doctrine\ORM\Mapping\ClassMetadata $class)
     {
         parent::__construct($em, $class);
-        $this->em = $em;
     }
 }

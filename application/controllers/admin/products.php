@@ -28,8 +28,17 @@ class Products extends KS_Controller {
             }
         }
 
+        $search = $this->input->post('search');
+        $this->_setData('search', $search);
+        $criteria = array();
+        if (!empty($search)) {
+            $fields  = array('name', 'description', 'price', 'discountPrice');
+            foreach ($fields as $field) {
+                $criteria[$field] = $search;
+            }
+        }
+        $products = $this->productRepo->searchBy($criteria);
         $jsData = array();
-        $products = $this->productRepo->findAll();
         foreach ($products as $product) {
             $jsData[] = array(
                 'id'   => $product->getId(),

@@ -1,5 +1,16 @@
-<a href="/admin/products/add"><button type="button" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;&nbsp;Produkt hinzufügen</button></a>
-<br /><br />
+<form action="/<?= uri_string() ?>" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    <div class="form-group">
+        <div class="col-sm-2">
+            <a href="/admin/products/add"><button type="button" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;&nbsp;Produkt hinzufügen</button></a>
+        </div>
+        <div class="col-sm-1 pull-right">
+            <button type="submit" name="submit" class="btn btn-default">Suchen</button>
+        </div>
+        <div class="col-sm-3 pull-right">
+            <input class="form-control" type="text" name="search" value="<?= $search ?>" placeholder="Suchkriterium" />
+        </div>
+    </div>
+</form>
 <div class="table-responsive table-overview">
     <table class="table table-striped" ng-controller="KeyshopProducts">
         <colgroup>

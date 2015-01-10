@@ -22,8 +22,17 @@ class Categories extends KS_Controller {
             }
         }
 
+        $search = $this->input->post('search');
+        $this->_setData('search', $search);
+        $criteria = array();
+        if (!empty($search)) {
+            $fields  = array('name', 'description');
+            foreach ($fields as $field) {
+                $criteria[$field] = $search;
+            }
+        }
+        $categories = $this->categoryRepo->searchBy($criteria);
         $jsData = array();
-        $categories = $this->categoryRepo->findAll();
         foreach ($categories as $category) {
             $jsData[] = array(
                 'id'   => $category->getId(),
