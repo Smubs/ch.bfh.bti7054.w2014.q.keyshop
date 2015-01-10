@@ -14,9 +14,9 @@
         <label for="input-name" class="col-sm-2 control-label">Key *</label>
         <div class="col-sm-10">
             <?php if ($isEditView): ?>
-            <input type="text" class="form-control" name="key" id="input-name" placeholder="" value="<?= $data['key'] ?>" />
+            <input type="text" class="form-control" name="key" id="input-name" placeholder="" value="<?= $data['key'] ?>" required />
             <?php else: ?>
-            <textarea class="form-control" name="keys" rows="3" placeholder="Pro Zeile ein Key"></textarea>
+            <textarea class="form-control" name="keys" rows="3" placeholder="Pro Zeile ein Key" required></textarea>
             <?php endif ?>
         </div>
     </div>

@@ -54,12 +54,14 @@ class Categories extends KS_Controller {
         if (($category = $this->categoryRepo->find($id)) && !$this->input->post()) {
             $post['name']        = $category->getName();
             $post['description'] = $category->getDescription();
+            $post['cssClass']    = $category->getCssClass();
         } else {
             $post = $this->input->post();
         }
 
         $data['name']        = isset($post['name'])        ? $post['name']        : '';
         $data['description'] = isset($post['description']) ? $post['description'] : '';
+        $data['cssClass']    = isset($post['cssClass'])    ? $post['cssClass']    : '';
         $this->_setData('data', $data);
 
         if ($this->input->post()) {
@@ -74,6 +76,9 @@ class Categories extends KS_Controller {
                 }
                 $category->setName($post['name']);
                 $category->setDescription($post['description']);
+                if (!empty($post['cssClass'])) {
+                    $category->setCssClass($post['cssClass']);
+                }
                 $this->em->persist($category);
                 $this->em->flush();
                 redirect('/admin/categories/success');

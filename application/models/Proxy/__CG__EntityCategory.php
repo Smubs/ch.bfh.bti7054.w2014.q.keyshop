@@ -64,10 +64,10 @@ class Category extends \Entity\Category implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'name', 'description', 'products');
+            return array('__isInitialized__', 'id', 'name', 'description', 'cssClass', 'products');
         }
 
-        return array('__isInitialized__', 'id', 'name', 'description', 'products');
+        return array('__isInitialized__', 'id', 'name', 'description', 'cssClass', 'products');
     }
 
     /**
@@ -173,6 +173,28 @@ class Category extends \Entity\Category implements \Doctrine\ORM\Proxy\Proxy
     }
 
     
+    /**
+     * {@inheritDoc}
+     */
+    public function setCssClass($cssClass)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCssClass', array($cssClass));
+
+        return parent::setCssClass($cssClass);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCssClass()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCssClass', array());
+
+        return parent::getCssClass();
+    }
+
     /**
      * {@inheritDoc}
      */

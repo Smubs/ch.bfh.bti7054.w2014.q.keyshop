@@ -5,11 +5,12 @@ CREATE TABLE IF NOT EXISTS `keyshop_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `css_class` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
-INSERT INTO `keyshop_categories` (`id`, `name`, `description`) VALUES
-  (2, 'Software', '');
+INSERT INTO `keyshop_categories` (`id`, `name`, `description`, `css_class`) VALUES
+  (2, 'Software', '', NULL);
 
 CREATE TABLE IF NOT EXISTS `keyshop_countries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

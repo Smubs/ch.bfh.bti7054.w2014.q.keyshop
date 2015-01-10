@@ -17,6 +17,12 @@ Entity\Category:
     description:
       type: text
 
+    cssClass:
+      type: string
+      length: 200
+      column: css_class
+      nullable: true
+
   manyToMany:
     products:
       targetEntity: Product

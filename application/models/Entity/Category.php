@@ -26,6 +26,10 @@ class Category {
      */
     protected $description;
     /**
+     * @var string $cssClass
+     */
+    protected $cssClass;
+    /**
      * @var \Doctrine\Common\Collections\ArrayCollection|Product[] $products
      */
     protected $products;
@@ -33,6 +37,22 @@ class Category {
     public function __construct()
     {
         $this->description = '';
+    }
+
+    /**
+     * @param string $cssClass
+     */
+    public function setCssClass($cssClass)
+    {
+        $this->cssClass = $cssClass;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCssClass()
+    {
+        return $this->cssClass;
     }
 
     /**

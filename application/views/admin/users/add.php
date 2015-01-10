@@ -11,15 +11,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
+        <label for="input-email" class="col-sm-2 control-label">E-Mail *</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="email" id="input-email" placeholder="E-Mail" value="<?= $data['email'] ?>" />
+            <input type="email" class="form-control" name="email" id="input-email" placeholder="E-Mail" value="<?= $data['email'] ?>" required />
         </div>
     </div>
     <div class="form-group">
-        <label for="input-password" class="col-sm-2 control-label">Passwort</label>
+        <label for="input-password" class="col-sm-2 control-label">Passwort *</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="password" id="input-password" placeholder="Passwort" value="<?= $data['password'] ?>" />
+            <input type="password" class="form-control" name="password" id="input-password" placeholder="Passwort" value="<?= $data['password'] ?>" required />
         </div>
     </div>
     <div class="form-group">

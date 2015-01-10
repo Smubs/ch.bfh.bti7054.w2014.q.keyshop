@@ -3,13 +3,19 @@
     <div class="form-group">
         <label for="input-name" class="col-sm-2 control-label">Name *</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="name" id="input-name" placeholder="Name" value="<?= $data['name'] ?>" />
+            <input type="text" class="form-control" name="name" id="input-name" placeholder="Name" value="<?= $data['name'] ?>" required />
         </div>
     </div>
     <div class="form-group">
         <label for="input-description" class="col-sm-2 control-label">Beschreibung</label>
         <div class="col-sm-10">
             <textarea class="form-control" rows="3" name="description" id="input-description" placeholder="Beschreibung"><?= $data['description'] ?></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="input-css-class" class="col-sm-2 control-label">CSS-Klasse</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="cssClass" id="input-css-class" placeholder="CSS-Klasse" value="<?= $data['cssClass'] ?>" />
         </div>
     </div>
     <div class="form-group">
