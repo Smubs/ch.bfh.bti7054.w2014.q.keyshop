@@ -7,10 +7,10 @@ CREATE TABLE IF NOT EXISTS `keyshop_categories` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `css_class` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 INSERT INTO `keyshop_categories` (`id`, `name`, `description`, `css_class`) VALUES
-  (2, 'Software', '', NULL);
+  (2, 'Software', 'yxcv', NULL);
 
 CREATE TABLE IF NOT EXISTS `keyshop_countries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -271,19 +271,28 @@ CREATE TABLE IF NOT EXISTS `keyshop_keys` (
   PRIMARY KEY (`id`),
   KEY `IDX_9ABF2C784584665A` (`product_id`),
   KEY `IDX_9ABF2C788D9F6D38` (`order_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
 
 INSERT INTO `keyshop_keys` (`id`, `product_id`, `order_id`, `key`) VALUES
-  (1, 2, NULL, '12345-45678-ABCDE-FGHIJ-KLMNO'),
-  (2, 3, NULL, '12345-45678-ABCDE-FGHIJ-KLMNO'),
-  (3, 4, NULL, '12345-45678-ABCDE-FGHIJ-KLMNO');
+  (1, 2, 1, '12345-45678-ABCDE-FGHIJ-KLMNO'),
+  (2, 3, 1, '12345-45678-ABCDE-FGHIJ-KLMNO'),
+  (3, 4, 2, '12345-45678-ABCDE-FGHIJ-KLMNO'),
+  (12, 2, 1, '67890-45678-ABCDE-FGHIJ-KLMNO\r'),
+  (13, 2, 1, '13579-45678-ABCDE-FGHIJ-KLMNO'),
+  (14, 3, NULL, '67890-45678-ABCDE-FGHIJ-KLMNO\r'),
+  (15, 3, NULL, '13579-45678-ABCDE-FGHIJ-KLMNO');
 
 CREATE TABLE IF NOT EXISTS `keyshop_orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` enum('waiting','confirmed','cancelled') COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_B36B75ABA76ED395` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+INSERT INTO `keyshop_orders` (`id`, `status`, `user_id`) VALUES
+  (1, 'waiting', 2),
+  (2, 'waiting', 3);
 
 CREATE TABLE IF NOT EXISTS `keyshop_orders_products` (
   `order_id` int(11) NOT NULL,
@@ -292,6 +301,11 @@ CREATE TABLE IF NOT EXISTS `keyshop_orders_products` (
   KEY `IDX_AD4E53B8D9F6D38` (`order_id`),
   KEY `IDX_AD4E53B4584665A` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `keyshop_orders_products` (`order_id`, `product_id`) VALUES
+  (1, 2),
+  (1, 3),
+  (2, 4);
 
 CREATE TABLE IF NOT EXISTS `keyshop_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
