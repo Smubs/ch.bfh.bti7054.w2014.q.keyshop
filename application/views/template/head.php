@@ -28,7 +28,6 @@
 									<li><a href="<?=site_url('admin')?>">Admin</a></li>
 							<?php endif ?>
                             <li><a href="<?=site_url('produkte')?>">Produkte</a></li>
-                            <li><a href="<?=site_url('kategorien')?>">Kategorien</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6" ng-controller="ModalLogin">
