@@ -14,16 +14,19 @@
             <col width="50px">
             <col>
             <col>
+            <col>
             <col width="30px">
         </colgroup>
         <tr>
             <th>#</th>
+            <th>Status</th>
             <th>Bestellung</th>
             <th>Benutzer</th>
             <th></th>
         </tr>
         <tr ng-repeat="order in orders">
             <td>{{order.id}}</td>
+            <td>{{order.status}}</td>
             <td>
                 <ul>
                     <li ng-repeat="product in order.products">

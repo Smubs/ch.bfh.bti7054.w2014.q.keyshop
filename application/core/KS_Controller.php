@@ -158,6 +158,22 @@ class KS_Controller extends CI_Controller {
             $this->data['scripts'] .= '<script src="' . base_url() . $jsitem . '"></script>' . "\n";
         }
 
+        if ($this->uri->segment(1) === 'checkout') {
+            $this->data['scripts'] .= '<script src="https://media.payrexx.com/modal/v1/modal.js"></script>' . "\n";
+            $this->data['scripts'] .= '
+                <script type="text/javascript">
+                    $("#btn-payrexx-modal").payrexxModal({
+                        hidden: function(transaction) {
+                            if (transaction.status === "confirmed") {
+                                $("#btn-payrexx-modal").hide();
+                                $("#checkout-success").show();
+                            }
+                        },
+                        hideObjects: [".contact", "#contact-details"]
+                    });
+                </script>' . "\n";
+        }
+
         $this->data['jsdata'] = base64_encode(json_encode($this->jsdata));
     }
 

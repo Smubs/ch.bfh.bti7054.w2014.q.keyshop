@@ -18,6 +18,10 @@ class Order {
      */
     protected $id;
     /**
+     * @var string $status
+     */
+    protected $status;
+    /**
      * @var User $user
      */
     protected $user;
@@ -81,6 +85,22 @@ class Order {
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**

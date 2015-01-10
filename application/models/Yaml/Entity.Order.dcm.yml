@@ -9,6 +9,11 @@ Entity\Order:
       generator:
         strategy: AUTO
 
+  fields:
+    status:
+      type: string
+      columnDefinition: ENUM('waiting', 'confirmed', 'cancelled')
+
   oneToMany:
     keys:
       targetEntity: Key

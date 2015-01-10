@@ -19,6 +19,7 @@ class Orders extends KS_Controller {
         foreach ($orders as $order) {
             $jsData[] = array(
                 'id'       => $order->getId(),
+                'status'   => $order->getStatus(),
                 'user'     => array(
                     'id'    => $order->getUser()->getId(),
                     'email' => $order->getUser()->getEmail(),
@@ -70,6 +71,7 @@ class Orders extends KS_Controller {
     public function detail($id)
     {
         $order = $this->orderRepo->find($id);
+        $this->_setData('status', $order->getStatus());
         $this->_setData('user', $order->getUser());
         $this->_setData('products', $this->getProductsArray($order->getProducts()->toArray(), $order));
 

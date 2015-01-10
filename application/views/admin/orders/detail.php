@@ -1,4 +1,4 @@
-<h3>Detailansicht der Bestellung #<?= $this->uri->segment(4) ?></h3>
+<h3>Detailansicht der Bestellung #<?= $this->uri->segment(4) ?><b class="pull-right">Status: <?= $status ?></b></h3>
 <h4>Produkte</h4>
 <div class="table-responsive table-overview">
     <table class="table table-striped">
