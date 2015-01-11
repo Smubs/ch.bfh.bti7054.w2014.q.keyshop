@@ -60,6 +60,8 @@ class Categories extends KS_Controller {
 
     public function add($id = 0)
     {
+        $this->_setData('isEditView', ($id > 0));
+
         if (($category = $this->categoryRepo->find($id)) && !$this->input->post()) {
             $post['name']        = $category->getName();
             $post['description'] = $category->getDescription();

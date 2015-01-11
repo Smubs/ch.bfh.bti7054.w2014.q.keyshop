@@ -39,7 +39,7 @@ class Payrexx extends KS_Controller {
         $this->email->to($order->getUser()->getEmail());
 
         $products = $order->getProducts()->toArray();
-        $message  = $this->getMailMessage($products);
+        $message  = $this->getMailMessage($order);
 
         $this->email->subject('Keyshop | Bestellung #' . $order->getId());
         $this->email->message($message);
@@ -47,11 +47,15 @@ class Payrexx extends KS_Controller {
         $this->email->send();
     }
 
-    protected function getMailMessage(array $products)
+    protected function getMailMessage(\Entity\Order $order)
     {
+        $products = $order->getProducts()->toArray();
         $strProducts = '';
         foreach ($products as $product) {
-            $keys    = $product->getKeys()->toArray();
+            $keys = $this->keyRepo->findBy(array(
+                'order'   => $order,
+                'product' => $product
+            ));
             $strKeys = '';
             foreach ($keys as $key) {
                 $strKeys .= $key->getKey() . '<br />';

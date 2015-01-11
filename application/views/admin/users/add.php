@@ -1,4 +1,4 @@
-<h3>Benutzer hinzufügen</h3><br />
+<h3>Benutzer <?php echo $isEditView ? 'bearbeiten' : 'hinzufügen' ?></h3><br />
 <form action="/<?= uri_string() ?>" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
     <div class="form-group">
         <label for="checkbox-admin" class="col-sm-2 control-label">Administrator</label>
@@ -17,9 +17,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="input-password" class="col-sm-2 control-label">Passwort *</label>
+        <label for="input-password" class="col-sm-2 control-label">Passwort <?php if (!$isEditView) echo '*' ?></label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" name="password" id="input-password" placeholder="Passwort" value="<?= $data['password'] ?>" required />
+            <input type="password" class="form-control" name="password" id="input-password" placeholder="Passwort" value="<?= $data['password'] ?>" <?php if (!$isEditView) echo 'required' ?> />
         </div>
     </div>
     <div class="form-group">

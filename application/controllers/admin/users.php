@@ -60,6 +60,8 @@ class Users extends KS_Controller {
 
     public function add($id = 0)
     {
+        $this->_setData('isEditView', ($id > 0));
+
         if (($user = $this->userRepo->find($id)) && !$this->input->post()) {
             $post['email']     = $user->getEmail();
             $post['admin']     = $user->getAdmin();

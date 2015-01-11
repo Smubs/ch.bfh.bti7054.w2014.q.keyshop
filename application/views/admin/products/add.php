@@ -1,4 +1,4 @@
-<h3>Produkt hinzufügen</h3><br />
+<h3>Produkt <?php echo $isEditView ? 'bearbeiten' : 'hinzufügen' ?></h3><br />
 <form action="/<?= uri_string() ?>" method="post" class="form-horizontal form-product" role="form" enctype="multipart/form-data">
     <div class="form-group">
         <label for="input-status" class="col-sm-2 control-label">Status</label>

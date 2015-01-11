@@ -1,4 +1,4 @@
-<h3>Key hinzufügen</h3><br />
+<h3>Key <?php echo $isEditView ? 'bearbeiten' : 'hinzufügen' ?></h3><br />
 <form action="/<?= uri_string() ?>" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
     <div class="form-group">
         <label for="select-product" class="col-sm-2 control-label">Produkt *</label>

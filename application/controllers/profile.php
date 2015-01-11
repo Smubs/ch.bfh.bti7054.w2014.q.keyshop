@@ -8,27 +8,38 @@ class Profile extends KS_Controller {
 
     public function index()
     {
-			//var_dump($this->user->getEmail()); 
-		//die;
+        $this->checkAccess();
 
+        $user = $this->getUser();
+        $this->_setData('countries', $this->countryRepo->findAll());
 
-		// user dont need to be assigned: allready done by core/ks_controller
-
-        if ($this->input->post()) {
-            if ($post['name'] === '') {
+        if ($post = $this->input->post()) {
+            if (empty($post['email'])) {
                 $this->_setData('alert', array(
                     'mode'    => 'warning',
-                    'message' => 'Bitte f�llen Sie alle Pflichtfelder aus.'
+                    'message' => 'Bitte füllen Sie alle Pflichtfelder aus.'
+                ));
+            } else if ((!empty($post['password']) || !empty($post['passwordRetype'])) && $post['password'] !== $post['passwordRetype']) {
+                $this->_setData('alert', array(
+                    'mode'    => 'warning',
+                    'message' => 'Passwörter stimmen nicht überein.'
                 ));
             } else {
-                if (!$category) {
-                    $category = new \Entity\Category();
+                $user->setEmail($post['email']);
+                $user->setFirstname($post['firstname']);
+                $user->setLastname($post['lastname']);
+                $user->setAddress($post['address']);
+                $user->setZip($post['zip']);
+                $user->setPlace($post['place']);
+                if ($country = $this->countryRepo->find($post['country'])) {
+                    $user->setCountry($country);
                 }
-                $category->setName($post['name']);
-                $category->setDescription($post['description']);
-                $this->em->persist($category);
+                if (!empty($post['password'])) {
+                    $user->setPassword($post['password']);
+                }
+                $this->em->persist($user);
                 $this->em->flush();
-                redirect('/admin/categories/success');
+                redirect('/profile/success');
             }
         }
 
@@ -44,7 +55,7 @@ class Profile extends KS_Controller {
     {
         $this->_setData('alert', array(
             'mode'    => 'success',
-            'message' => 'Kategorie erfolgreich gespeichert.'
+            'message' => 'Profil erfolgreich bearbeitet.'
         ));
         $this->index();
     }

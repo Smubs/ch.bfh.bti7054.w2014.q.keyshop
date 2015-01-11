@@ -50,11 +50,11 @@
 								<li><a href="#_" ng-click="openLogin()"><i class="fa fa-sign-in"></i>Anmelden</a></li>
 								<li><a href="#_" ng-click="openRegister()"><i class="fa fa-edit"></i>Registrieren</a></li>
 							<?php else: ?>
-								<li><a href="/profil/"><i class="fa fa-edit"></i>
+								<li><a href="/profile/"><i class="fa fa-edit"></i>
 									<?php if (!$user['firstname']): ?>
-										<?=$user['email']?>
+										<?= $user['email'] ?>
 									<?php else: ?>
-										<?=$user['firstname'].' '.$user['lastname']?>
+										<?= $user['firstname'].' '.$user['lastname'] ?>
 									<?php endif; ?>
 								</a></li>
 								<li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i>Abmelden</a></li>

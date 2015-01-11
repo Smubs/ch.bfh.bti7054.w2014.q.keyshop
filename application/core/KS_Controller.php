@@ -2,11 +2,18 @@
 
 class KS_Controller extends CI_Controller {
 
+    /**
+     * @var array $jsdata
+     */
     private $jsdata;
+    /**
+     * @var array $data
+     */
     private $data;
+    /**
+     * @var bool $isBackend
+     */
     private $isBackend;
-
-
     /**
      * @var \Doctrine\ORM\EntityManager $em
      */
@@ -35,9 +42,10 @@ class KS_Controller extends CI_Controller {
      * @var \Repository\CountryRepository $countryRepo
      */
     public $countryRepo;
-	
-	// current user
-	public $user;
+    /**
+     * @var \Entity\User $user Current user
+     */
+    public $user = null;
 
     public function __construct() {
         parent::__construct();
@@ -46,14 +54,12 @@ class KS_Controller extends CI_Controller {
         $this->data['iurl'] = base_url() . 'assets/images/';
         $this->isBackend    = $this->uri->segment(1) === 'admin';
 
-        if ($this->isBackend) {
-            // Set alert defaults
-            $this->data['alert'] = array(
-                'mode'    => '',
-                'display' => 'hide',
-                'message' => ''
-            );
-        }
+        // Set alert defaults
+        $this->data['alert'] = array(
+            'mode'    => '',
+            'display' => 'hide',
+            'message' => ''
+        );
 
         $this->em           = $this->doctrine->em;
         $this->categoryRepo = $this->em->getRepository('Entity\Category');
@@ -96,7 +102,8 @@ class KS_Controller extends CI_Controller {
 			$udata['address'] = $u->getAddress();
 			$udata['zip'] = $u->getZip();
 			$udata['place'] = $u->getPlace();
-            
+			$udata['country'] = $u->getCountry()->getId();
+
 			$this->_setData('user', $udata);
             define('USERID', $u->getId());
 
@@ -113,6 +120,10 @@ class KS_Controller extends CI_Controller {
         }
     }
 
+    public function getUser()
+    {
+        return $this->user;
+    }
 
     public function _renderScripts($js = array()) {
         // check if there is somewhere no .js 
@@ -220,6 +231,13 @@ class KS_Controller extends CI_Controller {
         $this->data['styles'] = '';
         foreach (array_merge($defaultCss, $css) as $cssitem) {
             $this->data['styles'] .= '<link type="text/css" rel="stylesheet" href="' . base_url() . $cssitem . '" />' . "\n";
+        }
+    }
+
+    public function checkAccess()
+    {
+        if (!$this->getUser()) {
+            redirect('/');
         }
     }
 
