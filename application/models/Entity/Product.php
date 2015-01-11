@@ -147,6 +147,18 @@ class Product {
         return $this->keys;
     }
 
+    public function getAvailableKeys()
+    {
+        $keys = $this->getKeys()->toArray();
+        $availableKeys = array();
+        foreach ($keys as $key) {
+            if (!$key->getOrder()) {
+                $availableKeys[] = $key;
+            }
+        }
+        return $availableKeys;
+    }
+
     /**
      * @param string $name
      */
@@ -227,6 +239,17 @@ class Product {
         return $this->status;
     }
 
+    /**
+     * @return int
+     */
+    public function getRealPrice() {
+        $price = $this->getPrice();
+        if ($this->getDiscountPrice() > 0) {
+            $price = $this->getDiscountPrice();
+        }
+        return $price;
+    }
+
     public function getHomeArray()
     {
         $categories = array();
@@ -236,6 +259,7 @@ class Product {
 
         $saved = $this->getPrice()-$this->getDiscountPrice();
         return array(
+            'id' => $this->getId(),
             'name' => $this->getName(),
             'picture' => $this->getPicture(),
             'description' => $this->getDescription(),
@@ -244,6 +268,19 @@ class Product {
             'price' => $this->getPrice() . ' CHF',
             'priceSave' => 'Sie sparen ' . $saved . ' CHF',
             'category' => implode(', ', $categories),
+        );
+    }
+
+    public function getCartArray()
+    {
+        $saved = $this->getPrice()-$this->getDiscountPrice();
+
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'price' => $this->getRealPrice(),
+            'count' => 1,
+            'maxcount' => count($this->getAvailableKeys())
         );
     }
 }

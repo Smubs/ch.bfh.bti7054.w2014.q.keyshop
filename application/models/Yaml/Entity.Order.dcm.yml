@@ -10,6 +10,9 @@ Entity\Order:
         strategy: AUTO
 
   fields:
+    date:
+      type: datetime
+
     status:
       type: string
       columnDefinition: ENUM('waiting', 'confirmed', 'cancelled')

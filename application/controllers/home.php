@@ -8,8 +8,10 @@ class Home extends KS_Controller {
     public function index() {
 	
         $homeProducts = array();
-        $products = $this->productRepo->findAll();
+        $products = $this->productRepo->findBy(array(), array('id' => 'DESC'));
         foreach ($products as $product) {
+            if (count($product->getAvailableKeys()) == 0 || count($homeProducts) > 2)
+                continue;
 			$t = array();
 			$t = $product->getHomeArray();
             $t['url'] = site_url('produkt/'.urlencode($t['name'])); 

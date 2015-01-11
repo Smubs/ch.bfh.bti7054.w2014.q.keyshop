@@ -10,7 +10,7 @@ class Product extends KS_Controller {
 
         $product = $this->productRepo->findOneByName(urldecode($name));
         $this->_setData('product', $product); 
-		$this->_setJsData('product', $product);
+		$this->_setJsData('product', $product->getCartArray());
 
         $firstCategory = $product->getCategories()->toArray();
 
@@ -18,9 +18,11 @@ class Product extends KS_Controller {
             $firstCategory = $firstCategory[0];
             $oproducts = $firstCategory->getProducts()->toArray();
             shuffle($oproducts);
-            $oproducts = array_slice($oproducts, 0, 3);
 
             foreach ($oproducts as $product) {
+                if (count($product->getAvailableKeys()) == 0 || count($products) > 2)
+                    continue;
+
                 $t = array();
                 $t = $product->getHomeArray();
                 $t['url'] = site_url('produkt/'.urlencode($t['name']));

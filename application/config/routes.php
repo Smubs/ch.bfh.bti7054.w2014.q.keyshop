@@ -45,6 +45,7 @@ $route['product/(:any)'] = 'product/index/$1';
 $route['produkt/(:any)'] = 'product/index/$1';
 $route['produkte'] = 'products/index';
 $route['kategorien'] = 'products/index';
+$route['checkout/(:any)'] = 'checkout/index/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

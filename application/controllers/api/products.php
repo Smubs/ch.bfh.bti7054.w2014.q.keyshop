@@ -27,6 +27,8 @@ class Products extends KS_Controller {
 
         $products = array();
         foreach ($oproducts as $product) {
+            if (count($product->getAvailableKeys()) == 0)
+                continue;
             $t = array();
             $t = $product->getHomeArray();
             $t['url'] = site_url('produkt/'.urlencode($t['name']));

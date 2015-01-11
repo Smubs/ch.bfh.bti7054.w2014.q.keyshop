@@ -11,8 +11,12 @@
 						<p class="product-info-price"><?=$product->getPrice()?> CHF</p>
 						<p class="text-smaller text-muted"><?=$product->getDescription()?></p>
 						<ul class="list-inline">
-							<li><a href="#_" ng-click="addCurrentProductToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> In Warenkorb</a>
+							<li>
+                                <a href="#_"  ng-class="{ 'disabled': cproduct.maxcount <= getCartCountCurrentProduct()}" ng-click="addCurrentProductToCart()" class="btn btn-primary  "><i class="fa fa-shopping-cart"></i> In Warenkorb <span ng-show="getCartCountCurrentProduct() > 0" class="animated fadeInLeft"> ({{getCartCountCurrentProduct()}})</span></a>
 							</li>
+                            <li  class="animated fadeIn" ng-show="getCartCountCurrentProduct() > 0"><a href="#_" ng-click="removeCurrentProductFromCart()" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                            </li>
+                            <li ng-show="cproduct.maxcount <= getCartCountCurrentProduct()" class="animated fadeIn mt20" >Wir haben keine weiteren Keys!</li>
 						</ul>
 					</div>
 				</div>

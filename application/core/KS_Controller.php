@@ -98,6 +98,8 @@ class KS_Controller extends CI_Controller {
 			$udata['place'] = $u->getPlace();
             
 			$this->_setData('user', $udata);
+            $this->_setJsData('user', $udata);
+
             define('USERID', $u->getId());
 
             if ($u->getAdmin() > 6) {
@@ -110,7 +112,12 @@ class KS_Controller extends CI_Controller {
             
         } else {
             $this->_setData('user', false);
+            $this->_setJsData('user', false);
         }
+    }
+
+    public function getUser() {
+        return $this->user;
     }
 
 

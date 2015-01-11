@@ -1,5 +1,50 @@
 var keyshop = angular.module('keyshop', ['ui.bootstrap', 'authService', 'ngCookies']);
 
+keyshop.run(function($rootScope, $cookieStore) {
+    if ($cookieStore.get('cart') == undefined) {
+        $cookieStore.put('cart', []);
+    }
+    $rootScope.cart = $cookieStore.get('cart');
+
+
+    $rootScope.getCartCount = function () {
+        var count = 0;
+
+        $rootScope.cart.forEach(function(p) {
+            count = count + p.count;
+        });
+        return count;
+    }
+
+    $rootScope.getCartCountByProduct = function (product) {
+        var count = 0;
+        $rootScope.cart.forEach(function(p) {
+            if (product.id == p.id) {
+                count = count + p.count;
+            }
+        });
+        return count;
+    }
+
+    $rootScope.addProductToCart = function (product) {
+        console.log('not yet implemented');
+    };
+
+    $rootScope.removeProductFromCart = function (product) {
+        $rootScope.cart.forEach(function(p) {
+            if (product.id == p.id) {
+                p.count = p.count-1;
+            }
+        });
+
+        $rootScope.cart = $rootScope.cart
+            .filter(function (el) {
+                return el.count !== 0;
+            });
+        $cookieStore.put('cart', $rootScope.cart);
+    };
+});
+
 keyshop.factory('ksUtil', function() {
         return {
 			// converts ksInputs to $.param-ready datas
@@ -14,7 +59,12 @@ keyshop.factory('ksUtil', function() {
         };
 });
 
-keyshop.controller('ModalLogin', function ($scope, $modal, Auth) {
+keyshop.controller('ModalLogin', function ($scope, $rootScope, $cookieStore, $modal, Auth) {
+
+    $scope.resetCart = function() {
+        $cookieStore.put('cart', []);
+    }
+
 	$scope.logout = function() {
         Auth.logout()
 			.success(function(data) {
@@ -65,7 +115,7 @@ keyshop.controller('ModalLogin', function ($scope, $modal, Auth) {
     };
 
 	
-    $scope.openRegister = function() {
+    $rootScope.openRegister = function() {
         $scope.data = {
             placeholders: {
                 modalTitle: 'Registrieren',
@@ -109,17 +159,29 @@ keyshop.controller('ModalLogin', function ($scope, $modal, Auth) {
     };
 });
 
-keyshop.controller('ModalCartInstance', function ($scope, $modalInstance, data, Auth, ksUtil) {
-    console.log('success');
+keyshop.controller('ModalCartInstance', function ($scope, $modalInstance, $rootScope, $http, $cookieStore) {
+    $scope.send = function () {
+        if (!ks.user) {
+            $rootScope.openRegister();
+        } else {
+            $scope.showLoader = true;
+            $http.post('/api/order/neworder/', {'cart' : $cookieStore.get('cart')}).success(function(data){
+                console.log(data.orderid);
+            });
+        }
+    };
+
     $scope.cancel = function () {
         $modalInstance.close();
     };
 });
 
-keyshop.controller('ModalLoginInstance', function ($scope, $modalInstance, data, Auth, ksUtil) {
+keyshop.controller('ModalLoginInstance', function ($scope, $rootScope, $modalInstance, data, Auth, ksUtil) {
+
     $scope.modalTitle = data.placeholders.modalTitle;
     $scope.modalSend  = data.placeholders.modalSend;
     $scope.inputs     = data.inputs;
+
 
     $scope.send = function () {
 		var uo = ksUtil.prepareInputs($scope.inputs); 
@@ -194,8 +256,10 @@ keyshop.directive('ksProduct', function() {
         link:function($scope,$element,attrs){
             function chunk(arr, size) {
                 var newArr = [];
-                for (var i=0; i<arr.length; i+=size) {
-                    newArr.push(arr.slice(i, i+size));
+                if (arr != undefined) {
+                    for (var i = 0; i < arr.length; i += size) {
+                        newArr.push(arr.slice(i, i + size));
+                    }
                 }
                 return newArr;
             }

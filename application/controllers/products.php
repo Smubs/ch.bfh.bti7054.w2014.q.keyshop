@@ -8,16 +8,22 @@ class Products extends KS_Controller {
     public function index() {
         $categories = array();
         $ocategories = $this->categoryRepo->findAll();
+
+
         foreach($ocategories as $category) {
+            if (count($category->getProducts()) == 0)
+                continue;
             $t = array();
             $t['id'] = $category->getId();
             $t['name'] = $category->getName();
             $t['description'] = $category->getDescription();
             $t['cssClass'] = $category->getCssClass();
             $t['selected'] = false; // used by angular
+
             $categories[] = $t;
             unset($t);
         }
+
 
         $this->_setJsData('apiurl', site_url('/api/products/'));
 
