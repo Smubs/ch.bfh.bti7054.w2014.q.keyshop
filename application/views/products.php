@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-9">
             <div class="row">
-                <div class="col-md-12">
+                <div class="row col-md-12">
                     <div class="product-sort">
                         <span ng-show="sortBy=='name'" class="product-sort-selected">Sortieren nach <b>Name</b></span>
                         <span ng-show="sortBy=='price'" class="product-sort-selected">Sortieren nach <b>Preis</b></span>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="product-wrap row row-wrap"  >
+            <div class="product-wrap row row-wrap">
                 <ks-product products="products"></ks-product>
             </div>
             <div class="gap"></div>

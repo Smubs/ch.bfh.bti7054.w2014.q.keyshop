@@ -58,11 +58,11 @@ class Products extends KS_Controller {
         // sort orders
         switch ($sortBy) {
             case 'price':
-                $products = $this->array_orderby($products, 'price', SORT_DESC);
+                $products = $this->arrayOrderBy($products, 'price', SORT_DESC);
                 break;
             default:
                 // 'name' belongs to default
-                $products = $this->array_orderby($products, 'name', SORT_ASC);
+                $products = $this->arrayOrderBy($products, 'name', SORT_ASC);
                 break;
         }
 
@@ -71,21 +71,20 @@ class Products extends KS_Controller {
         ));
     }
 
-    private function array_orderby()
+    private function arrayOrderBy($products, $field, $sort)
     {
-        $args = func_get_args();
-        $data = array_shift($args);
-        foreach ($args as $n => $field) {
-            if (is_string($field)) {
-                $tmp = array();
-                foreach ($data as $key => $row)
-                    $tmp[$key] = $row[$field];
-                $args[$n] = $tmp;
+        $filter = array();
+        foreach ($products as $key => $product) {
+            if ($field === 'price') {
+                $filter[$key] = str_replace(' CHF' , '', $product['hasDiscountPrice'] ? $product['discountPrice'] : $product['price']);
+            } else {
+                $filter[$key] = $product[$field];
             }
         }
-        $args[] = &$data;
-        call_user_func_array('array_multisort', $args);
-        return array_pop($args);
+        $data = &$products;
+        array_multisort($filter, $sort, $data);
+
+        return $products;
     }
 
     public function name() {
