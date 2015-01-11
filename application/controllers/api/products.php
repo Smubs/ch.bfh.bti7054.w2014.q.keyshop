@@ -9,18 +9,34 @@ class Products extends KS_Controller {
         $this->thisIsAjax();
 
         $requestCategories = $this->request('categories');
+        $search = $this->request('search');
 
         $oproducts = array();
         if (count($requestCategories) == 0) {
-            $oproducts = $this->productRepo->findAll();
+            $criteria = array();
+            if (!empty($search)) {
+                $fields  = array('name', 'description', 'price', 'discountPrice');
+                foreach ($fields as $field) {
+                    $criteria[$field] = $search;
+                }
+            }
+            $oproducts = $this->productRepo->searchBy($criteria);
         }
         else {
+            global $category;
             foreach ($requestCategories as $category) {
-                $ocategory = $this->categoryRepo->find($category->id);
-                if ($ocategory) {
-                    $categoryProducts = $ocategory->getProducts()->toArray();
-                    $oproducts = array_merge($oproducts, $categoryProducts);
+                $criteria = array();
+                if (!empty($search)) {
+                    $fields  = array('name', 'description', 'price', 'discountPrice');
+                    foreach ($fields as $field) {
+                        $criteria[$field] = $search;
+                    }
                 }
+                $categoryProducts = array_filter($this->productRepo->searchBy($criteria), function ($product) {
+                    global $category;
+                    return in_array($this->categoryRepo->find($category->id), $product->getCategories()->toArray());
+                });
+                $oproducts = array_merge($oproducts, $categoryProducts);
             }
         }
 

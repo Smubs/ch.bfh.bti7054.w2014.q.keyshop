@@ -62,7 +62,7 @@ keyshop.controller('KeyshopFilterProducts', ['$scope', 'filterFilter', '$http', 
         $scope.showLoader();
         var url = ks.apiurl+'/'+$scope.sortBy+'/';
 
-        $http.post(url, {'categories' : $scope.selectedCategories()}).success(function(data){
+        $http.post(url, {'categories' : $scope.selectedCategories(), 'search' : $('[name=search]').val()}).success(function(data){
             // save new cookies
             if (saveFilter) {
                 $cookies.categories = $scope.categories;
@@ -70,7 +70,7 @@ keyshop.controller('KeyshopFilterProducts', ['$scope', 'filterFilter', '$http', 
 
             $scope.hideLoader();
             $scope.products = data.products;
-            $scope.$broadcast("Data_Ready");
+            $scope.$broadcast('Data_Ready');
 
             $timeout(function() { initializing = false; });
         });
