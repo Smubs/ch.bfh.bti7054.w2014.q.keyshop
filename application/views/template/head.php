@@ -23,8 +23,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="<?= site_url('produkte') ?>">Produkte</a></li>
+                            <li><a href="/" class="<?= $classHome ?>">Home</a></li>
+                            <li><a href="/products" class="<?= $classProducts ?>">Produkte</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6" ng-controller="ModalLogin" ng-cloak>
@@ -52,7 +52,7 @@
                             <li><a href="#_" ng-click="openRegister()"><i class="fa fa-edit"></i>Registrieren</a></li>
 							<?php else: ?>
                             <li>
-                                <a href="/profile/"><i class="fa fa-edit"></i>
+                                <a href="/profile/" class="<?= $classProfile ?>"><i class="fa fa-edit"></i>
                                     <?php if (!$user->getFirstname()): ?>
                                     <?= $user->getEmail() ?>
                                     <?php else: ?>

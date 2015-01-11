@@ -24,11 +24,11 @@
                     <div class="col-md-8">
                         <ul>
 							<li><a href="/"><i class="fa fa-reply"></i>Frontend</a></li>
-                            <li><a href="/admin/orders">Bestellungen</a></li>
-                            <li><a href="/admin/products">Produkte</a></li>
-                            <li><a href="/admin/keys">Keys</a></li>
-                            <li><a href="/admin/categories">Kategorien</a></li>
-                            <li><a href="/admin/users">Benutzer</a></li>
+                            <li><a href="/admin" class="<?= $classOrders ?>">Bestellungen</a></li>
+                            <li><a href="/admin/products" class="<?= $classProducts ?>">Produkte</a></li>
+                            <li><a href="/admin/keys" class="<?= $classKeys ?>">Keys</a></li>
+                            <li><a href="/admin/categories" class="<?= $classCategories ?>">Kategorien</a></li>
+                            <li><a href="/admin/users" class="<?= $classUsers ?>">Benutzer</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4">

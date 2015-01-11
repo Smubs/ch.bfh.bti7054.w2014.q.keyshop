@@ -68,6 +68,7 @@ nav ul {
 nav ul li {
   float: left;
   list-style-type: none;
+  border-right: 1px solid #232323;
 }
 nav ul li a {
   float: left;
@@ -79,16 +80,18 @@ nav ul li a {
 nav ul li a i {
   margin: 0 8px 0 0;
 }
-nav ul li a:hover {
+nav ul li a:hover,
+nav ul li a.active {
   color: #ffffff;
   text-decoration: none;
   background-color: #262626;
 }
 nav ul li a:focus {
+  color: #ffffff;
   text-decoration: none;
 }
-nav ul li a.active {
-  background-color: #2a8fbd;
+nav ul li:last-child {
+  border: none;
 }
 .box {
   background: #ffffff;
@@ -219,12 +222,6 @@ nav ul li a.active {
 /* SHOPING CART */
 .useroption-wrapper {
   float: right;
-}
-.useroption-wrapper li {
-  border-right: 1px solid #232323;
-}
-.useroption-wrapper li:last-child {
-  border: none;
 }
 .search-wrapper {
   padding: 8px 0 5px 0;

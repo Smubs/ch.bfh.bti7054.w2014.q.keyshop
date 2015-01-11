@@ -81,6 +81,18 @@ class KS_Controller extends CI_Controller {
         if ($this->isBackend) {
             $this->checkAccess(true);
         }
+
+        if ($this->isBackend) {
+            $this->_setData('classOrders', in_array($this->uri->segment(2), array(false, 'orders')) ? 'active' : '');
+            $this->_setData('classProducts', $this->uri->segment(2) === 'products' ? 'active' : '');
+            $this->_setData('classKeys', $this->uri->segment(2) === 'keys' ? 'active' : '');
+            $this->_setData('classCategories', $this->uri->segment(2) === 'categories' ? 'active' : '');
+            $this->_setData('classUsers', $this->uri->segment(2) === 'users' ? 'active' : '');
+        } else {
+            $this->_setData('classHome', in_array($this->uri->segment(1), array(false, 'home')) ? 'active' : '');
+            $this->_setData('classProducts', $this->uri->segment(1) === 'products' ? 'active' : '');
+            $this->_setData('classProfile', $this->uri->segment(1) === 'profile' ? 'active' : '');
+        }
     }
 
     protected function showSearch() {

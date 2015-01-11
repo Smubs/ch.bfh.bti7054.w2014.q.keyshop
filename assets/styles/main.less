@@ -71,6 +71,7 @@ nav {
     li {
       float:left;
       list-style-type:none;
+      border-right: 1px solid #232323;
       a {
         float:left;
         height:50px;
@@ -81,17 +82,19 @@ nav {
           margin:0 8px 0 0;
         }
       }
-      a:hover {
+      a:hover,
+      a.active {
         color:#ffffff;
         text-decoration:none;
         background-color:#262626;
       }
       a:focus {
+        color:#ffffff;
         text-decoration:none;
       }
-      a.active {
-        background-color:#2a8fbd;
-      }
+    }
+    li:last-child {
+      border:none;
     }
   }
 }
@@ -237,12 +240,6 @@ nav {
 /* SHOPING CART */
 .useroption-wrapper {
   float:right;
-  li {
-    border-right:1px solid #232323;
-  }
-  li:last-child {
-    border:none;
-  }
 }
 .search-wrapper {
   padding:8px 0 5px 0;
