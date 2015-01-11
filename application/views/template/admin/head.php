@@ -5,6 +5,7 @@
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
     
     <?= $styles ?>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300" rel="stylesheet" type="text/css">
@@ -32,8 +33,8 @@
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <ul class="pull-right">
-                            <li class="logout"><a href="/admin/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+                        <ul class="pull-right" ng-controller="LogoutController">
+                            <li class="logout"><a href="#_" ng-click="logout()"><i class="fa fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-var keyshop = angular.module("keyshop", ["ui.bootstrap", "multi-select"]);
+var keyshop = angular.module("keyshop", ["ui.bootstrap", "multi-select", "authService"]);
 
 keyshop.controller("KeyshopOrders", function ($scope) {
     $scope.orders = ks.orders;
@@ -43,4 +43,16 @@ $(function () {
             $(".form-remove").submit();
         }
     });
+});
+
+keyshop.controller('LogoutController', function ($scope, Auth) {
+    $scope.logout = function() {
+        Auth.logout().success(function(data) {
+            if (data.success) {
+                window.location.reload();
+            } else {
+                console.log('error 2013: logout error');
+            }
+        });
+    };
 });
