@@ -134,9 +134,11 @@
                 </div>
             </div>
         </nav>
+
         <form action="/<?= uri_string() ?>" method="post" class="search-wrapper">
             <div class="container">
                 <div class="row">
+                    <?php if($showSearch): ?>
                     <div class="col-md-6 clearfix">
                         <label>
                             <i class="fa fa-search"></i>
@@ -149,6 +151,7 @@
                     <div class="col-md-6 clearfix">
                         <!-- something else??? -->
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </form>
