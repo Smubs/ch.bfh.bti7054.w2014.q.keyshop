@@ -1,10 +1,22 @@
-var keyshop = angular.module('keyshop', ['ui.bootstrap', 'authService', 'ngCookies']);
+var keyshop = angular.module('keyshop', ['ui.bootstrap', 'authService', 'ipCookie']);
 
-keyshop.run(function($rootScope, $cookieStore) {
-    if ($cookieStore.get('cart') == undefined) {
-        $cookieStore.put('cart', []);
+keyshop.run(function($rootScope, ipCookie) {
+
+    $rootScope.setCookie = function(cname, ccontent) {
+        ipCookie(cname, ccontent, { path: '/' });
+        //jQuery.cookie(cname, JSON.stringify(ccontent));
+    };
+
+    $rootScope.getCookie = function(cname) {
+            return ipCookie(cname);
+    };
+
+    if ($rootScope.getCookie('cart') == undefined) {
+        $rootScope.setCookie('cart', []);
     }
-    $rootScope.cart = $cookieStore.get('cart');
+
+    $rootScope.cart = $rootScope.getCookie('cart');
+
 
     $rootScope.getCartCount = function () {
         var count = 0;
@@ -23,10 +35,15 @@ keyshop.run(function($rootScope, $cookieStore) {
             }
         });
         return count;
-    }
+    };
+
+    $rootScope.resetCart = function() {
+        $rootScope.setCookie('cart', []);
+        $rootScope.cart = $rootScope.getCookie('cart');
+    };
 
     $rootScope.addProductToCart = function (product) {
-        var array = $cookieStore.get('cart');
+        var array = $rootScope.getCookie('cart');
 
         var foundIt = false;
         array.forEach(function(p) {
@@ -39,7 +56,7 @@ keyshop.run(function($rootScope, $cookieStore) {
             array.push(product);
         }
 
-        $cookieStore.put('cart', array);
+        $rootScope.setCookie('cart', array);
         $rootScope.cart = array;
     };
 
@@ -54,7 +71,7 @@ keyshop.run(function($rootScope, $cookieStore) {
             .filter(function (el) {
                 return el.count !== 0;
             });
-        $cookieStore.put('cart', $rootScope.cart);
+        $rootScope.setCookie('cart', $rootScope.cart);
     };
 });
 
@@ -175,7 +192,8 @@ keyshop.controller('ModalCartInstance', function ($scope, $modalInstance, $rootS
         } else {
             $scope.showLoader = true;
             $http.post('/api/order/neworder/', {'cart' : $rootScope.cart}).success(function(data){
-                console.log(data.orderid);
+                $rootScope.resetCart();
+                window.location.replace('/checkout/'+data.orderid);
             });
         }
     };
