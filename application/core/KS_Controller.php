@@ -71,6 +71,10 @@ class KS_Controller extends CI_Controller {
 		
 		// do authentifaction and load current user
         $this->_doUser();
+
+        if ($this->isBackend) {
+            $this->checkAccess(true);
+        }
     }
 
     public function _setJsData($name, $object) {
@@ -90,34 +94,12 @@ class KS_Controller extends CI_Controller {
 
     public function _doUser() {
         if ($this->session->userdata('logged_in')) {
-            $uid = $this->session->userdata('logged_in'); 
-
-			$u = $this->userRepo->find($uid);
+            $uid = $this->session->userdata('logged_in');
+			$u   = $this->userRepo->find($uid);
 			$this->user = $u;
-			
-			$udata['id'] = $u->getId();
-			$udata['email'] = $u->getEmail();
-			$udata['firstname'] = $u->getFirstname();
-			$udata['lastname'] = $u->getLastname();
-			$udata['address'] = $u->getAddress();
-			$udata['zip'] = $u->getZip();
-			$udata['place'] = $u->getPlace();
-			$udata['country'] = $u->getCountry()->getId();
-
-			$this->_setData('user', $udata);
-            define('USERID', $u->getId());
-
-            if ($u->getAdmin() > 6) {
-                $this->_setData('isAdmin', true);
-				
-            } else
-            {
-                $this->_setData('isAdmin', false);
-            }
-            
-        } else {
-            $this->_setData('user', false);
+            define('USERID', $this->user->getId());
         }
+        $this->_setData('user', $this->user);
     }
 
     public function getUser()
@@ -234,9 +216,12 @@ class KS_Controller extends CI_Controller {
         }
     }
 
-    public function checkAccess()
+    public function checkAccess($checkAdmin = false)
     {
-        if (!$this->getUser()) {
+        if (!$user = $this->getUser()) {
+            redirect('/');
+        }
+        if ($checkAdmin && !$user->getAdmin()) {
             redirect('/');
         }
     }

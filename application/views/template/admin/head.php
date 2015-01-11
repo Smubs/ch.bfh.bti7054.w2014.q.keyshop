@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <ul>
-							<li><a href="/"><i class="fa fa-reply"></i>Zurück zu Keyshop</a></li>
+							<li><a href="/"><i class="fa fa-reply"></i>Frontend</a></li>
                             <li><a href="/admin/orders">Bestellungen</a></li>
                             <li><a href="/admin/products">Produkte</a></li>
                             <li><a href="/admin/keys">Keys</a></li>

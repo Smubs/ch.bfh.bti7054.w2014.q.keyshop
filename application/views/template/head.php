@@ -24,10 +24,7 @@
                     <div class="col-md-6">
                         <ul>
                             <li><a href="/">Home</a></li>
-							<?php if (isset($isAdmin) && $isAdmin): ?>
-									<li><a href="<?=site_url('admin')?>">Admin</a></li>
-							<?php endif ?>
-                            <li><a href="<?=site_url('produkte')?>">Produkte</a></li>
+                            <li><a href="<?= site_url('produkte') ?>">Produkte</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6" ng-controller="ModalLogin">
@@ -35,8 +32,6 @@
                             <li class="cart"  ng-click="openCart()">
                                 <a href="#"><i class="fa fa-shopping-cart"></i>Warenkorb</a>
                                 <div class="cart-box">
-
-
                                     <ul class="cart-items">
                                         <li>
                                             <a href="#_" ng-click="openCart()"><strong>5</strong> Produkte befinden sich in Ihrem Warenkorb</a>
@@ -47,17 +42,22 @@
                                 </div>
                             </li>
 							<?php if (!$user): ?>
-								<li><a href="#_" ng-click="openLogin()"><i class="fa fa-sign-in"></i>Anmelden</a></li>
-								<li><a href="#_" ng-click="openRegister()"><i class="fa fa-edit"></i>Registrieren</a></li>
+                            <li><a href="#_" ng-click="openLogin()"><i class="fa fa-sign-in"></i>Anmelden</a></li>
+                            <li><a href="#_" ng-click="openRegister()"><i class="fa fa-edit"></i>Registrieren</a></li>
 							<?php else: ?>
-								<li><a href="/profile/"><i class="fa fa-edit"></i>
-									<?php if (!$user['firstname']): ?>
-										<?= $user['email'] ?>
-									<?php else: ?>
-										<?= $user['firstname'].' '.$user['lastname'] ?>
-									<?php endif; ?>
-								</a></li>
-								<li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i>Abmelden</a></li>
+                            <li>
+                                <a href="/profile/"><i class="fa fa-edit"></i>
+                                    <?php if (!$user->getFirstname()): ?>
+                                    <?= $user->getEmail() ?>
+                                    <?php else: ?>
+                                    <?= $user->getFirstname().' '.$user->getLastname() ?>
+                                    <?php endif; ?>
+                                </a>
+                            </li>
+                            <?php if ($user && $user->getAdmin()): ?>
+                            <li><a href="<?= site_url('admin') ?>"><i class="fa fa-list"></i>Backend</a></li>
+                            <?php endif ?>
+                            <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i>Abmelden</a></li>
 							<?php endif; ?>
 
                         </ul>

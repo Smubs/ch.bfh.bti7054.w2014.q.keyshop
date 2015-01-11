@@ -6,34 +6,34 @@
     <div class="form-group">
         <label for="input-email" class="col-sm-2 control-label">E-Mail *</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" name="email" id="input-email" placeholder="email@adresse.ch" value="<?= $user['email'] ?>" required />
+            <input type="email" class="form-control" name="email" id="input-email" placeholder="email@adresse.ch" value="<?= $user->getEmail() ?>" required />
         </div>
     </div>
 	<div class="form-group">
         <label for="input-firstname" class="col-sm-2 control-label">Vorname</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="firstname" id="input-firstname" placeholder="Vorname" value="<?= $user['firstname'] ?>" />
+            <input type="text" class="form-control" name="firstname" id="input-firstname" placeholder="Vorname" value="<?= $user->getFirstname() ?>" />
         </div>
     </div>
 	<div class="form-group">
         <label for="input-lastname" class="col-sm-2 control-label">Nachname</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="lastname" id="input-lastname" placeholder="Nachname" value="<?= $user['lastname'] ?>" />
+            <input type="text" class="form-control" name="lastname" id="input-lastname" placeholder="Nachname" value="<?= $user->getLastname() ?>" />
         </div>
     </div>
 	<div class="form-group">
         <label for="input-address" class="col-sm-2 control-label">Adresse</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="address" id="input-address" placeholder="Adresse" value="<?= $user['address'] ?>" />
+            <input type="text" class="form-control" name="address" id="input-address" placeholder="Adresse" value="<?= $user->getAddress() ?>" />
         </div>
     </div>
 	<div class="form-group">
         <label for="input-zip" class="col-sm-2 control-label">PLZ / Ort</label>
 		<div class="col-sm-5">
-            <input type="text" class="form-control" name="zip" id="input-zip" placeholder="PLZ" value="<?= $user['zip'] ?>" />
+            <input type="text" class="form-control" name="zip" id="input-zip" placeholder="PLZ" value="<?= $user->getZip() ?>" />
         </div>
         <div class="col-sm-5">
-            <input type="text" class="form-control" name="place" id="input-place" placeholder="Ort" value="<?= $user['place'] ?>" />
+            <input type="text" class="form-control" name="place" id="input-place" placeholder="Ort" value="<?= $user->getPlace() ?>" />
         </div>
     </div>
     <div class="form-group">
@@ -41,7 +41,7 @@
         <div class="col-sm-10">
             <select class="form-control" id="select-country" name="country">
                 <?php foreach ($countries as $country): ?>
-                    <option value="<?= $country->getId() ?>" <?php if ($country->getId() === $user['country']) echo 'selected' ?>><?= $country->getCountryName() ?></option>
+                    <option value="<?= $country->getId() ?>" <?php if ($country->getId() === $user->getCountry()->getId()) echo 'selected' ?>><?= $country->getCountryName() ?></option>
                 <?php endforeach ?>
             </select>
         </div>
