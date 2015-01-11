@@ -6,9 +6,17 @@ if (!defined('BASEPATH'))
 class Home extends KS_Controller {
 
     public function index() {
-	
+        $search = $this->input->post('search');
+        $this->_setData('search', $search);
+        $criteria = array();
+        if (!empty($search)) {
+            $fields  = array('name', 'description', 'price', 'discountPrice');
+            foreach ($fields as $field) {
+                $criteria[$field] = $search;
+            }
+        }
+        $products = $this->productRepo->searchBy($criteria);
         $homeProducts = array();
-        $products = $this->productRepo->findAll();
         foreach ($products as $product) {
 			$t = array();
 			$t = $product->getHomeArray();

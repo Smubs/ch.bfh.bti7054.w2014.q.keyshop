@@ -6,6 +6,8 @@ if (!defined('BASEPATH'))
 class Products extends KS_Controller {
 
     public function index() {
+        $search = $this->input->post('search');
+        $this->_setData('search', $search);
         $categories = array();
         $ocategories = $this->categoryRepo->findAll();
         foreach($ocategories as $category) {

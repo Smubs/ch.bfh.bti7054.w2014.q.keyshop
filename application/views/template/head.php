@@ -114,7 +114,7 @@
                 </div>
             </div>
         </nav>
-        <form class="search-wrapper">
+        <form action="/<?= uri_string() ?>" method="post" class="search-wrapper">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 clearfix">
@@ -123,7 +123,7 @@
                             <span>Ich suche nach</span>
                         </label>
                         <div class="search-input">
-                            <input class="form-control" type="text" placeholder="Produkt" />
+                            <input class="form-control" type="text" name="search" value="<?= $search ?>" placeholder="Produkt" />
                         </div>
                     </div>
                     <div class="col-md-6 clearfix">
