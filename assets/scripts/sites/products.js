@@ -1,8 +1,5 @@
-keyshop.controller('KeyshopFilterProducts', ['$scope', 'filterFilter', '$http', '$timeout', '$cookies', function ($scope, filterFilter, $http, $timeout, $cookies) {
+keyshop.controller('KeyshopFilterProducts', ['$scope', 'filterFilter', '$http', '$timeout', function ($scope, filterFilter, $http, $timeout) {
     $scope.products = ks.products;
-
-    // will save user filters in cookies - not finished
-    var saveFilter = true;
 
     // do not edit!
     $scope.sortBy = 'name';
@@ -52,22 +49,12 @@ keyshop.controller('KeyshopFilterProducts', ['$scope', 'filterFilter', '$http', 
         });
     };
 
-    // get cookies if exist
-    if (saveFilter && $cookies.categories) {
-        // $scope.categories = $cookies.categories;
-    }
-
     // refreshes the filter
     $scope.refreshFilter = function() {
         $scope.showLoader();
         var url = ks.apiurl+'/'+$scope.sortBy+'/';
 
         $http.post(url, {'categories' : $scope.selectedCategories(), 'search' : $('[name=search]').val()}).success(function(data){
-            // save new cookies
-            if (saveFilter) {
-                $cookies.categories = $scope.categories;
-            }
-
             $scope.hideLoader();
             $scope.products = data.products;
             $scope.$broadcast('Data_Ready');
