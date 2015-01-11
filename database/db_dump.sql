@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `keyshop_categories` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 INSERT INTO `keyshop_categories` (`id`, `name`, `description`, `css_class`) VALUES
-  (2, 'Software', 'yxcv', NULL);
+  (2, 'Software', 'Software Beschreibung', NULL);
 
 CREATE TABLE IF NOT EXISTS `keyshop_countries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -291,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `keyshop_orders` (
   KEY `IDX_B36B75ABA76ED395` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
-INSERT INTO `keyshop_orders` (`id`, `status`, `user_id`) VALUES
+INSERT INTO `keyshop_orders` (`id`, `date`, `status`, `user_id`) VALUES
 (1, '2015-01-11 13:14:29', 'waiting', 2),
 (2, '2015-01-11 13:14:29', 'waiting', 3);
 
