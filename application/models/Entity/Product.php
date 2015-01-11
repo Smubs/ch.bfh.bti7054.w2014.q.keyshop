@@ -104,7 +104,7 @@ class Product {
      */
     public function setDiscountPrice($discountPrice)
     {
-        $this->discountPrice = floatval($discountPrice);
+        $this->discountPrice = !empty($discountPrice) ? floatval($discountPrice) : null;
     }
 
     /**

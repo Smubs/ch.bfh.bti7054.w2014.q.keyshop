@@ -140,9 +140,7 @@ class Products extends KS_Controller {
                 $product->setName($post['name']);
                 $product->setDescription($post['description']);
                 $product->setPrice($post['price']);
-                if (!empty($post['discountPrice'])) {
-                    $product->setDiscountPrice($post['discountPrice']);
-                }
+                $product->setDiscountPrice($post['discountPrice']);
                 if (!empty($_FILES['picture']['name']) && $picture = $this->upload('picture')) {
                     $oldPicture = $product->getPicture();
                     if (!empty($oldPicture)) {
