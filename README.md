@@ -137,4 +137,7 @@ The default admin user has the email <code>admin@keyshop.ch</code> and the passw
 
 ## Screencast
 
-coming soon
+[Frontend](screencast/keyshop_frontend.webm)
+[Backend](screencast/keyshop_backend.webm)
+
+[E-Mail Screenshot](screencast/keyshop_order_email.png)
