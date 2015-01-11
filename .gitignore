@@ -3,3 +3,4 @@ application/config/config.php
 application/config/database.php
 database/update.php
 application/dump.sql
+user_guide/
