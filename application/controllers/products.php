@@ -19,7 +19,7 @@ class Products extends KS_Controller {
             unset($t);
         }
 
-        $this->_setJsData('ajaxurl', site_url('/ajax/products/'));
+        $this->_setJsData('apiurl', site_url('/api/products/'));
 
 
         $this->_setJsData('categories', $categories);

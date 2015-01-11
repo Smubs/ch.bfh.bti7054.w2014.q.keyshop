@@ -28,11 +28,11 @@ class Product extends KS_Controller {
                 unset($t);
             }
         }
-		
-		 
+
+
         $this->_setJsData('products', $products);
 
-        $this->_renderScripts();
+        $this->_renderScripts(array('assets/scripts/sites/product.js'));
         $this->_renderStyles();
 
         $this->load->view('template/head', $this->_getData());

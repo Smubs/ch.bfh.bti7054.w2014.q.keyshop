@@ -60,7 +60,7 @@ keyshop.controller('KeyshopFilterProducts', ['$scope', 'filterFilter', '$http', 
     // refreshes the filter
     $scope.refreshFilter = function() {
         $scope.showLoader();
-        var url = ks.ajaxurl+'/'+$scope.sortBy+'/';
+        var url = ks.apiurl+'/'+$scope.sortBy+'/';
 
         $http.post(url, {'categories' : $scope.selectedCategories()}).success(function(data){
             // save new cookies
