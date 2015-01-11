@@ -47,6 +47,12 @@ class KS_Controller extends CI_Controller {
      */
     public $user = null;
 
+    /**
+     * @var boolean $showSearch
+     */
+    public $showSearch = false;
+
+
     public function __construct() {
         parent::__construct();
 
@@ -75,6 +81,10 @@ class KS_Controller extends CI_Controller {
         if ($this->isBackend) {
             $this->checkAccess(true);
         }
+    }
+
+    protected function showSearch() {
+        $this->showSearch = true;
     }
 
     public function _setJsData($name, $object) {
@@ -214,6 +224,8 @@ class KS_Controller extends CI_Controller {
     }
 
     public function _renderStyles($css = array()) {
+        $this->_setData('showSearch', $this->showSearch);
+
         // check if there is somewhere no .css 
         $i = 0;
         foreach ($css as $cssitem) {

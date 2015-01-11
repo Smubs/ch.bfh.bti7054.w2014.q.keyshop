@@ -1,4 +1,4 @@
-keyshop.controller('KeyshopProductOverview', ['$scope', '$cookieStore', '$rootScope', function ($scope, $cookieStore, $rootScope) {
+keyshop.controller('KeyshopProductOverview', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.cproduct = ks.product;
 
     $scope.getCartCountCurrentProduct = function() {
@@ -10,21 +10,6 @@ keyshop.controller('KeyshopProductOverview', ['$scope', '$cookieStore', '$rootSc
     }
 
     $scope.addCurrentProductToCart = function() {
-
-        var array = $cookieStore.get('cart');
-
-        var foundIt = false;
-        array.forEach(function(p) {
-            if (p.id == $scope.cproduct.id) {
-                p.count = p.count+1;
-                foundIt = true;
-            }
-        });
-        if (!foundIt) {
-            array.push($scope.cproduct);
-        }
-
-        $cookieStore.put('cart', array);
-        $rootScope.cart = array;
+        $rootScope.addProductToCart($scope.cproduct);
     };
 }]);

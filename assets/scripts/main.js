@@ -6,7 +6,6 @@ keyshop.run(function($rootScope, $cookieStore) {
     }
     $rootScope.cart = $cookieStore.get('cart');
 
-
     $rootScope.getCartCount = function () {
         var count = 0;
 
@@ -27,7 +26,21 @@ keyshop.run(function($rootScope, $cookieStore) {
     }
 
     $rootScope.addProductToCart = function (product) {
-        console.log('not yet implemented');
+        var array = $cookieStore.get('cart');
+
+        var foundIt = false;
+        array.forEach(function(p) {
+            if (p.id == product.id) {
+                p.count = p.count+1;
+                foundIt = true;
+            }
+        });
+        if (!foundIt) {
+            array.push(product);
+        }
+
+        $cookieStore.put('cart', array);
+        $rootScope.cart = array;
     };
 
     $rootScope.removeProductFromCart = function (product) {
@@ -59,11 +72,7 @@ keyshop.factory('ksUtil', function() {
         };
 });
 
-keyshop.controller('ModalLogin', function ($scope, $rootScope, $cookieStore, $modal, Auth) {
-
-    $scope.resetCart = function() {
-        $cookieStore.put('cart', []);
-    }
+keyshop.controller('ModalLogin', function ($scope, $rootScope, $modal, Auth) {
 
 	$scope.logout = function() {
         Auth.logout()
@@ -159,13 +168,13 @@ keyshop.controller('ModalLogin', function ($scope, $rootScope, $cookieStore, $mo
     };
 });
 
-keyshop.controller('ModalCartInstance', function ($scope, $modalInstance, $rootScope, $http, $cookieStore) {
+keyshop.controller('ModalCartInstance', function ($scope, $modalInstance, $rootScope, $http) {
     $scope.send = function () {
         if (!ks.user) {
             $rootScope.openRegister();
         } else {
             $scope.showLoader = true;
-            $http.post('/api/order/neworder/', {'cart' : $cookieStore.get('cart')}).success(function(data){
+            $http.post('/api/order/neworder/', {'cart' : $rootScope.cart}).success(function(data){
                 console.log(data.orderid);
             });
         }
