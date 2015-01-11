@@ -47,7 +47,7 @@ The default admin user has the email <code>admin@keyshop.ch</code> and the passw
     </li>
     <li>Services
         <ul>
-            <li>[payrexx](http://payrexx.com) service</li>
+            <li>payrexx service</li>
         </ul>
     </li>
 </ul>
