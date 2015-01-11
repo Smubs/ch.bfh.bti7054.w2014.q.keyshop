@@ -127,7 +127,7 @@
 
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" ng-click="send()">{{modalSend}}</button>
-                                    <button class="btn btn-warning" ng-click="cancel()">Schliessen</button>
+                                    <button class="btn btn-warning" ng-click="cancel()" type="button">Schliessen</button>
                                 </div>
                             </form>
                         </script>
