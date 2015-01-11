@@ -4,17 +4,17 @@ angular.module('authService', [])
 
         return {
             get : function() {
-                return $http.get('/ajax/auth');
+                return $http.get('/api/auth');
             },
 
             logout : function() {
-                return $http.get('/ajax/auth/logout');
+                return $http.get('/api/auth/logout');
             },
 
             login : function(loginData) {
                 return $http({
                     method: 'POST',
-                    url: '/ajax/auth/login',
+                    url: '/api/auth/login',
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
                     data: $.param(loginData)
                 });
@@ -23,7 +23,7 @@ angular.module('authService', [])
 			register : function(registerData) {
                 return $http({
                     method: 'POST',
-                    url: '/ajax/auth/register',
+                    url: '/api/auth/register',
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
                     data: $.param(registerData)
                 });

@@ -26,6 +26,18 @@ keyshop.controller('ModalLogin', function ($scope, $modal, Auth) {
 			});
 	};
 
+    $scope.openCart = function() {
+        var modalInstance = $modal.open({
+            templateUrl: 'modalCart.html',
+            controller: 'ModalCartInstance',
+            resolve: {
+                data: function () {
+                    return $scope.data;
+                }
+            }
+        });
+    }
+
     $scope.openLogin = function() {
 
         $scope.data = {
@@ -94,6 +106,13 @@ keyshop.controller('ModalLogin', function ($scope, $modal, Auth) {
                 }
             }
         });
+    };
+});
+
+keyshop.controller('ModalCartInstance', function ($scope, $modalInstance, data, Auth, ksUtil) {
+    console.log('success');
+    $scope.cancel = function () {
+        $modalInstance.close();
     };
 });
 

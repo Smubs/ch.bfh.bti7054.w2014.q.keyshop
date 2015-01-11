@@ -32,14 +32,14 @@
                     </div>
                     <div class="col-md-6" ng-controller="ModalLogin">
                         <ul class="useroption-wrapper">
-                            <li class="cart">
+                            <li class="cart"  ng-click="openCart()">
                                 <a href="#"><i class="fa fa-shopping-cart"></i>Warenkorb</a>
                                 <div class="cart-box">
 
 
                                     <ul class="cart-items">
                                         <li>
-                                            <a href="<?=site_url('cart')?>"><span>5</span> befinden sich in deinem Warenkorb</a>
+                                            <a href="#_" ng-click="openCart()"><strong>5</strong> Produkte befinden sich in Ihrem Warenkorb</a>
                                         </li>
                                         <li><a href="#"><i class="fa fa-shopping-cart"></i> Zur Kasse</a>
                                         </li>
@@ -47,8 +47,8 @@
                                 </div>
                             </li>
 							<?php if (!$user): ?>
-								<li><a href="#" ng-click="openLogin()"><i class="fa fa-sign-in"></i>Anmelden</a></li>
-								<li><a href="#" ng-click="openRegister()"><i class="fa fa-edit"></i>Registrieren</a></li>
+								<li><a href="#_" ng-click="openLogin()"><i class="fa fa-sign-in"></i>Anmelden</a></li>
+								<li><a href="#_" ng-click="openRegister()"><i class="fa fa-edit"></i>Registrieren</a></li>
 							<?php else: ?>
 								<li><a href="/profil/"><i class="fa fa-edit"></i>
 									<?php if (!$user['firstname']): ?>
@@ -62,7 +62,7 @@
 
                         </ul>
 
-                        <script type="text/ng-template" id="modalUser.html">
+                        <script type="text/ng-template" id="modalCart.html">
                             <div class="modal-header">
                                 <h3 class="modal-title">{{modalTitle}}</h3>
                             </div>
@@ -79,9 +79,36 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" ng-click="send()">{{modalSend}}</button>
+                                <button class="btn btn-primary" ng-click="send()">Bestellen</button>
                                 <button class="btn btn-warning" ng-click="cancel()">Schliessen</button>
                             </div>
+                        </script>
+
+                        <script type="text/ng-template" id="modalUser.html">
+                            <form ng-submit="send()">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{modalTitle}}</h3>
+                                </div>
+                                <div class="modal-body">
+                                        <div ng-show="error" class="bs-callout bs-callout-danger modal-callout">
+                                            <h4>{{feedback.title}}</h4>
+                                            <p>{{feedback.message}}</p>
+                                        </div>
+                                        <div class="form-group" ng-repeat="input in inputs">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="fa {{input.icon}}"></i></div>
+                                                <input class="form-control" type="{{input.type}}" ng-model="input.value" name="{{input.name}}" placeholder="{{input.placeholder}}" />
+                                            </div>
+                                        </div>
+                                    <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" ng-click="send()">{{modalSend}}</button>
+                                    <button class="btn btn-warning" ng-click="cancel()">Schliessen</button>
+                                </div>
+                            </form>
                         </script>
                     </div>
                 </div>

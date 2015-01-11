@@ -1,10 +1,9 @@
-
-<div class="container">
+<div ng-controller="KeyshopProductOverview" class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="row">
 				<div class="col-md-7 animated fadeInLeft">
-					<img src="<?='/assets/images/products/'.$product->getPicture()?>" alt="<?=$product->getName()?>-Bild" title="Gamer Chick" />
+					<img src="<?='/assets/images/products/'.$product->getPicture()?>" alt="<?=$product->getName()?>-Bild" title="<?=$product->getName()?>" />
 				</div>
 				<div class="col-md-5 animated fadeInRight">
 					<div class="product-info box">
@@ -12,7 +11,7 @@
 						<p class="product-info-price"><?=$product->getPrice()?> CHF</p>
 						<p class="text-smaller text-muted"><?=$product->getDescription()?></p>
 						<ul class="list-inline">
-							<li><a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> In Warenkorb</a>
+							<li><a href="#_" ng-click="addCurrentProductToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> In Warenkorb</a>
 							</li>
 						</ul>
 					</div>

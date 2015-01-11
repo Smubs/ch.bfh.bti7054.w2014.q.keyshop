@@ -353,6 +353,7 @@ footer .footer-copyright {
 .cart-items li {
   width: 100%;
   border-right: 0;
+  height: 47px;
   line-height: 3px;
 }
 .cart-items li i {
@@ -364,13 +365,15 @@ footer .footer-copyright {
 }
 .cart-items li a {
   color: #666666;
-  height: 36px;
+  height: 84px;
+  line-height: 25px;
+  margin-top: 10px;
 }
 .cart-items li a .hidden {
   display: none;
 }
 .cart-items li a:hover {
-  background: #fff;
+  background: none;
   color: black;
 }
 .cart-items li a:hover .hidden {
@@ -641,6 +644,9 @@ footer .footer-copyright {
 }
 .product-sort:hover > ul {
   display: block;
+}
+.modal-dialog {
+  margin-top: 17%;
 }
 .table-overview .quantity {
   display: inline-block;
