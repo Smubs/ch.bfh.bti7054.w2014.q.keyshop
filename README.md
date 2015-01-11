@@ -18,7 +18,9 @@ The default admin user has the email <code>admin@keyshop.ch</code> and the passw
 
 [![Deployment status from keyshop.dploy.io](https://keyshop.dploy.io/badge/88313865858892/12347.png)](http://keyshop.dploy.io)
 
-## Used frameworks and libraries
+keyshop.kioh.ch
+
+## Used frameworks, libraries and services
 
 <ul>
     <li>PHP
@@ -43,4 +45,96 @@ The default admin user has the email <code>admin@keyshop.ch</code> and the passw
             <li>Lesscss</li>
         </ul>
     </li>
+    <li>Services
+        <ul>
+            <li>payrexx.com service</li>
+        </ul>
+    </li>
 </ul>
+
+## Features
+
+<ul>
+    <li>Frontend
+        <ul>
+            <li>Product
+                <ul>
+                    <li>Overview</li>
+                    <li>Detailview</li>
+                    <li>Filter by category</li>
+                    <li>Sort by price and name</li>
+                    <li>Search</li>
+                </ul>
+            </li>
+            <li>Cart
+                <ul>
+                    <li>Stored in cookie</li>
+                    <li>Add product to cart</li>
+                    <li>Delete product from cart</li>
+                </ul>
+            </li>
+            <li>Usersystem
+                <ul>
+                    <li>Login/Logout/Register</li>
+                    <li>Edit profile</li>
+                    <li>Modern password crypt</li>
+                </ul>
+            </li>
+            <li>Order
+                <ul>
+                    <li>Order a cart</li>
+                    <li>Pay order with payrexx</li>
+                    <li>Sends email with ordered keys</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Backend
+        <ul>
+            <li>Product
+                <ul>
+                    <li>Overview</li>
+                    <li>Full-Text-Search</li>
+                    <li>Detailview -> Edit/Add/Delete</li>
+                    <li>Assign to more than one category</li>
+                    <li>Discount price</li>
+                    <li>Picture upload</li>
+                </ul>
+            </li>
+            <li>Category
+                <ul>
+                    <li>Overview</li>
+                    <li>Full-Text-Search</li>
+                    <li>Detailview -> Edit/Add/Delete</li>
+                </ul>
+            </li>
+            <li>User
+                <ul>
+                    <li>Overview</li>
+                    <li>Full-Text-Search</li>
+                    <li>Detailview -> Edit/Add/Delete</li>
+                </ul>
+            </li>
+            <li>Key
+                <ul>
+                    <li>Overview</li>
+                    <li>Full-Text-Search</li>
+                    <li>Detailview -> Edit/Add/Delete</li>
+                    <li>Assign keys to product</li>
+                    <li>Insert more than one key at once</li>
+                </ul>
+            </li>
+            <li>Order
+                <ul>
+                    <li>Overview</li>
+                    <li>Id-Search</li>
+                    <li>Detailview</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+## Screencast
+
+coming soon

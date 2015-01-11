@@ -27,7 +27,7 @@
                             <li><a href="<?= site_url('produkte') ?>">Produkte</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-6" ng-controller="ModalLogin">
+                    <div class="col-md-6" ng-controller="ModalLogin" ng-cloak>
                         <ul class="useroption-wrapper">
                             <li class="cart">
                                 <a href="#_"><i class="fa fa-shopping-cart"></i>Warenkorb <span ng-show="getCartCount() > 0">({{getCartCount()}})</span></a>
