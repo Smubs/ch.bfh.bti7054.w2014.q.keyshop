@@ -63,7 +63,7 @@
                             <?php if ($user && $user->getAdmin()): ?>
                             <li><a href="<?= site_url('admin') ?>"><i class="fa fa-list"></i>Backend</a></li>
                             <?php endif ?>
-                            <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i>Abmelden</a></li>
+                            <li><a href="#_" ng-click="logout()"><i class="fa fa-sign-out"></i>Abmelden</a></li>
 							<?php endif; ?>
 
                         </ul>
@@ -100,7 +100,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" ng-click="send()">Bestellen</button>
+                                <button class="btn btn-primary" ng-click="send()"><i ng-show="showLoader" class="fa fa-spinner fa-spin"></i> Bestellen</button>
                                 <button class="btn btn-warning" ng-click="cancel()">Schliessen</button>
                             </div>
                         </script>

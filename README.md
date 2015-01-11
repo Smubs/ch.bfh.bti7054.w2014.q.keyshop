@@ -18,16 +18,29 @@ The default admin user has the email <code>admin@keyshop.ch</code> and the passw
 
 [![Deployment status from keyshop.dploy.io](https://keyshop.dploy.io/badge/88313865858892/12347.png)](http://keyshop.dploy.io)
 
-## Used Framework and libraries
+## Used frameworks and libraries
+
 <ul>
-  <li>JavaScript</li>
-  <ul>
-    <li>angularjs</li>
-    <li>jQuery</li>
-  </ul>
-  <li>PHP</li>
-    <ul>
-      <li>CodeIgniter</li>
-    </ul>
-  </li>
+    <li>PHP
+        <ul>
+            <li>CodeIgniter v2.2</li>
+            <li>doctrine v2.4</li>
+        </ul>
+    </li>
+    <li>JavaScript
+        <ul>
+            <li>AngularJS v1.2.26</li>
+            <li>AngularJS MultiSelect v2.0.2</li>
+            <li>angular-cookie</li>
+            <li>jQuery v2.1.3</li>
+        </ul>
+    </li>
+    <li>HTML & CSS
+        <ul>
+            <li>Bootstrap v3.2.0</li>
+            <li>Font Awesome v4.2.0</li>
+            <li>Animate.css</li>
+            <li>Lesscss</li>
+        </ul>
+    </li>
 </ul>
