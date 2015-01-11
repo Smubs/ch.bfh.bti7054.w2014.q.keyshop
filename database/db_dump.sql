@@ -7,10 +7,15 @@ CREATE TABLE IF NOT EXISTS `keyshop_categories` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `css_class` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 INSERT INTO `keyshop_categories` (`id`, `name`, `description`, `css_class`) VALUES
-  (2, 'Software', 'Software Beschreibung', NULL);
+  (2, 'Betriebssystem', 'Ein Betriebssystem ist eine Zusammenstellung von Computerprogrammen, die die Systemressourcen eines Computers wie Arbeitsspeicher, Festplatten, Ein- und Ausgabegeräte verwaltet und diese Anwendungsprogrammen zur Verfügung stellt.', NULL),
+  (4, 'Software', 'Software ist ein Sammelbegriff für Programme und die zugehörigen Daten.', NULL),
+  (5, 'CMS', 'Content Management System', NULL),
+  (6, 'Onlineshop', 'Ein Onlineshop ist eine spezielle Form des Versandhandels, bei dem ein Händler oder Hersteller gewerbliche Waren oder Dienstleistungen zum Verkauf oder zur Miete anbietet.', NULL),
+  (7, 'Videobearbeitung', '', NULL),
+  (8, 'Grafikbearbeitung', '', NULL);
 
 CREATE TABLE IF NOT EXISTS `keyshop_countries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -271,16 +276,34 @@ CREATE TABLE IF NOT EXISTS `keyshop_keys` (
   PRIMARY KEY (`id`),
   KEY `IDX_9ABF2C784584665A` (`product_id`),
   KEY `IDX_9ABF2C788D9F6D38` (`order_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=37 ;
 
 INSERT INTO `keyshop_keys` (`id`, `product_id`, `order_id`, `key`) VALUES
-  (1, 2, 1, '12345-45678-ABCDE-FGHIJ-KLMNO'),
-  (2, 3, 1, '12345-45678-ABCDE-FGHIJ-KLMNO'),
-  (3, 4, 2, '12345-45678-ABCDE-FGHIJ-KLMNO'),
-  (12, 2, 1, '67890-45678-ABCDE-FGHIJ-KLMNO\r'),
-  (13, 2, 1, '13579-45678-ABCDE-FGHIJ-KLMNO'),
-  (14, 3, NULL, '67890-45678-ABCDE-FGHIJ-KLMNO\r'),
-  (15, 3, NULL, '13579-45678-ABCDE-FGHIJ-KLMNO');
+  (1, 2, 1, 'HPKWI-X88SL-UWGZW-RO794-HTAPK'),
+  (2, 3, 1, 'OI4AR-3DRNJ-VAINC-PBBHM-VOHYR'),
+  (3, 4, 2, 'OTI4D-KUW9J-5PG1B-1FFJI-VXPY1'),
+  (12, 2, 1, 'GQWAM-4Q8Z0-IW4LZ-O4E60-R2KXF'),
+  (13, 2, 1, 'W6RCB-FVQUP-S6EC9-52KY6-WMAMP'),
+  (14, 3, 3, 'YO2I5-TD3LI-2FTE8-VJ0QQ-RNWB0'),
+  (15, 3, NULL, 'RFLMS-1KKTQ-ENIWI-D3F7Q-O5ZOJ'),
+  (19, 2, NULL, 'HG4MN-6V82R-BQQPT-12M4L-JMDQE'),
+  (20, 2, NULL, 'L8N8R-OJPW2-X86J9-R0896-U1F59'),
+  (21, 2, NULL, 'MC6TY-H39LI-VI6ZY-DP6VH-AOBYX'),
+  (22, 2, NULL, 'WQAP5-AZJQG-1FV9R-HE894-B1PVI'),
+  (23, 4, NULL, '2LJO7-PJR1Y-FMVYT-XRIIH-W5E43'),
+  (24, 4, NULL, 'C3J1Z-X37SC-ETCOR-ULIAO-PFVPB'),
+  (25, 6, NULL, 'KKUXD-PXCOI-KUJ99-EMUKY-JQC7J\r'),
+  (26, 6, NULL, '8CRM5-R9Q6J-0DXLM-Q99DP-EOTCR\r'),
+  (27, 6, NULL, 'OAIO7-3JIQJ-34K4B-17BUJ-7GQM9\r'),
+  (28, 6, NULL, 'CLNDJ-6QZGC-598KB-ZLWQ0-ORYPR'),
+  (29, 7, NULL, '3ZB3F-W62ZY-TEB39-GYDIB-H7YPG\r'),
+  (30, 7, NULL, 'W4VPF-Q8J5I-VHD8L-EHQFD-JUOZB\r'),
+  (31, 7, NULL, 'KHLZL-1ONRO-4OH93-FY3UM-KX614\r'),
+  (32, 7, NULL, '3TW0O-I2Y4Q-Q6XSV-4PINH-QIHIZ'),
+  (33, 8, NULL, 'TKT6U-E9SYL-I357Z-IO446-E892I\r'),
+  (34, 8, NULL, 'QGYFT-W0SUE-JKXU6-5YVS3-MBVUU\r'),
+  (35, 8, NULL, 'Y2O6U-TVE3Z-9T7WA-499PC-AW3ED\r'),
+  (36, 8, NULL, '2ZG9X-4EJ7Z-PXGRT-K7H5Z-A3T4N');
 
 CREATE TABLE IF NOT EXISTS `keyshop_orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -289,11 +312,12 @@ CREATE TABLE IF NOT EXISTS `keyshop_orders` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_B36B75ABA76ED395` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 INSERT INTO `keyshop_orders` (`id`, `date`, `status`, `user_id`) VALUES
-(1, '2015-01-11 13:14:29', 'waiting', 2),
-(2, '2015-01-11 13:14:29', 'waiting', 3);
+  (1, '2015-01-11 17:35:29', 'confirmed', 2),
+  (2, '2015-01-11 17:35:32', 'confirmed', 3),
+  (3, '2015-01-11 17:35:35', 'confirmed', 2);
 
 CREATE TABLE IF NOT EXISTS `keyshop_orders_products` (
   `order_id` int(11) NOT NULL,
@@ -306,7 +330,8 @@ CREATE TABLE IF NOT EXISTS `keyshop_orders_products` (
 INSERT INTO `keyshop_orders_products` (`order_id`, `product_id`) VALUES
   (1, 2),
   (1, 3),
-  (2, 4);
+  (2, 4),
+  (3, 3);
 
 CREATE TABLE IF NOT EXISTS `keyshop_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -318,12 +343,15 @@ CREATE TABLE IF NOT EXISTS `keyshop_products` (
   `picture` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 INSERT INTO `keyshop_products` (`id`, `status`, `name`, `description`, `price`, `discount_price`, `picture`) VALUES
   (2, 1, 'Windows 8.1 Pro', 'Das stabile und bewährte Windows 8.1 Pro.', 150, 75, 'windows-8.1.jpg'),
   (3, 1, 'Windows 10 Beta', 'Testen Sie die Beta-Version von Windows 10.', 15, 10, 'windows-10.jpg'),
-  (4, 1, 'Microsoft Office 2013 Professional Plus', 'Alles, was Sie für''s Arbeiten benötigen.', 200, 100, 'office-2013.png');
+  (4, 1, 'Microsoft Office 2013 Professional Plus', 'Alles, was Sie für''s Arbeiten benötigen.', 200, 100, 'office-2013.png'),
+  (6, 1, 'Windows 7', 'Microsoft Windows 7 ist ein Betriebssystem des US-amerikanischen Unternehmens Microsoft. Es erschien am 22. Oktober 2009 und ist der Nachfolger von Microsoft Windows Vista. Der weltweite Marktanteil von Windows 7 liegt bei 50 Prozent.', 90, NULL, 'windows-7.jpg'),
+  (7, 1, 'Adobe Photoshop CS5', 'Adobe Photoshop CS5 ist ein Bildbearbeitungsprogramm für Pixelgrafiken des US-amerikanischen Softwarehauses Adobe Systems. Im Bereich der Bildbearbeitung und Druckvorstufe ist das Programm Weltmarktführer und marktbeherrschend.', 250, NULL, 'photoshop-cs5.jpg'),
+  (8, 1, 'Pinnacle Studio 18 Ultimate', 'Pinnacle Studio ist eine Videobearbeitungs-Software des Unternehmens Pinnacle Systems.', 160, NULL, 'pinnacle-studio-18-ultimate.png');
 
 CREATE TABLE IF NOT EXISTS `keyshop_products_categories` (
   `product_id` int(11) NOT NULL,
@@ -335,8 +363,16 @@ CREATE TABLE IF NOT EXISTS `keyshop_products_categories` (
 
 INSERT INTO `keyshop_products_categories` (`product_id`, `category_id`) VALUES
   (2, 2),
+  (2, 4),
   (3, 2),
-  (4, 2);
+  (3, 4),
+  (4, 4),
+  (6, 2),
+  (6, 4),
+  (7, 4),
+  (7, 8),
+  (8, 4),
+  (8, 8);
 
 CREATE TABLE IF NOT EXISTS `keyshop_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -352,11 +388,13 @@ CREATE TABLE IF NOT EXISTS `keyshop_users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `IDX_E3CFC3DCF92F3E70` (`country_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 INSERT INTO `keyshop_users` (`id`, `admin`, `email`, `password`, `firstname`, `lastname`, `address`, `zip`, `place`, `country_id`) VALUES
-  (2, 1, 'raess.michael@gmail.com', '$2a$10$9LcDgnWxqMyaR6AljcWB.OFSVSccON5mGDXTGCcF1gp6w0CdtWqJS', 'Michael', 'Räss', 'Interlakenstrasse 90', '3705', 'Faulensee', 208),
-  (3, 1, 'tobischmoker@gmail.com', '$2a$10$74Etz3He2OQ.b1Y.zs/ZbuZCz6GE74ADnuhdactjuC2JTeJgZT/py', 'Tobias', 'Schmoker', 'Rugenaustrasse 23', '3800', 'Interlaken', 208);
+  (2, 1, 'raess.michael@gmail.com', '$2a$10$2ML4OM6xHW4w3ctbc/UGqOm2kjN/wdXY50nMIW/Y38xKgiW/DNASe', 'Michael', 'Räss', 'Interlakenstrasse 90', '3705', 'Faulensee', 208),
+  (3, 1, 'tobischmoker@gmail.com', '$2a$10$74Etz3He2OQ.b1Y.zs/ZbuZCz6GE74ADnuhdactjuC2JTeJgZT/py', 'Tobias', 'Schmoker', 'Rugenaustrasse 23', '3800', 'Interlaken', 208),
+  (5, 1, 'admin@keyshop.ch', '$2a$10$fiH9i/dZLmJ4g6NC.SKjR./UczSmT3owuGxd6nI9qGFrrU27QvxzC', '', '', '', '', '', 208),
+  (6, 0, 'customer@keyshop.ch', '$2a$10$MhTG55tSTwLgBCIg/B4Si.ftJjHgMrlNk9IKMLCI9m9Z5NX2dEbV.', '', '', '', '', '', 208);
 
 
 ALTER TABLE `keyshop_keys`
