@@ -301,6 +301,17 @@ class Product extends \Entity\Product implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getAvailableKeys()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAvailableKeys', array());
+
+        return parent::getAvailableKeys();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setName($name)
     {
 
@@ -411,12 +422,34 @@ class Product extends \Entity\Product implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getRealPrice()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRealPrice', array());
+
+        return parent::getRealPrice();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getHomeArray()
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getHomeArray', array());
 
         return parent::getHomeArray();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCartArray()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCartArray', array());
+
+        return parent::getCartArray();
     }
 
 }

@@ -15,7 +15,7 @@ Entity\Order:
 
     status:
       type: string
-      columnDefinition: ENUM('waiting', 'confirmed', 'cancelled')
+      columnDefinition: enum('waiting', 'confirmed', 'cancelled')
 
   oneToMany:
     keys:

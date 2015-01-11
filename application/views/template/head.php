@@ -61,7 +61,7 @@
                                 </a>
                             </li>
                             <?php if ($user && $user->getAdmin()): ?>
-                            <li><a href="<?= site_url('admin') ?>"><i class="fa fa-list"></i>Backend</a></li>
+                            <li><a href="<?= site_url('admin') ?>"><i class="fa fa-cogs"></i>Backend</a></li>
                             <?php endif ?>
                             <li><a href="#_" ng-click="logout()"><i class="fa fa-sign-out"></i>Abmelden</a></li>
 							<?php endif; ?>

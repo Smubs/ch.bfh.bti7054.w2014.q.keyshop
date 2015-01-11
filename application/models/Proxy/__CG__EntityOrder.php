@@ -36,7 +36,7 @@ class Order extends \Entity\Order implements \Doctrine\ORM\Proxy\Proxy
      *
      * @see \Doctrine\Common\Persistence\Proxy::__getLazyProperties
      */
-    public static $lazyPropertiesDefaults = array();
+    public static $lazyPropertiesDefaults = array('date' => NULL);
 
 
 
@@ -46,16 +46,60 @@ class Order extends \Entity\Order implements \Doctrine\ORM\Proxy\Proxy
      */
     public function __construct($initializer = null, $cloner = null)
     {
+        unset($this->date);
 
         $this->__initializer__ = $initializer;
         $this->__cloner__      = $cloner;
     }
 
+    /**
+     * 
+     * @param string $name
+     */
+    public function __get($name)
+    {
+        if (array_key_exists($name, $this->__getLazyProperties())) {
+            $this->__initializer__ && $this->__initializer__->__invoke($this, '__get', array($name));
 
+            return $this->$name;
+        }
 
+        trigger_error(sprintf('Undefined property: %s::$%s', __CLASS__, $name), E_USER_NOTICE);
+    }
 
+    /**
+     * 
+     * @param string $name
+     * @param mixed  $value
+     */
+    public function __set($name, $value)
+    {
+        if (array_key_exists($name, $this->__getLazyProperties())) {
+            $this->__initializer__ && $this->__initializer__->__invoke($this, '__set', array($name, $value));
 
+            $this->$name = $value;
 
+            return;
+        }
+
+        $this->$name = $value;
+    }
+
+    /**
+     * 
+     * @param  string $name
+     * @return boolean
+     */
+    public function __isset($name)
+    {
+        if (array_key_exists($name, $this->__getLazyProperties())) {
+            $this->__initializer__ && $this->__initializer__->__invoke($this, '__isset', array($name));
+
+            return isset($this->$name);
+        }
+
+        return false;
+    }
 
     /**
      * 
@@ -64,10 +108,10 @@ class Order extends \Entity\Order implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'userId', 'user', 'keys', 'products');
+            return array('__isInitialized__', 'id', 'date', 'status', 'user', 'keys', 'products');
         }
 
-        return array('__isInitialized__', 'id', 'userId', 'user', 'keys', 'products');
+        return array('__isInitialized__', 'id', 'status', 'user', 'keys', 'products');
     }
 
     /**
@@ -89,6 +133,7 @@ class Order extends \Entity\Order implements \Doctrine\ORM\Proxy\Proxy
                 }
             };
 
+            unset($this->date);
         }
     }
 
@@ -176,6 +221,28 @@ class Order extends \Entity\Order implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getDate()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDate', array());
+
+        return parent::getDate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDate($date)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDate', array($date));
+
+        return parent::setDate($date);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setId($id)
     {
 
@@ -246,6 +313,28 @@ class Order extends \Entity\Order implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function setStatus($status)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setStatus', array($status));
+
+        return parent::setStatus($status);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getStatus()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getStatus', array());
+
+        return parent::getStatus();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setUser($user)
     {
 
@@ -263,28 +352,6 @@ class Order extends \Entity\Order implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUser', array());
 
         return parent::getUser();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setUserId($userId)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUserId', array($userId));
-
-        return parent::setUserId($userId);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUserId()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUserId', array());
-
-        return parent::getUserId();
     }
 
 }
