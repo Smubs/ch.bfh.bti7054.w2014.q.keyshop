@@ -1,7 +1,7 @@
 Keyshop
 ===================================
 
-## Environment Dependencies
+## Environment dependencies
 * Apache with PHP >= 5.5
 * MySQL >= 5.6
 
@@ -18,7 +18,7 @@ The default admin user has the email <code>admin@keyshop.ch</code> and the passw
 
 [![Deployment status from keyshop.dploy.io](https://keyshop.dploy.io/badge/88313865858892/12347.png)](http://keyshop.dploy.io)
 
-keyshop.kioh.ch
+[keyshop.kioh.ch](http://keyshop.kioh.ch)
 
 ## Used frameworks, libraries and services
 
@@ -47,7 +47,7 @@ keyshop.kioh.ch
     </li>
     <li>Services
         <ul>
-            <li>payrexx.com service</li>
+            <li>[payrexx.com](https://payrexx.com) service</li>
         </ul>
     </li>
 </ul>

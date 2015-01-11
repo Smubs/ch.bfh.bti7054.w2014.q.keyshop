@@ -9,8 +9,8 @@ class Product extends KS_Controller {
         $products = array();
 
         $product = $this->productRepo->findOneByName(urldecode($name));
-        $this->_setData('product', $product); 
-		$this->_setJsData('product', $product->getCartArray());
+        $this->setData('product', $product);
+		$this->setJsData('product', $product->getCartArray());
 
         $firstCategory = $product->getCategories()->toArray();
 
@@ -32,14 +32,14 @@ class Product extends KS_Controller {
         }
 
 
-        $this->_setJsData('products', $products);
+        $this->setJsData('products', $products);
 
-        $this->_renderScripts(array('assets/scripts/sites/product.js'));
-        $this->_renderStyles();
+        $this->renderScripts(array('assets/scripts/sites/product.js'));
+        $this->renderStyles();
 
-        $this->load->view('template/head', $this->_getData());
-        $this->load->view('product', $this->_getData());
-        $this->load->view('template/foot', $this->_getData());
+        $this->load->view('template/head', $this->getData());
+        $this->load->view('product', $this->getData());
+        $this->load->view('template/foot', $this->getData());
     }
 
 }

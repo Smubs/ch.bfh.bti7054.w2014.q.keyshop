@@ -9,7 +9,7 @@ class Orders extends KS_Controller {
 	public function index()
 	{
         $search = $this->input->post('search');
-        $this->_setData('search', $search);
+        $this->setData('search', $search);
         if (!empty($search)) {
             $orders[] = $this->orderRepo->find($search);
         } else {
@@ -27,14 +27,14 @@ class Orders extends KS_Controller {
                 'products' => $this->getProductsArray($order->getProducts()->toArray(), $order),
             );
         }
-        $this->_setJsData('orders', $jsData);
+        $this->setJsData('orders', $jsData);
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-		$this->load->view('template/admin/head', $this->_getData());
-		$this->load->view('admin/orders/overview', $this->_getData());
-		$this->load->view('template/admin/foot', $this->_getData());
+		$this->load->view('template/admin/head', $this->getData());
+		$this->load->view('admin/orders/overview', $this->getData());
+		$this->load->view('template/admin/foot', $this->getData());
 	}
 
     private function getProductsArray($products, $paramOrder)
@@ -71,16 +71,16 @@ class Orders extends KS_Controller {
     public function detail($id)
     {
         $order = $this->orderRepo->find($id);
-        $this->_setData('status', $order->getStatus());
-        $this->_setData('user', $order->getUser());
-        $this->_setData('products', $this->getProductsArray($order->getProducts()->toArray(), $order));
+        $this->setData('status', $order->getStatus());
+        $this->setData('user', $order->getUser());
+        $this->setData('products', $this->getProductsArray($order->getProducts()->toArray(), $order));
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/admin/head', $this->_getData());
-        $this->load->view('admin/orders/detail', $this->_getData());
-        $this->load->view('template/admin/foot', $this->_getData());
+        $this->load->view('template/admin/head', $this->getData());
+        $this->load->view('admin/orders/detail', $this->getData());
+        $this->load->view('template/admin/foot', $this->getData());
     }
 
 }

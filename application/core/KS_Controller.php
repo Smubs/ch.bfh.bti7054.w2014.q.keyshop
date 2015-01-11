@@ -17,40 +17,40 @@ class KS_Controller extends CI_Controller {
     /**
      * @var \Doctrine\ORM\EntityManager $em
      */
-    public $em;
+    protected $em;
     /**
      * @var \Repository\CategoryRepository $categoryRepo
      */
-    public $categoryRepo;
+    protected $categoryRepo;
     /**
      * @var \Repository\KeyRepository $keyRepo
      */
-    public $keyRepo;
+    protected $keyRepo;
     /**
      * @var \Repository\OrderRepository $orderRepo
      */
-    public $orderRepo;
+    protected $orderRepo;
     /**
      * @var \Repository\ProductRepository $productRepo
      */
-    public $productRepo;
+    protected $productRepo;
     /**
      * @var \Repository\UserRepository $userRepo
      */
-    public $userRepo;
+    protected $userRepo;
     /**
      * @var \Repository\CountryRepository $countryRepo
      */
-    public $countryRepo;
+    protected $countryRepo;
     /**
      * @var \Entity\User $user Current user
      */
-    public $user = null;
+    private $user = null;
 
     /**
      * @var boolean $showSearch
      */
-    public $showSearch = false;
+    protected $showSearch = false;
 
 
     public function __construct() {
@@ -76,22 +76,22 @@ class KS_Controller extends CI_Controller {
         $this->countryRepo  = $this->em->getRepository('Entity\Country');
 		
 		// do authentifaction and load current user
-        $this->_doUser();
+        $this->doUser();
 
         if ($this->isBackend) {
             $this->checkAccess(true);
         }
 
         if ($this->isBackend) {
-            $this->_setData('classOrders', in_array($this->uri->segment(2), array(false, 'orders')) ? 'active' : '');
-            $this->_setData('classProducts', $this->uri->segment(2) === 'products' ? 'active' : '');
-            $this->_setData('classKeys', $this->uri->segment(2) === 'keys' ? 'active' : '');
-            $this->_setData('classCategories', $this->uri->segment(2) === 'categories' ? 'active' : '');
-            $this->_setData('classUsers', $this->uri->segment(2) === 'users' ? 'active' : '');
+            $this->setData('classOrders', in_array($this->uri->segment(2), array(false, 'orders')) ? 'active' : '');
+            $this->setData('classProducts', $this->uri->segment(2) === 'products' ? 'active' : '');
+            $this->setData('classKeys', $this->uri->segment(2) === 'keys' ? 'active' : '');
+            $this->setData('classCategories', $this->uri->segment(2) === 'categories' ? 'active' : '');
+            $this->setData('classUsers', $this->uri->segment(2) === 'users' ? 'active' : '');
         } else {
-            $this->_setData('classHome', in_array($this->uri->segment(1), array(false, 'home')) ? 'active' : '');
-            $this->_setData('classProducts', $this->uri->segment(1) === 'products' ? 'active' : '');
-            $this->_setData('classProfile', $this->uri->segment(1) === 'profile' ? 'active' : '');
+            $this->setData('classHome', in_array($this->uri->segment(1), array(false, 'home')) ? 'active' : '');
+            $this->setData('classProducts', $this->uri->segment(1) === 'products' ? 'active' : '');
+            $this->setData('classProfile', $this->uri->segment(1) === 'profile' ? 'active' : '');
         }
     }
 
@@ -99,22 +99,22 @@ class KS_Controller extends CI_Controller {
         $this->showSearch = true;
     }
 
-    public function _setJsData($name, $object) {
+    protected function setJsData($name, $object) {
         $this->jsdata[$name] = $object;
     }
 
-    public function _setData($name, $object) {
+    protected function setData($name, $object) {
         $this->data[$name] = $object;
     }
     
-    public function _getData() {
+    protected function getData() {
         if (!isset($this->data['alert']['display'])) {
             $this->data['alert']['display'] = '';
         }
         return $this->data;
     }
 
-    public function _doUser() {
+    private function doUser() {
         if ($this->session->userdata('logged_in')) {
             $uid = $this->session->userdata('logged_in');
 			$u   = $this->userRepo->find($uid);
@@ -128,33 +128,33 @@ class KS_Controller extends CI_Controller {
 			$udata['zip'] = $u->getZip();
 			$udata['place'] = $u->getPlace();
             
-			$this->_setData('user', $udata);
-            $this->_setJsData('user', $udata);
+			$this->setData('user', $udata);
+            $this->setJsData('user', $udata);
 
             define('USERID', $u->getId());
 
             if ($u->getAdmin() > 6) {
-                $this->_setData('isAdmin', true);
+                $this->setData('isAdmin', true);
 				
             } else
             {
-                $this->_setData('isAdmin', false);
+                $this->setData('isAdmin', false);
             }
             
         } else {
-            $this->_setData('user', false);
-            $this->_setJsData('user', false);
+            $this->setData('user', false);
+            $this->setJsData('user', false);
         }
-        $this->_setData('user', $this->user);
+        $this->setData('user', $this->user);
     }
 
-    public function getUser()
+    protected function getUser()
     {
         return $this->user;
     }
 
 
-    public function _renderScripts($js = array()) {
+    protected function renderScripts($js = array()) {
         // check if there is somewhere no .js 
         $i = 0;
         foreach ($js as $jsitem) {
@@ -229,13 +229,13 @@ class KS_Controller extends CI_Controller {
         }
     }
 
-    public function thisIsAjax() {
+    protected function thisIsAjax() {
         $this->output->set_content_type('application/json');
         $this->request = json_decode(file_get_contents("php://input"));
     }
 
-    public function _renderStyles($css = array()) {
-        $this->_setData('showSearch', $this->showSearch);
+    protected function renderStyles($css = array()) {
+        $this->setData('showSearch', $this->showSearch);
 
         // check if there is somewhere no .css 
         $i = 0;
@@ -264,7 +264,7 @@ class KS_Controller extends CI_Controller {
         }
     }
 
-    public function checkAccess($checkAdmin = false)
+    protected function checkAccess($checkAdmin = false)
     {
         if (!$user = $this->getUser()) {
             redirect('/');

@@ -15,7 +15,7 @@ class Keys extends KS_Controller {
                 $this->em->remove($key);
                 $this->em->flush();
 
-                $this->_setData('alert', array(
+                $this->setData('alert', array(
                     'mode'    => 'success',
                     'message' => 'Der Key "' . $keyString . '" wurde erfolgreich gelöscht.'
                 ));
@@ -23,7 +23,7 @@ class Keys extends KS_Controller {
         }
 
         $search = $this->input->post('search');
-        $this->_setData('search', $search);
+        $this->setData('search', $search);
         $keys     = array();
         $criteria = array();
         if (!empty($search)) {
@@ -43,19 +43,19 @@ class Keys extends KS_Controller {
                 'product' => $key->getProduct()->getName(),
             );
         }
-        $this->_setJsData('keys', $jsData);
+        $this->setJsData('keys', $jsData);
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/admin/head', $this->_getData());
-        $this->load->view('admin/keys/overview', $this->_getData());
-        $this->load->view('template/admin/foot', $this->_getData());
+        $this->load->view('template/admin/head', $this->getData());
+        $this->load->view('admin/keys/overview', $this->getData());
+        $this->load->view('template/admin/foot', $this->getData());
     }
 
     public function success()
     {
-        $this->_setData('alert', array(
+        $this->setData('alert', array(
             'mode'    => 'success',
             'message' => 'Key(s) erfolgreich gespeichert.'
         ));
@@ -64,7 +64,7 @@ class Keys extends KS_Controller {
 
     public function add($id = 0)
     {
-        $this->_setData('isEditView', ($id > 0));
+        $this->setData('isEditView', ($id > 0));
 
         if (($key = $this->keyRepo->find($id)) && !$this->input->post()) {
             $post['product'] = $key->getProduct()->getId();
@@ -77,11 +77,11 @@ class Keys extends KS_Controller {
         $data['product']  = isset($post['product']) ? $post['product'] : 0;
         $data['key']      = isset($post['key'])     ? $post['key']     : '';
         $data['keys']     = isset($post['keys'])    ? $post['keys']    : '';
-        $this->_setData('data', $data);
+        $this->setData('data', $data);
 
         if ($this->input->post()) {
             if (empty($post['key']) && empty($post['keys'])) {
-                $this->_setData('alert', array(
+                $this->setData('alert', array(
                     'mode'    => 'warning',
                     'message' => 'Bitte füllen Sie alle Pflichtfelder aus.'
                 ));
@@ -112,12 +112,12 @@ class Keys extends KS_Controller {
             }
         }
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/admin/head', $this->_getData());
-        $this->load->view('admin/keys/add', $this->_getData());
-        $this->load->view('template/admin/foot', $this->_getData());
+        $this->load->view('template/admin/head', $this->getData());
+        $this->load->view('admin/keys/add', $this->getData());
+        $this->load->view('template/admin/foot', $this->getData());
     }
 
     public function edit($id)

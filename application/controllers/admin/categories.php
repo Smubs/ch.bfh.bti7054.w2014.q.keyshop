@@ -15,7 +15,7 @@ class Categories extends KS_Controller {
                 $this->em->remove($category);
                 $this->em->flush();
 
-                $this->_setData('alert', array(
+                $this->setData('alert', array(
                     'mode'    => 'success',
                     'message' => 'Die Kategorie "' . $categoryName . '" wurde erfolgreich gelöscht.'
                 ));
@@ -23,7 +23,7 @@ class Categories extends KS_Controller {
         }
 
         $search = $this->input->post('search');
-        $this->_setData('search', $search);
+        $this->setData('search', $search);
         $criteria = array();
         if (!empty($search)) {
             $fields  = array('name', 'description');
@@ -39,19 +39,19 @@ class Categories extends KS_Controller {
                 'name' => $category->getName(),
             );
         }
-        $this->_setJsData('categories', $jsData);
+        $this->setJsData('categories', $jsData);
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/admin/head', $this->_getData());
-        $this->load->view('admin/categories/overview', $this->_getData());
-        $this->load->view('template/admin/foot', $this->_getData());
+        $this->load->view('template/admin/head', $this->getData());
+        $this->load->view('admin/categories/overview', $this->getData());
+        $this->load->view('template/admin/foot', $this->getData());
     }
 
     public function success()
     {
-        $this->_setData('alert', array(
+        $this->setData('alert', array(
             'mode'    => 'success',
             'message' => 'Kategorie erfolgreich gespeichert.'
         ));
@@ -60,7 +60,7 @@ class Categories extends KS_Controller {
 
     public function add($id = 0)
     {
-        $this->_setData('isEditView', ($id > 0));
+        $this->setData('isEditView', ($id > 0));
 
         if (($category = $this->categoryRepo->find($id)) && !$this->input->post()) {
             $post['name']        = $category->getName();
@@ -73,11 +73,11 @@ class Categories extends KS_Controller {
         $data['name']        = isset($post['name'])        ? $post['name']        : '';
         $data['description'] = isset($post['description']) ? $post['description'] : '';
         $data['cssClass']    = isset($post['cssClass'])    ? $post['cssClass']    : '';
-        $this->_setData('data', $data);
+        $this->setData('data', $data);
 
         if ($this->input->post()) {
             if ($post['name'] === '') {
-                $this->_setData('alert', array(
+                $this->setData('alert', array(
                     'mode'    => 'warning',
                     'message' => 'Bitte füllen Sie alle Pflichtfelder aus.'
                 ));
@@ -96,12 +96,12 @@ class Categories extends KS_Controller {
             }
         }
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/admin/head', $this->_getData());
-        $this->load->view('admin/categories/add', $this->_getData());
-        $this->load->view('template/admin/foot', $this->_getData());
+        $this->load->view('template/admin/head', $this->getData());
+        $this->load->view('admin/categories/add', $this->getData());
+        $this->load->view('template/admin/foot', $this->getData());
     }
 
     public function edit($id)

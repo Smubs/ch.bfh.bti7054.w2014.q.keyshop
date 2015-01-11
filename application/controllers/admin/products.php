@@ -15,12 +15,12 @@ class Products extends KS_Controller {
                 $this->em->remove($product);
                 try {
                     $this->em->flush();
-                    $this->_setData('alert', array(
+                    $this->setData('alert', array(
                         'mode'    => 'success',
                         'message' => 'Das Produkt "' . $productName . '" wurde erfolgreich gelöscht.'
                     ));
                 } catch (\Exception $e) {
-                    $this->_setData('alert', array(
+                    $this->setData('alert', array(
                         'mode'    => 'danger',
                         'message' => 'Löschen Sie zuerst die zugewiesenen Keys.'
                     ));
@@ -29,7 +29,7 @@ class Products extends KS_Controller {
         }
 
         $search = $this->input->post('search');
-        $this->_setData('search', $search);
+        $this->setData('search', $search);
         $criteria = array();
         if (!empty($search)) {
             $fields  = array('name', 'description', 'price', 'discountPrice');
@@ -45,19 +45,19 @@ class Products extends KS_Controller {
                 'name' => $product->getName(),
             );
         }
-        $this->_setJsData('products', $jsData);
+        $this->setJsData('products', $jsData);
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/admin/head', $this->_getData());
-        $this->load->view('admin/products/overview', $this->_getData());
-        $this->load->view('template/admin/foot', $this->_getData());
+        $this->load->view('template/admin/head', $this->getData());
+        $this->load->view('admin/products/overview', $this->getData());
+        $this->load->view('template/admin/foot', $this->getData());
 	}
 
     public function success()
     {
-        $this->_setData('alert', array(
+        $this->setData('alert', array(
             'mode'    => 'success',
             'message' => 'Produkt erfolgreich gespeichert.'
         ));
@@ -66,7 +66,7 @@ class Products extends KS_Controller {
 
     public function add($id = 0)
     {
-        $this->_setData('isEditView', ($id > 0));
+        $this->setData('isEditView', ($id > 0));
 
         if (($product = $this->productRepo->find($id)) && !$this->input->post()) {
             $productCategories = $product->getCategories()->toArray();
@@ -111,7 +111,7 @@ class Products extends KS_Controller {
                 'ticked' => in_array($category, $productCategories),
             );
         }
-        $this->_setJsData('multiSelectCategories', $jsData);
+        $this->setJsData('multiSelectCategories', $jsData);
 
         $data['status']        = isset($post['status'])        ? 'checked'              : '';
         $data['name']          = isset($post['name'])          ? $post['name']          : '';
@@ -120,14 +120,14 @@ class Products extends KS_Controller {
         $data['discountPrice'] = isset($post['discountPrice']) ? $post['discountPrice'] : '';
         $data['picture']       = isset($post['picture'])       ? $post['picture']       : '';
         if (empty($data['keys'])) $data['keys'] = '';
-        $this->_setData('data', $data);
+        $this->setData('data', $data);
 
         if ($this->input->post()) {
             if (($post['name'] === '')
                 || ($post['description'] === '')
                 || ($post['price'] === '')
             ) {
-                $this->_setData('alert', array(
+                $this->setData('alert', array(
                     'mode'    => 'warning',
                     'message' => 'Bitte füllen Sie alle Pflichtfelder aus.'
                 ));
@@ -154,12 +154,12 @@ class Products extends KS_Controller {
             }
         }
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/admin/head', $this->_getData());
-        $this->load->view('admin/products/add', $this->_getData());
-        $this->load->view('template/admin/foot', $this->_getData());
+        $this->load->view('template/admin/head', $this->getData());
+        $this->load->view('admin/products/add', $this->getData());
+        $this->load->view('template/admin/foot', $this->getData());
     }
 
     private function upload($field)
@@ -171,7 +171,7 @@ class Products extends KS_Controller {
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload($field)) {
-            $this->_setData('alert', array(
+            $this->setData('alert', array(
                 'mode'    => 'danger',
                 'message' => $this->upload->display_errors()
             ));

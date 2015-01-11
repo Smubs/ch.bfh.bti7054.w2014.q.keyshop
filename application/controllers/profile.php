@@ -11,16 +11,16 @@ class Profile extends KS_Controller {
         $this->checkAccess();
 
         $user = $this->getUser();
-        $this->_setData('countries', $this->countryRepo->findAll());
+        $this->setData('countries', $this->countryRepo->findAll());
 
         if ($post = $this->input->post()) {
             if (empty($post['email'])) {
-                $this->_setData('alert', array(
+                $this->setData('alert', array(
                     'mode'    => 'warning',
                     'message' => 'Bitte füllen Sie alle Pflichtfelder aus.'
                 ));
             } else if ((!empty($post['password']) || !empty($post['passwordRetype'])) && $post['password'] !== $post['passwordRetype']) {
-                $this->_setData('alert', array(
+                $this->setData('alert', array(
                     'mode'    => 'warning',
                     'message' => 'Passwörter stimmen nicht überein.'
                 ));
@@ -43,17 +43,17 @@ class Profile extends KS_Controller {
             }
         }
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/head', $this->_getData());
-        $this->load->view('profile', $this->_getData());
-        $this->load->view('template/foot', $this->_getData());
+        $this->load->view('template/head', $this->getData());
+        $this->load->view('profile', $this->getData());
+        $this->load->view('template/foot', $this->getData());
     }
 
     public function success()
     {
-        $this->_setData('alert', array(
+        $this->setData('alert', array(
             'mode'    => 'success',
             'message' => 'Profil erfolgreich bearbeitet.'
         ));

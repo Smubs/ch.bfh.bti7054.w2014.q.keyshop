@@ -672,8 +672,17 @@ footer .footer-copyright {
 #payrexx-modal #payrexx-modal-footer img {
   width: auto !important;
 }
-
-.form-group input::-webkit-input-placeholder { color:#aaa; }
-.form-group input::-moz-placeholder { color:#aaa; } /* firefox 19+ */
-.form-group input:-ms-input-placeholder { color:#aaa; } /* ie */
-.form-group input:input:-moz-placeholder { color:#aaa; }
+.form-group input::-webkit-input-placeholder {
+  color: #aaa;
+}
+.form-group input::-moz-placeholder {
+  color: #aaa;
+}
+/* firefox 19+ */
+.form-group input:-ms-input-placeholder {
+  color: #aaa;
+}
+/* ie */
+.form-group input:input:-moz-placeholder {
+  color: #aaa;
+}

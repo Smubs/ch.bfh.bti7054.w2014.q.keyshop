@@ -9,7 +9,7 @@ class Home extends KS_Controller {
         $this->showSearch();
 
         $search = $this->input->post('search');
-        $this->_setData('search', $search);
+        $this->setData('search', $search);
         $criteria = array();
         if (!empty($search)) {
             $fields  = array('name', 'description', 'price', 'discountPrice');
@@ -29,14 +29,14 @@ class Home extends KS_Controller {
 			unset($t); 
         }
 		
-        $this->_setJsData('products', $homeProducts);
+        $this->setJsData('products', $homeProducts);
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/head', $this->_getData());
-        $this->load->view('home', $this->_getData());
-        $this->load->view('template/foot', $this->_getData());
+        $this->load->view('template/head', $this->getData());
+        $this->load->view('home', $this->getData());
+        $this->load->view('template/foot', $this->getData());
     }
 
 }

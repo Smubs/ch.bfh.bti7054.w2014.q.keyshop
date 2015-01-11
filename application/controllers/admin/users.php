@@ -15,7 +15,7 @@ class Users extends KS_Controller {
                 $this->em->remove($user);
                 $this->em->flush();
 
-                $this->_setData('alert', array(
+                $this->setData('alert', array(
                     'mode'    => 'success',
                     'message' => 'Der Benutzer "' . $userEmail . '" wurde erfolgreich gelöscht.'
                 ));
@@ -23,7 +23,7 @@ class Users extends KS_Controller {
         }
 
         $search = $this->input->post('search');
-        $this->_setData('search', $search);
+        $this->setData('search', $search);
         $criteria = array();
         if (!empty($search)) {
             $fields  = array('email', 'firstname', 'lastname', 'address', 'zip', 'place');
@@ -39,19 +39,19 @@ class Users extends KS_Controller {
                 'email' => $user->getEmail(),
             );
         }
-        $this->_setJsData('users', $jsData);
+        $this->setJsData('users', $jsData);
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/admin/head', $this->_getData());
-        $this->load->view('admin/users/overview', $this->_getData());
-        $this->load->view('template/admin/foot', $this->_getData());
+        $this->load->view('template/admin/head', $this->getData());
+        $this->load->view('admin/users/overview', $this->getData());
+        $this->load->view('template/admin/foot', $this->getData());
     }
 
     public function success()
     {
-        $this->_setData('alert', array(
+        $this->setData('alert', array(
             'mode'    => 'success',
             'message' => 'Benutzer erfolgreich gespeichert.'
         ));
@@ -60,7 +60,7 @@ class Users extends KS_Controller {
 
     public function add($id = 0)
     {
-        $this->_setData('isEditView', ($id > 0));
+        $this->setData('isEditView', ($id > 0));
 
         if (($user = $this->userRepo->find($id)) && !$this->input->post()) {
             $post['email']     = $user->getEmail();
@@ -85,11 +85,11 @@ class Users extends KS_Controller {
         $data['zip']       = isset($post['zip'])       ? $post['zip']       : '';
         $data['place']     = isset($post['place'])     ? $post['place']     : '';
         $data['country']   = isset($post['country'])   ? $post['country']   : '';
-        $this->_setData('data', $data);
+        $this->setData('data', $data);
 
         if ($this->input->post()) {
             if (empty($post['email']) || ($id == 0 && empty($post['password']))) {
-                $this->_setData('alert', array(
+                $this->setData('alert', array(
                     'mode'    => 'warning',
                     'message' => 'Bitte füllen Sie alle Pflichtfelder aus.'
                 ));
@@ -116,12 +116,12 @@ class Users extends KS_Controller {
             }
         }
 
-        $this->_renderScripts();
-        $this->_renderStyles();
+        $this->renderScripts();
+        $this->renderStyles();
 
-        $this->load->view('template/admin/head', $this->_getData());
-        $this->load->view('admin/users/add', $this->_getData());
-        $this->load->view('template/admin/foot', $this->_getData());
+        $this->load->view('template/admin/head', $this->getData());
+        $this->load->view('admin/users/add', $this->getData());
+        $this->load->view('template/admin/foot', $this->getData());
     }
 
     public function edit($id)
