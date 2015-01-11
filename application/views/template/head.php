@@ -29,14 +29,20 @@
                     </div>
                     <div class="col-md-6" ng-controller="ModalLogin">
                         <ul class="useroption-wrapper">
-                            <li class="cart"  ng-click="openCart()">
-                                <a href="#"><i class="fa fa-shopping-cart"></i>Warenkorb</a>
+                            <li class="cart">
+                                <a href="#_"><i class="fa fa-shopping-cart"></i>Warenkorb <span ng-show="getCartCount() > 0">({{getCartCount()}})</span></a>
                                 <div class="cart-box">
                                     <ul class="cart-items">
-                                        <li>
-                                            <a href="#_" ng-click="openCart()"><strong>5</strong> Produkte befinden sich in Ihrem Warenkorb</a>
+                                        <li  ng-show="getCartCount() > 1">
+                                            <a href="#_" ng-click="openCart()"><strong>{{getCartCount()}}</strong> Produkte befinden sich in Ihrem Warenkorb</a>
                                         </li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i> Zur Kasse</a>
+                                        <li  ng-show="getCartCount() == 1">
+                                            <a href="#_" ng-click="openCart()"><strong>Ein</strong> Produkt befindet sich in Ihrem Warenkorb</a>
+                                        </li>
+                                        <li  ng-show="getCartCount() == 0">
+                                            <a href="#_">Sie haben noch keine Produkte in Ihrem Warenkorb</a>
+                                        </li>
+                                        <li style="height: 0;" ng-show="getCartCount() > 0"><a href="#_"  ng-click="openCart()"><i class="fa fa-shopping-cart"></i> Zur Kasse</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -64,19 +70,34 @@
 
                         <script type="text/ng-template" id="modalCart.html">
                             <div class="modal-header">
-                                <h3 class="modal-title">{{modalTitle}}</h3>
+                                <h3 class="modal-title">Warenkorb</h3>
                             </div>
                             <div class="modal-body">
                                 <div ng-show="error" class="bs-callout bs-callout-danger modal-callout">
                                     <h4>{{feedback.title}}</h4>
                                     <p>{{feedback.message}}</p>
                                 </div>
-                                <div class="form-group" ng-repeat="input in inputs">
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa {{input.icon}}"></i></div>
-                                        <input class="form-control" type="{{input.type}}" ng-model="input.value" name="{{input.name}}" placeholder="{{input.placeholder}}" />
-                                    </div>
+                                <div class="table-responsive table-overview">
+                                    <table class="table table-striped ng-scope" ng-controller="KeyshopProducts">
+
+                                        <tbody><tr>
+                                            <th>Anzahl</th>
+                                            <th>Name</th>
+                                            <th>Preis</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr ng-repeat="product in cart" class="ng-scope">
+                                            <td class="ng-binding">{{product.count}}</td>
+                                            <td class="name">{{product.name}}</td>
+                                            <td class="price">{{product.price*product.count}} CHF</td>
+                                            <td>
+                                                <!--<i ng-click="" class="fa fa-plus"></i>-->
+                                                <i style="cursor: pointer" ng-click="removeProductFromCart(product)" class="fa fa-trash"></i>
+                                            </td>
+                                        </tr>
+                                        </tbody></table>
                                 </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-primary" ng-click="send()">Bestellen</button>
@@ -101,7 +122,6 @@
                                             </div>
                                         </div>
                                     <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
-
                                 </div>
 
                                 <div class="modal-footer">

@@ -15,9 +15,11 @@ class Home extends KS_Controller {
                 $criteria[$field] = $search;
             }
         }
-        $products = $this->productRepo->searchBy($criteria);
+        $products = $this->productRepo->searchBy($criteria, array('id' => 'desc'));
         $homeProducts = array();
         foreach ($products as $product) {
+            if (count($product->getAvailableKeys()) == 0 || count($homeProducts) > 2)
+                continue;
 			$t = array();
 			$t = $product->getHomeArray();
             $t['url'] = site_url('produkt/'.urlencode($t['name'])); 

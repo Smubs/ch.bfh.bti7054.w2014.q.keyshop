@@ -284,6 +284,7 @@ INSERT INTO `keyshop_keys` (`id`, `product_id`, `order_id`, `key`) VALUES
 
 CREATE TABLE IF NOT EXISTS `keyshop_orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` enum('waiting','confirmed','cancelled') COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -291,8 +292,8 @@ CREATE TABLE IF NOT EXISTS `keyshop_orders` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 INSERT INTO `keyshop_orders` (`id`, `status`, `user_id`) VALUES
-  (1, 'waiting', 2),
-  (2, 'waiting', 3);
+(1, '2015-01-11 13:14:29', 'waiting', 2),
+(2, '2015-01-11 13:14:29', 'waiting', 3);
 
 CREATE TABLE IF NOT EXISTS `keyshop_orders_products` (
   `order_id` int(11) NOT NULL,

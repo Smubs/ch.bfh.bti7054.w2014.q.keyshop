@@ -28,7 +28,7 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository {
         $this->em = $em;
     }
 
-    public function searchBy(array $criteria)
+    public function searchBy(array $criteria, array $orderBy = array())
     {
         $qb = $this->createQueryBuilder('e');
         if (!empty($criteria)) {
@@ -41,6 +41,11 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository {
                 $qb->setParameter($field, (is_object($value)) ? $value : '%' . $value . '%');
             }
             $qb->where($orX);
+        }
+        if (!empty($orderBy)) {
+            foreach ($orderBy as $field => $order) {
+                $qb->addOrderBy('e.' . $field, $order);
+            }
         }
         return $qb->getQuery()->getResult();
     }

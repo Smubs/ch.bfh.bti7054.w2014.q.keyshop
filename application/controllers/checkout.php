@@ -7,15 +7,29 @@ if (!defined('BASEPATH')) {
 class Checkout extends KS_Controller
 {
 
-    public function index()
+    public function index($id)
     {
-        $order   = $this->orderRepo->find(1);
-        $product = $this->productRepo->find(2);
-        $user    = $this->userRepo->find(2);
+        $order   = $this->orderRepo->find($id);
+
+        if ($order->getStatus() != 'waiting' || $order->getUser() != $this->getUser())
+            redirect('/');
+
+        $price = 0;
+        foreach($order->getProducts() as $product) {
+            $quantity = count($this->keyRepo->findBy(array(
+                'order'   => $order,
+                'product' => $product
+            )));
+            $price += $product->getRealPrice() * $quantity;
+        }
+
+
+        //$product = $this->productRepo->find(2);
+        $user    = $this->getUser();
 
         $params = array(
             'invoice_number'   => $order->getId(),
-            'invoice_amount'   => $product->getPrice(),
+            'invoice_amount'   => $price,
             'invoice_currency' => 'CHF',
             'contact_forename' => $user->getFirstname(),
             'contact_surname'  => $user->getLastname(),

@@ -18,6 +18,10 @@ class Order {
      */
     protected $id;
     /**
+     * @var \DateTime $date
+     */
+    var $date;
+    /**
      * @var string $status
      */
     protected $status;
@@ -36,7 +40,23 @@ class Order {
 
     public function __construct()
     {
+        $this->date = new \DateTime();
+    }
 
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
     }
 
     /**
