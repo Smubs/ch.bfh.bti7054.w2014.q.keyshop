@@ -12,7 +12,7 @@ Keyshop
 3. Set your MySQL data in <code>application/config/database.sample.php</code> and rename it to <code>application/config/database.php</code>
 
 
-The default admin user has the email <code>admin@2buy.io</code> and the password <code>1234</code>.
+The default admin user has the email <code>admin@keyshop.ch</code> and the password <code>123456</code>.
 
 ### Current deploy
 
