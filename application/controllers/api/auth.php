@@ -87,12 +87,7 @@ class Auth extends KS_Controller {
 			$nuser->setAdmin(0);
 			$nuser->setEmail($data['email']);
 			$nuser->setPassword($data['password']);
-			$nuser->setFirstname($data['firstname']);
-			$nuser->setLastname($data['lastname']);
-			$nuser->setAddress($data['address']);
-			$nuser->setZip($data['zip']);
-			$nuser->setPlace($data['place']);
-			$nuser->setCountry($this->countryRepo->find($data['country_id']));
+			$nuser->setCountry($this->countryRepo->find(208));
 			$this->em->persist($nuser);
 			$this->em->flush();
 			
