@@ -258,11 +258,14 @@ class Product {
         }
 
         $saved = $this->getPrice()-$this->getDiscountPrice();
+        $description = $this->getDescription();
+        $descLength  = strlen($description);
+        $descPoints  = ($descLength > 100) ? '...' : '';
         return array(
             'id' => $this->getId(),
             'name' => $this->getName(),
             'picture' => $this->getPicture(),
-            'description' => $this->getDescription(),
+            'description' => substr($description, 0, 100) . $descPoints,
             'discountPrice' => $this->getDiscountPrice() . ' CHF',
             'hasDiscountPrice' => ($this->getDiscountPrice() > 0) ? true : false,
             'price' => $this->getPrice() . ' CHF',
