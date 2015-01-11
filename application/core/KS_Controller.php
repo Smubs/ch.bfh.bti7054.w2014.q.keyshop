@@ -164,7 +164,6 @@ class KS_Controller extends CI_Controller {
 
         // default js
         $defaultJs = array(
-			'assets/scripts/md5.js',
             'assets/scripts/angular.min.js',
             'assets/scripts/angular-cookies.min.js',
             'assets/scripts/bootstrap.min.js',
